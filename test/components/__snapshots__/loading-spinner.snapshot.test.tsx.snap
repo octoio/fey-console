@@ -1,0 +1,950 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LoadingSpinner Snapshots > Combined Props Snapshots > should match snapshot with all custom props 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 300px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Combined Props Snapshots > should match snapshot with large size, long tip, and custom height 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 500px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Combined Props Snapshots > should match snapshot with minimal height and no tip 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 50px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-sm ant-spin-spinning css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Combined Props Snapshots > should match snapshot with small size and custom tip 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 400px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Component Structure Snapshots > should match snapshot of wrapper div only 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 400px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Component Structure Snapshots > should match snapshot showing complete component structure 1`] = `
+<div>
+  <div
+    data-testid="loading-spinner"
+    style="display: flex; justify-content: center; align-items: center; height: 400px;"
+  >
+    <div
+      aria-busy="true"
+      aria-live="polite"
+      class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    >
+      <span
+        class="ant-spin-dot-holder"
+      >
+        <span
+          class="ant-spin-dot ant-spin-dot-spin"
+        >
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Default Props Snapshots > should match snapshot with default props 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 400px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Edge Cases Snapshots > should match snapshot with numeric characters in tip 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 400px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Edge Cases Snapshots > should match snapshot with special unicode characters 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 400px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Edge Cases Snapshots > should match snapshot with very large height 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 9999px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Edge Cases Snapshots > should match snapshot with zero height 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 0px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Height Variations Snapshots > should match snapshot with calc height 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: calc(100% - 50px);"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Height Variations Snapshots > should match snapshot with custom pixel height 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 600px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Height Variations Snapshots > should match snapshot with percentage height 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 50%;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Height Variations Snapshots > should match snapshot with small height 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 100px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Height Variations Snapshots > should match snapshot with viewport height 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 100vh;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Multiple Instances Snapshots > should match snapshot with identical spinners 1`] = `
+<div>
+  <div
+    data-testid="loading-spinner"
+    style="display: flex; justify-content: center; align-items: center; height: 400px;"
+  >
+    <div
+      aria-busy="true"
+      aria-live="polite"
+      class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    >
+      <span
+        class="ant-spin-dot-holder"
+      >
+        <span
+          class="ant-spin-dot ant-spin-dot-spin"
+        >
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+        </span>
+      </span>
+    </div>
+  </div>
+  <div
+    data-testid="loading-spinner"
+    style="display: flex; justify-content: center; align-items: center; height: 400px;"
+  >
+    <div
+      aria-busy="true"
+      aria-live="polite"
+      class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    >
+      <span
+        class="ant-spin-dot-holder"
+      >
+        <span
+          class="ant-spin-dot ant-spin-dot-spin"
+        >
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Multiple Instances Snapshots > should match snapshot with multiple different spinners 1`] = `
+<div>
+  <div
+    data-testid="loading-spinner"
+    style="display: flex; justify-content: center; align-items: center; height: 200px;"
+  >
+    <div
+      aria-busy="true"
+      aria-live="polite"
+      class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    >
+      <span
+        class="ant-spin-dot-holder"
+      >
+        <span
+          class="ant-spin-dot ant-spin-dot-spin"
+        >
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+        </span>
+      </span>
+    </div>
+  </div>
+  <div
+    data-testid="loading-spinner"
+    style="display: flex; justify-content: center; align-items: center; height: 300px;"
+  >
+    <div
+      aria-busy="true"
+      aria-live="polite"
+      class="ant-spin ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    >
+      <span
+        class="ant-spin-dot-holder"
+      >
+        <span
+          class="ant-spin-dot ant-spin-dot-spin"
+        >
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+        </span>
+      </span>
+    </div>
+  </div>
+  <div
+    data-testid="loading-spinner"
+    style="display: flex; justify-content: center; align-items: center; height: 400px;"
+  >
+    <div
+      aria-busy="true"
+      aria-live="polite"
+      class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    >
+      <span
+        class="ant-spin-dot-holder"
+      >
+        <span
+          class="ant-spin-dot ant-spin-dot-spin"
+        >
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+          <i
+            class="ant-spin-dot-item"
+          />
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Size Variations Snapshots > should match snapshot with default size 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 400px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Size Variations Snapshots > should match snapshot with large size 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 400px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Size Variations Snapshots > should match snapshot with small size 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 400px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Tip Text Variations Snapshots > should match snapshot with custom tip 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 400px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Tip Text Variations Snapshots > should match snapshot with empty tip 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 400px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Tip Text Variations Snapshots > should match snapshot with long tip text 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 400px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`LoadingSpinner Snapshots > Tip Text Variations Snapshots > should match snapshot with special characters in tip 1`] = `
+<div
+  data-testid="loading-spinner"
+  style="display: flex; justify-content: center; align-items: center; height: 400px;"
+>
+  <div
+    aria-busy="true"
+    aria-live="polite"
+    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+  >
+    <span
+      class="ant-spin-dot-holder"
+    >
+      <span
+        class="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+        <i
+          class="ant-spin-dot-item"
+        />
+      </span>
+    </span>
+  </div>
+</div>
+`;
