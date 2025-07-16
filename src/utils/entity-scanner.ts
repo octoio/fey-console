@@ -13,19 +13,20 @@ export interface FileInfo {
   entityType?: string;
 }
 
-// Interface that extends the common EntityReference with path
+// Interface that extends the common EntityReference with path and data
 interface FileEntityReference extends EntityReference {
   path: string;
   name: string; // Alias for key for backward compatibility
+  data?: any; // Store the full JSON data
 }
 
-type FileEntityReferences = Record<EntityType, FileEntityReference[]>;
+export type FileEntityReferences = Record<EntityType, FileEntityReference[]>;
 
 const mapEntityReferenceFromFileEntityReference = (
   entityRef: FileEntityReference,
 ): EntityReference => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { path, name, ...entityReference } = entityRef;
+  const { path, name, data, ...entityReference } = entityRef;
   return entityReference;
 };
 
@@ -45,6 +46,7 @@ export async function scanFolderForEntities(
 ): Promise<{
   entities: EntityReferences;
   files: FileInfo[];
+  entitiesWithData: FileEntityReferences; // Add this for entities with full JSON data
 }> {
   // Group entities by type
   const entityReferences: FileEntityReferences =
@@ -69,6 +71,7 @@ export async function scanFolderForEntities(
     return {
       entities: mapEntityReferencesFromFileEntityReferences(entityReferences),
       files: allFiles,
+      entitiesWithData: entityReferences,
     };
   } catch (error) {
     console.error("Error scanning folder for entities:", error);
@@ -166,6 +169,7 @@ async function processJsonFile(
         owner: json.owner,
         version: json.version,
         path: filePath,
+        data: json, // Store the full JSON data
       };
 
       console.log(`Found entity: ${entityRef.name} (${entityRef.type})`);

@@ -7,23 +7,24 @@ import {
   notification,
   Tabs,
 } from "antd";
-import React, { useState, useEffect, Suspense, lazy } from "react";
-import { FileList } from "@components/file-list";
-import { FolderSelector } from "@components/folder-selector";
-import { LoadingSpinner } from "@components/loading-spinner";
+import React, { useState, useEffect } from "react";
+import { EntityManager } from "@components/entity-editors/generic/entity-manager";
+import { FileList } from "@components/file-manager/file-list";
+import { FolderSelector } from "@components/file-manager/folder-selector";
 import styled from "@emotion/styled";
 import {
   getDefaultEntityReferences,
   EntityReferences,
+  EntityType,
 } from "@models/common.types";
-import { scanFolderForEntities, FileInfo } from "@utils/entity-scanner";
-
-// Lazy load the heavy SkillEditor component
-const SkillEditor = lazy(() =>
-  import("@components/skill-editor").then((module) => ({
-    default: module.SkillEditor,
-  })),
-);
+import { ENTITY_TYPE_DISPLAY_NAMES, SimpleEntity } from "@models/entity.types";
+import { useEntityActions } from "@store/entity.store";
+import { entityFileOps } from "@utils/entity-file-operations";
+import {
+  scanFolderForEntities,
+  FileInfo,
+  FileEntityReferences,
+} from "@utils/entity-scanner";
 
 // Ant Design custom theme configuration
 const theme = {
@@ -48,12 +49,49 @@ export const App: React.FC = () => {
   const [selectedFolder, setSelectedFolder] = useState<string | null>(null);
   const [directoryHandle, setDirectoryHandle] =
     useState<FileSystemDirectoryHandle | null>(null);
-  const [entityReferences, setEntityReferences] = useState<EntityReferences>(
+  const [, setEntityReferences] = useState<EntityReferences>(
     getDefaultEntityReferences(),
   );
   const [files, setFiles] = useState<FileInfo[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<string>("1");
+  const [activeTab, setActiveTab] = useState<string>("file-manager");
+  const [filesLoaded, setFilesLoaded] = useState<boolean>(false);
+
+  const entityActions = useEntityActions();
+
+  // Convert FileEntityReferences to SimpleEntities for the store
+  const convertFileEntityReferencesToSimpleEntities = (
+    entityRefs: FileEntityReferences,
+  ): SimpleEntity[] => {
+    const entities: SimpleEntity[] = [];
+
+    Object.entries(entityRefs).forEach(([, refs]) => {
+      refs.forEach((ref) => {
+        const simpleEntity: SimpleEntity = {
+          id: ref.id,
+          type: ref.type,
+          key: ref.key,
+          owner: ref.owner,
+          data: ref.data || {}, // Use actual JSON data from file
+          createdAt: ref.data?.createdAt
+            ? new Date(ref.data.createdAt)
+            : new Date(),
+          modifiedAt: ref.data?.modifiedAt
+            ? new Date(ref.data.modifiedAt)
+            : new Date(),
+          metadata: {
+            title: ref.data?.metadata?.title || ref.key,
+            description:
+              ref.data?.metadata?.description ||
+              `${ENTITY_TYPE_DISPLAY_NAMES[ref.type]} entity`,
+          },
+        };
+        entities.push(simpleEntity);
+      });
+    });
+
+    return entities;
+  };
 
   const loadEntitiesFromFolder = async (
     folderPath: string,
@@ -64,7 +102,16 @@ export const App: React.FC = () => {
       const result = await scanFolderForEntities(folderPath, dirHandle);
       setEntityReferences(result.entities);
       setFiles(result.files);
+
+      // Convert and import entities into the store using the data-rich entities
+      const simpleEntities = convertFileEntityReferencesToSimpleEntities(
+        result.entitiesWithData,
+      );
+      entityActions.clearEntities(); // Clear existing entities first
+      entityActions.importEntities(simpleEntities);
+
       setLoading(false);
+      setFilesLoaded(true);
 
       notification.success({
         message: "Entities Loaded",
@@ -90,38 +137,56 @@ export const App: React.FC = () => {
   ) => {
     setSelectedFolder(folderPath);
     setDirectoryHandle(dirHandle);
+    // Update the entity file operations with the new directory handle
+    entityFileOps.updateDirectoryHandle(dirHandle);
+  };
+
+  const createEntityTabs = () => {
+    const entityTabs: Array<{
+      key: string;
+      label: string;
+      children: JSX.Element;
+    }> = [];
+
+    // Add all entity tabs using EntityManager (including Skills)
+    const allEntityTypes = Object.values(EntityType);
+
+    allEntityTypes.forEach((entityType) => {
+      entityTabs.push({
+        key: entityType.toLowerCase(),
+        label: ENTITY_TYPE_DISPLAY_NAMES[entityType],
+        children: <EntityManager initialEntityType={entityType} />,
+      });
+    });
+
+    return entityTabs;
   };
 
   const tabItems = [
     {
-      key: "1",
-      label: "Load Files",
+      key: "file-manager",
+      label: "File Manager",
       children: (
-        <FolderSelector
-          onFolderSelect={handleFolderSelect}
-          selectedFolder={selectedFolder}
-          loading={loading}
-        />
-      ),
-    },
-    {
-      key: "2",
-      label: "File List",
-      children: <FileList files={files} />,
-    },
-    {
-      key: "3",
-      label: "Skill Editor",
-      children: (
-        <Suspense fallback={<LoadingSpinner tip="Loading Skill Editor..." />}>
-          <SkillEditor
-            entityReferences={entityReferences}
-            files={files}
-            directoryHandle={directoryHandle}
+        <Space direction="vertical" style={{ width: "100%" }}>
+          <FolderSelector
+            onFolderSelect={handleFolderSelect}
+            selectedFolder={selectedFolder}
+            loading={loading}
           />
-        </Suspense>
+          <FileList files={files} />
+        </Space>
       ),
     },
+    {
+      key: "home",
+      label: "Home",
+      children: <EntityManager />,
+      disabled: !filesLoaded,
+    },
+    ...createEntityTabs().map((tab) => ({
+      ...tab,
+      disabled: !filesLoaded,
+    })),
   ];
 
   return (
@@ -129,13 +194,17 @@ export const App: React.FC = () => {
       <AntApp>
         <AppContainer direction="vertical">
           <HeaderContainer>
-            <Typography.Title level={4}>Skill Editor</Typography.Title>
+            <Typography.Title level={4}>
+              Fey Console - Multi-Entity Editor
+            </Typography.Title>
           </HeaderContainer>
 
           <Tabs
             activeKey={activeTab}
             onChange={setActiveTab}
             items={tabItems}
+            size="small"
+            type="card"
           />
         </AppContainer>
       </AntApp>

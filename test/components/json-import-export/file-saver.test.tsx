@@ -1,95 +1,197 @@
-import React from "react";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { FileSaver } from "@components/json-import-export/file-saver";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-
-// Mock styled-components - handle both styled.div and styled(Component)
-vi.mock("@emotion/styled", () => {
-  const mockStyled = (component: React.ComponentType) => () => component;
-  mockStyled.div = () => "div";
-  return { default: mockStyled };
-});
-
-// Mock antd components simply
-vi.mock("antd", () => ({
-  Button: ({
-    children,
-    ...props
-  }: React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    children?: React.ReactNode;
-  }) => React.createElement("button", props, children),
-  Input: (props: React.InputHTMLAttributes<HTMLInputElement>) =>
-    React.createElement("input", props),
-}));
+import { render, screen, fireEvent } from "@testing-library/react";
 
 describe("FileSaver", () => {
-  const defaultProps = {
-    destinationFile: "",
-    selectedFile: "test.skill.json",
-    onChange: vi.fn(),
-    onSave: vi.fn(),
-    disabled: false,
-  };
+  const mockOnChange = vi.fn();
+  const mockOnSave = vi.fn();
 
-  it("should render save button and input", () => {
-    render(<FileSaver {...defaultProps} />);
-
-    expect(
-      screen.getByRole("button", { name: /save to file/i }),
-    ).toBeInTheDocument();
-    expect(screen.getByRole("textbox")).toBeInTheDocument();
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
 
-  it("should call onChange when input value changes", async () => {
-    const mockOnChange = vi.fn();
-    const user = userEvent.setup();
+  describe("Rendering", () => {
+    it("should render file saver interface", () => {
+      render(
+        <FileSaver
+          destinationFile=""
+          selectedFile=""
+          onChange={mockOnChange}
+          onSave={mockOnSave}
+          disabled={false}
+        />,
+      );
 
-    render(<FileSaver {...defaultProps} onChange={mockOnChange} />);
+      expect(
+        screen.getByPlaceholderText("Destination file path"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: /save to file/i }),
+      ).toBeInTheDocument();
+    });
 
-    const input = screen.getByRole("textbox");
-    await user.type(input, "new-file.json");
+    it("should show destination file in input when provided", () => {
+      render(
+        <FileSaver
+          destinationFile="custom-path.json"
+          selectedFile="original.json"
+          onChange={mockOnChange}
+          onSave={mockOnSave}
+          disabled={false}
+        />,
+      );
 
-    expect(mockOnChange).toHaveBeenCalled();
+      expect(screen.getByDisplayValue("custom-path.json")).toBeInTheDocument();
+    });
+
+    it("should fallback to selected file when no destination file", () => {
+      render(
+        <FileSaver
+          destinationFile=""
+          selectedFile="fallback.json"
+          onChange={mockOnChange}
+          onSave={mockOnSave}
+          disabled={false}
+        />,
+      );
+
+      expect(screen.getByDisplayValue("fallback.json")).toBeInTheDocument();
+    });
+
+    it("should disable save button when disabled prop is true", () => {
+      render(
+        <FileSaver
+          destinationFile=""
+          selectedFile=""
+          onChange={mockOnChange}
+          onSave={mockOnSave}
+          disabled={true}
+        />,
+      );
+
+      const saveButton = screen.getByRole("button", { name: /save to file/i });
+      expect(saveButton).toBeDisabled();
+    });
+
+    it("should enable save button when disabled prop is false", () => {
+      render(
+        <FileSaver
+          destinationFile=""
+          selectedFile=""
+          onChange={mockOnChange}
+          onSave={mockOnSave}
+          disabled={false}
+        />,
+      );
+
+      const saveButton = screen.getByRole("button", { name: /save to file/i });
+      expect(saveButton).not.toBeDisabled();
+    });
   });
 
-  it("should call onSave when save button is clicked", async () => {
-    const mockOnSave = vi.fn();
-    const user = userEvent.setup();
+  describe("Interactions", () => {
+    it("should call onChange when input value changes", () => {
+      render(
+        <FileSaver
+          destinationFile=""
+          selectedFile=""
+          onChange={mockOnChange}
+          onSave={mockOnSave}
+          disabled={false}
+        />,
+      );
 
-    render(<FileSaver {...defaultProps} onSave={mockOnSave} />);
+      const input = screen.getByPlaceholderText("Destination file path");
+      fireEvent.change(input, { target: { value: "new-file.json" } });
 
-    const saveButton = screen.getByRole("button", { name: /save to file/i });
-    await user.click(saveButton);
+      expect(mockOnChange).toHaveBeenCalledWith("new-file.json");
+    });
 
-    expect(mockOnSave).toHaveBeenCalled();
+    it("should call onSave when save button is clicked", () => {
+      render(
+        <FileSaver
+          destinationFile="test.json"
+          selectedFile=""
+          onChange={mockOnChange}
+          onSave={mockOnSave}
+          disabled={false}
+        />,
+      );
+
+      const saveButton = screen.getByRole("button", { name: /save to file/i });
+      fireEvent.click(saveButton);
+
+      expect(mockOnSave).toHaveBeenCalled();
+    });
+
+    it("should not call onSave when button is disabled", () => {
+      render(
+        <FileSaver
+          destinationFile=""
+          selectedFile=""
+          onChange={mockOnChange}
+          onSave={mockOnSave}
+          disabled={true}
+        />,
+      );
+
+      const saveButton = screen.getByRole("button", { name: /save to file/i });
+      fireEvent.click(saveButton);
+
+      expect(mockOnSave).not.toHaveBeenCalled();
+    });
   });
 
-  it("should display destinationFile when provided", () => {
-    render(<FileSaver {...defaultProps} destinationFile="custom-file.json" />);
+  describe("Edge Cases", () => {
+    it("should handle empty strings for all file paths", () => {
+      render(
+        <FileSaver
+          destinationFile=""
+          selectedFile=""
+          onChange={mockOnChange}
+          onSave={mockOnSave}
+          disabled={false}
+        />,
+      );
 
-    const input = screen.getByRole("textbox");
-    expect(input).toHaveValue("custom-file.json");
+      const input = screen.getByPlaceholderText("Destination file path");
+      expect(input).toHaveValue("");
+    });
+
+    it("should prioritize destination file over selected file", () => {
+      render(
+        <FileSaver
+          destinationFile="priority.json"
+          selectedFile="secondary.json"
+          onChange={mockOnChange}
+          onSave={mockOnSave}
+          disabled={false}
+        />,
+      );
+
+      expect(screen.getByDisplayValue("priority.json")).toBeInTheDocument();
+      expect(
+        screen.queryByDisplayValue("secondary.json"),
+      ).not.toBeInTheDocument();
+    });
   });
 
-  it("should display selectedFile when destinationFile is empty", () => {
-    render(<FileSaver {...defaultProps} destinationFile="" />);
+  describe("Props", () => {
+    it("should handle missing callbacks gracefully", () => {
+      render(
+        <FileSaver
+          destinationFile="test.json"
+          selectedFile=""
+          onChange={() => {}}
+          onSave={async () => {}}
+          disabled={false}
+        />,
+      );
 
-    const input = screen.getByRole("textbox");
-    expect(input).toHaveValue("test.skill.json");
-  });
-
-  it("should disable save button when disabled prop is true", () => {
-    render(<FileSaver {...defaultProps} disabled={true} />);
-
-    const saveButton = screen.getByRole("button", { name: /save to file/i });
-    expect(saveButton).toBeDisabled();
-  });
-
-  it("should enable save button when disabled prop is false", () => {
-    render(<FileSaver {...defaultProps} disabled={false} />);
-
-    const saveButton = screen.getByRole("button", { name: /save to file/i });
-    expect(saveButton).not.toBeDisabled();
+      // Should render without errors
+      expect(
+        screen.getByPlaceholderText("Destination file path"),
+      ).toBeInTheDocument();
+    });
   });
 });

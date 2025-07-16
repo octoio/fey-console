@@ -7,6 +7,16 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   base: "./",
+  server: {
+    port: 5173,
+    host: true,
+    allowedHosts: [
+      "048fbad6c6e6.ngrok-free.app",
+      ".ngrok-free.app", // Allow all ngrok subdomains
+      "localhost",
+      "127.0.0.1",
+    ],
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -56,4 +56,33 @@ export const fileUtils = {
     await writable.write(content);
     await writable.close();
   },
+
+  deleteFile: async (
+    rootHandle: FileSystemDirectoryHandle,
+    filePath: string,
+  ): Promise<void> => {
+    const segments = filePath.split("/");
+    const fileName = segments.pop() || "";
+
+    const dirHandle = await fileUtils.navigateToDirectory(rootHandle, segments);
+    await dirHandle.removeEntry(fileName);
+  },
+
+  fileExists: async (
+    rootHandle: FileSystemDirectoryHandle,
+    filePath: string,
+  ): Promise<boolean> => {
+    try {
+      const segments = filePath.split("/");
+      const fileName = segments.pop() || "";
+      const dirHandle = await fileUtils.navigateToDirectory(
+        rootHandle,
+        segments,
+      );
+      await dirHandle.getFileHandle(fileName);
+      return true;
+    } catch {
+      return false;
+    }
+  },
 };
