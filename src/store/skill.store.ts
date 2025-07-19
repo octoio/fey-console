@@ -11,10 +11,10 @@ import {
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import {
-  getDefaultEntityReferences,
   EntityReference,
   EntityReferences,
   EntityType,
+  EntityDefinition,
   HitType,
 } from "@models/common.types";
 import { QualityType } from "@models/quality.types";
@@ -30,62 +30,53 @@ import {
   SkillIndicator,
   SkillTargetType,
 } from "@models/skill.types";
+import { EntityStoreInterface, createEntityStore } from "./entity.store";
+import { validateFileLoadingComplete } from "./file-loading.store";
 
-interface SkillEditorState {
-  // Skill data
+// Skill store extends the generic entity store interface
+interface SkillStoreState extends EntityStoreInterface<Skill> {
+  // Skill-specific data (keep reference to typed entity definition)
   skillData: SkillEntityDefinition | null;
   setSkillData: (data: SkillEntityDefinition) => void;
 
-  // React Flow state
+  // React Flow state for node execution editor
   nodes: Node[];
   edges: Edge[];
   onNodesChange: (changes: NodeChange[]) => void;
   onEdgesChange: (changes: EdgeChange[]) => void;
   onConnect: (connection: Connection) => void;
+  setNodes: (updatedNodes: Node[]) => void;
 
-  // Update specific parts of skill data
-  updateMetadata: (title: string, description: string) => void;
+  // Skill-specific operations
   updateBasicInfo: (
     quality: QualityType,
     categories: SkillCategory[],
     cooldown: number,
     targetType: SkillTargetType,
   ) => void;
+
+  // Backward compatibility method
+  updateMetadata: (title: string, description: string) => void;
   updateCost: (mana: number) => void;
   updateCastDistance: (min: number, max: number) => void;
-
-  // Node management
-  addNode: (nodeType: SkillActionNodeType, parentId: string | null) => void;
-  updateNode: (nodeId: string, data: Partial<SkillActionNode>) => void;
-  removeNode: (nodeId: string) => void;
-
-  // Export/Import
-  exportToJson: () => string;
-  importFromJson: (json: string) => void;
-
-  // Convert between skill data and react flow representation
-  skillToNodes: () => void;
-  nodesToSkill: () => void;
-
-  // Update the reorderNode function signature
-  reorderNode: (nodeId: string, direction: "left" | "right") => void;
-
-  // Entity references
-  entityReferences: EntityReferences;
-  setEntityReferences: (references: EntityReferences) => void;
-
-  // Helper to get entity references by type
-  getEntityReferencesByType: (type: EntityType) => EntityReference[];
-
-  // Add this missing method
-  setNodes: (updatedNodes: Node[]) => void;
-
   setIconReference: (iconReference: EntityReference) => void;
   setIndicators: (indicators: SkillIndicator[]) => void;
 
-  updateEntityDefinition: (definition: SkillEntityDefinition) => void;
+  // Node execution management
+  addNode: (nodeType: SkillActionNodeType, parentId: string | null) => void;
+  updateNode: (nodeId: string, data: Partial<SkillActionNode>) => void;
+  removeNode: (nodeId: string) => void;
+  reorderNode: (nodeId: string, direction: "left" | "right") => void;
 
-  // Helper function to update skill entity while preserving root properties
+  // Skill-specific import/export
+  exportSkillToJson: () => string;
+  importSkillFromJson: (json: string) => boolean;
+
+  // Execution tree conversion
+  skillToNodes: () => void;
+  nodesToSkill: () => void;
+
+  // Helper function to update skill entity
   updateSkillEntity: (updateEntityFn: (entity: Skill) => Skill) => void;
 }
 
@@ -269,33 +260,48 @@ const convertFlowToExecutionTree = (
   return buildTree(rootNode.id);
 };
 
-export const useSkillStore = create<SkillEditorState>()(
+// Create the skill store using the generic entity store factory
+const skillEntityStore = createEntityStore<Skill>("skill-entity-store");
+
+export const useSkillStore = create<SkillStoreState>()(
   devtools(
     (set, get) => ({
-      skillData: defaultSkill,
-      nodes: [],
-      edges: [],
+      // Initialize state from generic entity store
+      entityReferences: skillEntityStore.getState().entityReferences,
+      currentEntity: null,
 
-      updateSkillEntity: (updateEntityFn: (entity: Skill) => Skill) => {
-        const skillData = get().skillData;
-        if (!skillData) return;
-
-        set(
-          {
-            skillData: {
-              ...skillData,
-              entity: updateEntityFn(skillData.entity),
-            },
-          },
-          false,
-          "updateSkillEntity",
-        );
+      // Override methods to keep skillData in sync
+      setCurrentEntity: (entity) => {
+        // Update both the generic entity store and skill-specific data
+        skillEntityStore.getState().setCurrentEntity(entity);
+        set({ currentEntity: entity, skillData: entity as SkillEntityDefinition | null }, false, "setCurrentEntity");
       },
 
+      updateEntityMetadata: (title, description) => {
+        // Update in generic entity store
+        skillEntityStore.getState().updateEntityMetadata(title, description);
+        
+        // Update skill-specific data
+        get().updateSkillEntity((entity) => ({
+          ...entity,
+          metadata: { title, description },
+        }));
+      },
+
+      // Skill-specific data
+      skillData: defaultSkill,
+      
       setSkillData: (data) => {
-        set({ skillData: data }, false, "setSkillData");
+        validateFileLoadingComplete("setSkillData");
+        set({ skillData: data, currentEntity: data }, false, "setSkillData");
+        // Also update the generic entity store
+        skillEntityStore.getState().setCurrentEntity(data);
         get().skillToNodes();
       },
+
+      // React Flow state
+      nodes: [],
+      edges: [],
 
       onNodesChange: (changes) => {
         set(
@@ -345,13 +351,25 @@ export const useSkillStore = create<SkillEditorState>()(
         );
       },
 
-      updateMetadata: (title, description) => {
-        get().updateSkillEntity((entity) => ({
-          ...entity,
-          metadata: { title, description },
-        }));
+      setNodes: (updatedNodes) => set({ nodes: updatedNodes }, false, "setNodes"),
+
+      // Skill entity operations
+      updateSkillEntity: (updateEntityFn: (entity: Skill) => Skill) => {
+        const skillData = get().skillData;
+        if (!skillData) return;
+
+        const updatedSkillData = {
+          ...skillData,
+          entity: updateEntityFn(skillData.entity),
+        };
+
+        set({ skillData: updatedSkillData, currentEntity: updatedSkillData }, false, "updateSkillEntity");
+        
+        // Keep generic entity store in sync
+        skillEntityStore.getState().setCurrentEntity(updatedSkillData);
       },
 
+      // Skill-specific operations
       updateBasicInfo: (quality, categories, cooldown, targetType) => {
         get().updateSkillEntity((entity) => ({
           ...entity,
@@ -360,6 +378,11 @@ export const useSkillStore = create<SkillEditorState>()(
           cooldown,
           target_type: targetType,
         }));
+      },
+
+      // Backward compatibility method
+      updateMetadata: (title, description) => {
+        get().updateEntityMetadata(title, description);
       },
 
       updateCost: (mana) => {
@@ -376,6 +399,21 @@ export const useSkillStore = create<SkillEditorState>()(
         }));
       },
 
+      setIconReference: (iconReference) => {
+        get().updateSkillEntity((entity) => ({
+          ...entity,
+          icon_reference: iconReference,
+        }));
+      },
+
+      setIndicators: (indicators) => {
+        get().updateSkillEntity((entity) => ({
+          ...entity,
+          indicators,
+        }));
+      },
+
+      // Node management
       addNode: (nodeType, parentId) => {
         // Create a new node of the specified type
         const newNodeId = generateId();
@@ -574,48 +612,6 @@ export const useSkillStore = create<SkillEditorState>()(
         });
       },
 
-      exportToJson: () => {
-        // Update skill data from nodes first
-        get().nodesToSkill();
-        return JSON.stringify(get().skillData, null, 2);
-      },
-
-      importFromJson: (json) => {
-        try {
-          const data = JSON.parse(json) as SkillEntityDefinition;
-          set({ skillData: data });
-          get().skillToNodes();
-        } catch (e) {
-          console.error("Failed to parse JSON:", e);
-        }
-      },
-
-      skillToNodes: () => {
-        const skillData = get().skillData;
-        if (!skillData || !skillData.entity.execution_root) return;
-
-        const { nodes, edges } = convertExecutionTreeToFlow(
-          skillData.entity.execution_root,
-        );
-        set({ nodes, edges });
-      },
-
-      nodesToSkill: () => {
-        const skillData = get().skillData;
-        if (!skillData) return;
-
-        const executionTree = convertFlowToExecutionTree(
-          get().nodes,
-          get().edges,
-        );
-        if (executionTree) {
-          get().updateSkillEntity((entity) => ({
-            ...entity,
-            execution_root: executionTree,
-          }));
-        }
-      },
-
       reorderNode: (nodeId, direction) => {
         const { nodes, edges } = get();
 
@@ -671,40 +667,88 @@ export const useSkillStore = create<SkillEditorState>()(
         });
       },
 
-      entityReferences: getDefaultEntityReferences(),
+      // Skill-specific import/export
+      exportSkillToJson: () => {
+        // Update skill data from nodes first
+        get().nodesToSkill();
+        return JSON.stringify(get().skillData, null, 2);
+      },
 
+      importSkillFromJson: (json) => {
+        try {
+          const data = JSON.parse(json) as SkillEntityDefinition;
+          set({ skillData: data }, false, "importSkillFromJson");
+          skillEntityStore.getState().setCurrentEntity(data);
+          get().skillToNodes();
+          return true;
+        } catch (e) {
+          console.error("Failed to parse JSON:", e);
+          return false;
+        }
+      },
+
+      // Execution tree conversion
+      skillToNodes: () => {
+        const skillData = get().skillData;
+        if (!skillData || !skillData.entity.execution_root) return;
+
+        const { nodes, edges } = convertExecutionTreeToFlow(
+          skillData.entity.execution_root,
+        );
+        set({ nodes, edges }, false, "skillToNodes");
+      },
+
+      nodesToSkill: () => {
+        const skillData = get().skillData;
+        if (!skillData) return;
+
+        const executionTree = convertFlowToExecutionTree(
+          get().nodes,
+          get().edges,
+        );
+        if (executionTree) {
+          get().updateSkillEntity((entity) => ({
+            ...entity,
+            execution_root: executionTree,
+          }));
+        }
+      },
+
+      // Delegate entity references to the shared entity store
       setEntityReferences: (references) => {
-        set({ entityReferences: references });
+        skillEntityStore.getState().setEntityReferences(references);
+        set({ entityReferences: references }, false, "setEntityReferences");
       },
 
       getEntityReferencesByType: (type) => {
-        return get().entityReferences[type];
+        return skillEntityStore.getState().getEntityReferencesByType(type);
       },
 
-      setNodes: (updatedNodes) => set({ nodes: updatedNodes }),
-
-      setIconReference: (iconReference) => {
-        get().updateSkillEntity((entity) => ({
-          ...entity,
-          icon_reference: iconReference,
-        }));
+      // Delegate other generic entity store methods
+      updateEntityReference: (field, reference) => {
+        skillEntityStore.getState().updateEntityReference(field, reference);
+        // Update current entity in skill store
+        const updatedEntity = skillEntityStore.getState().currentEntity;
+        if (updatedEntity) {
+          set({ currentEntity: updatedEntity, skillData: updatedEntity as SkillEntityDefinition | null }, false, "updateEntityReference");
+        }
       },
 
-      setIndicators: (indicators) => {
-        get().updateSkillEntity((entity) => ({
-          ...entity,
-          indicators,
-        }));
+      exportToJson: () => {
+        return skillEntityStore.getState().exportToJson();
       },
 
-      updateEntityDefinition: (definition: SkillEntityDefinition) => {
-        set(
-          {
-            skillData: definition,
-          },
-          false,
-          "updateEntityDefinition",
-        );
+      importFromJson: (json) => {
+        const result = skillEntityStore.getState().importFromJson(json);
+        if (result) {
+          const importedEntity = skillEntityStore.getState().currentEntity;
+          set({ currentEntity: importedEntity, skillData: importedEntity as SkillEntityDefinition | null }, false, "importFromJson");
+        }
+        return result;
+      },
+
+      validateEntity: (entity) => {
+        return skillEntityStore.getState().validateEntity(entity);
       },
     }),
     {

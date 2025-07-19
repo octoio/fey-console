@@ -17,10 +17,12 @@ import {
   EntityReferences,
 } from "@models/common.types";
 import { scanFolderForEntities, FileInfo } from "@utils/entity-scanner";
+import { FileLoadingGuard } from "@components/file-loading-guard";
+import { useFileLoadingStore } from "@store/file-loading.store";
 
 // Lazy load the heavy SkillEditor component
 const SkillEditor = lazy(() =>
-  import("@components/skill-editor").then((module) => ({
+  import("@components/entity-editors/skill/skill-editor").then((module) => ({
     default: module.SkillEditor,
   })),
 );
@@ -46,32 +48,40 @@ const HeaderContainer = styled(Space)`
 
 export const App: React.FC = () => {
   const [selectedFolder, setSelectedFolder] = useState<string | null>(null);
-  const [directoryHandle, setDirectoryHandle] =
-    useState<FileSystemDirectoryHandle | null>(null);
-  const [entityReferences, setEntityReferences] = useState<EntityReferences>(
-    getDefaultEntityReferences(),
-  );
-  const [files, setFiles] = useState<FileInfo[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>("1");
+  
+  // Use file loading store instead of local state
+  const { 
+    directoryHandle, 
+    entityReferences, 
+    files, 
+    loadingState,
+    loadFromDirectory,
+    setDirectoryHandle
+  } = useFileLoadingStore();
+  
+  // Computed loading state from store
+  const loading = loadingState === "LOADING";
 
   const loadEntitiesFromFolder = async (
     folderPath: string,
     dirHandle: FileSystemDirectoryHandle,
   ) => {
     try {
-      setLoading(true);
-      const result = await scanFolderForEntities(folderPath, dirHandle);
-      setEntityReferences(result.entities);
-      setFiles(result.files);
-      setLoading(false);
-
-      notification.success({
-        message: "Entities Loaded",
-        description: `Successfully loaded ${result.files.length} files from ${folderPath}`,
-      });
+      const success = await loadFromDirectory(dirHandle, folderPath);
+      
+      if (success) {
+        notification.success({
+          message: "Entities Loaded",
+          description: `Successfully loaded files from ${folderPath}`,
+        });
+      } else {
+        notification.error({
+          message: "Error Loading Entities",
+          description: "Failed to load entities from the selected directory",
+        });
+      }
     } catch (error) {
-      setLoading(false);
       notification.error({
         message: "Error Loading Entities",
         description: String(error),

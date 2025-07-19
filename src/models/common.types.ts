@@ -100,6 +100,16 @@ export const ALL_TARGET_TYPES: TargetType[] = Object.values(TargetType);
 
 export type EntityReferences = Record<EntityType, EntityReference[]>;
 
+// Generic entity definition that all entities follow
+export type EntityDefinition<T = any> = {
+  id: string;
+  owner: string;
+  type: string;
+  key: string;
+  version: number;
+  entity: T;
+};
+
 export const getDefaultEntityReferences = (): EntityReferences =>
   Object.fromEntries(
     Object.values(EntityType).map((type) => [type, []]),
