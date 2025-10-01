@@ -500,6 +500,21 @@ export const useSkillStore = create<SkillEditorState>()(
             };
             newNode.data.position_offset = { x: 0, y: 0, z: 0 };
             break;
+          case SkillActionNodeType.Projectile:
+            newNode.data.projectile = {
+              id: "",
+              owner: "Octoio",
+              type: EntityType.Projectile,
+              key: "",
+              version: 1,
+            };
+            newNode.data.spawn_position = {
+              type: "Character",
+              position: { x: 0, y: 1.5, z: 0 },
+              offset: { x: 0, y: 0, z: 1 },
+            };
+            newNode.data.direction = { x: 0, y: 0, z: 1 };
+            break;
           case SkillActionNodeType.Requirement:
             newNode.data.requirements = {
               operator: RequirementOperator.All,

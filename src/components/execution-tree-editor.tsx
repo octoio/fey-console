@@ -19,6 +19,7 @@ import { AnimationNode } from "./nodetypes/animation-node";
 import { DelayNode } from "./nodetypes/delay-node";
 import { HitEffectNode } from "./nodetypes/hit-effect-node";
 import { ParallelNode } from "./nodetypes/parallel-node";
+import { ProjectileNode } from "./nodetypes/projectile-node";
 import { RequirementNode } from "./nodetypes/requirement-node";
 import { SequenceNode } from "./nodetypes/sequence-node";
 import { SoundNode } from "./nodetypes/sound-node";
@@ -58,6 +59,7 @@ export const ExecutionTreeEditor: React.FC = () => {
         [SkillActionNodeType.Hit]: HitEffectNode,
         [SkillActionNodeType.Status]: StatusNode,
         [SkillActionNodeType.Summon]: SummonNode,
+        [SkillActionNodeType.Projectile]: ProjectileNode,
         [SkillActionNodeType.Requirement]: RequirementNode,
       }) as Record<SkillActionNodeType, React.FC<NodeProps>>,
     [],

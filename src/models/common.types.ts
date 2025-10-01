@@ -60,6 +60,7 @@ export enum EntityType {
   Character = "Character",
   AnimationSource = "AnimationSource",
   Animation = "Animation",
+  Projectile = "Projectile",
 }
 
 // Update EntityReference to use the enum

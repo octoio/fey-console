@@ -123,9 +123,8 @@ describe("ExecutionTreeEditor Component", () => {
     it("should register all node types", () => {
       render(<ExecutionTreeEditor />);
 
-      // Should have all 9 node types registered
       expect(screen.getByTestId("react-flow-node-types")).toHaveTextContent(
-        "NodeTypes: 9",
+        "NodeTypes: 10",
       );
     });
   });

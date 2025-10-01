@@ -169,6 +169,24 @@ export type SkillActionSummonNode = SkillActionNode & {
   position_offset: Vector3;
 };
 
+export enum ProjectileSpawnPositionType {
+  Character = "Character",
+  World = "World",
+}
+
+export type ProjectileSpawnPosition = {
+  type: ProjectileSpawnPositionType;
+  position: Vector3;
+  offset: Vector3;
+};
+
+export type SkillActionProjectileNode = SkillActionNode & {
+  type: SkillActionNodeType.Projectile;
+  projectile: EntityReference;
+  spawn_position: ProjectileSpawnPosition;
+  direction: Vector3;
+};
+
 export type SkillActionRequirementNode = SkillActionNode & {
   type: SkillActionNodeType.Requirement;
   requirements: RequirementEvaluation;
@@ -228,3 +246,6 @@ export const ALL_SKILL_ACTION_NODE_TYPES: SkillActionNodeType[] =
 
 export const ALL_SKILL_INDICATOR_POSITIONS: SkillIndicatorPosition[] =
   Object.values(SkillIndicatorPosition).sort();
+
+export const ALL_PROJECTILE_SPAWN_POSITION_TYPES: ProjectileSpawnPositionType[] =
+  Object.values(ProjectileSpawnPositionType).sort();
