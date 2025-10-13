@@ -4,10 +4,10 @@ import { HitEffectNode } from "@components/nodetypes/hit-effect-node";
 import { HitType, EntityType, EntityReference } from "@models/common.types";
 import {
   HitEffect,
-  SkillActionNodeType,
-  SkillEffectTarget,
-  SkillEffectTargetMechanicType,
-} from "@models/skill.types";
+  EffectTarget,
+  EffectTargetMechanicType,
+} from "@models/effect.types";
+import { SkillActionNodeType } from "@models/skill.types";
 import { StatType } from "@models/stat.types";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 
@@ -127,8 +127,8 @@ vi.mock("@utils/node-operations", () => ({
     data: data || {
       hit_type: HitType.Damage,
       scalers: [],
-      target: SkillEffectTarget.Enemy,
-      target_mechanic: { type: SkillEffectTargetMechanicType.Self },
+      target: EffectTarget.Enemy,
+      target_mechanic: { type: EffectTargetMechanicType.Self },
       hit_sound: null,
       can_crit: false,
       can_miss: false,
@@ -143,8 +143,8 @@ describe("HitEffectNode", () => {
   const defaultHitEffect: HitEffect = {
     hit_type: HitType.Damage,
     scalers: [],
-    target: SkillEffectTarget.Enemy,
-    target_mechanic: { type: SkillEffectTargetMechanicType.Self },
+    target: EffectTarget.Enemy,
+    target_mechanic: { type: EffectTargetMechanicType.Self },
     hit_sound: {
       owner: "test",
       type: EntityType.Sound,

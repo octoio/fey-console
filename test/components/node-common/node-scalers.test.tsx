@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { NodeScalers } from "@components/node-common/node-scalers";
 import { EntityType } from "@models/common.types";
-import { SkillEffectScaling } from "@models/skill.types";
+import { EffectScaling } from "@models/effect.types";
 import { StatType } from "@models/stat.types";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -100,7 +100,7 @@ describe("NodeScalers", () => {
   });
 
   describe("Scaler Display", () => {
-    const sampleScalers: SkillEffectScaling[] = [
+    const sampleScalers: EffectScaling[] = [
       {
         base: 100,
         scaling: { min: 0.5, max: 2.0 },
@@ -132,7 +132,7 @@ describe("NodeScalers", () => {
   });
 
   describe("Remove Scaler Functionality", () => {
-    const sampleScalers: SkillEffectScaling[] = [
+    const sampleScalers: EffectScaling[] = [
       {
         base: 100,
         scaling: { min: 0.5, max: 2.0 },
@@ -170,7 +170,7 @@ describe("NodeScalers", () => {
   });
 
   describe("Value Change Functionality", () => {
-    const sampleScaler: SkillEffectScaling = {
+    const sampleScaler: EffectScaling = {
       base: 100,
       scaling: { min: 0.5, max: 2.0 },
       stat: StatType.AttackPower,
@@ -218,7 +218,7 @@ describe("NodeScalers", () => {
     it("should render correctly with no available stats", () => {
       mockGetEntityReferencesByType.mockReturnValue([]);
 
-      const sampleScaler: SkillEffectScaling = {
+      const sampleScaler: EffectScaling = {
         base: 100,
         scaling: { min: 0.5, max: 2.0 },
         stat: StatType.AttackPower,
@@ -231,7 +231,7 @@ describe("NodeScalers", () => {
     });
 
     it("should handle large arrays of scalers", () => {
-      const manyScalers: SkillEffectScaling[] = Array.from(
+      const manyScalers: EffectScaling[] = Array.from(
         { length: 10 },
         (_, i) => ({
           base: i,
@@ -249,7 +249,7 @@ describe("NodeScalers", () => {
 
   describe("Accessibility", () => {
     it("should have proper field labels", () => {
-      const sampleScaler: SkillEffectScaling = {
+      const sampleScaler: EffectScaling = {
         base: 100,
         scaling: { min: 0.5, max: 2.0 },
         stat: StatType.AttackPower,
@@ -266,7 +266,7 @@ describe("NodeScalers", () => {
 
   describe("Performance", () => {
     it("should not cause errors with stable props", () => {
-      const sampleScaler: SkillEffectScaling = {
+      const sampleScaler: EffectScaling = {
         base: 100,
         scaling: { min: 0.5, max: 2.0 },
         stat: StatType.AttackPower,

@@ -1,9 +1,9 @@
 import { describe, it, expect } from "vitest";
 import {
-  SkillEffectTargetMechanicType,
+  EffectTargetMechanicType,
   CharacterTeam,
-  SkillEffectTarget,
-} from "@models/skill.types";
+  EffectTarget,
+} from "@models/effect.types";
 import {
   mapTargetMechanicChange,
   getDefaultTargetForMechanic,
@@ -14,38 +14,38 @@ describe("mechanic", () => {
   describe("mapTargetMechanicChange", () => {
     it("should create Self mechanic", () => {
       const result = mapTargetMechanicChange(
-        SkillEffectTargetMechanicType.Self,
+        EffectTargetMechanicType.Self,
       );
       expect(result).toEqual({
-        type: SkillEffectTargetMechanicType.Self,
+        type: EffectTargetMechanicType.Self,
       });
     });
 
     it("should create Team mechanic", () => {
       const result = mapTargetMechanicChange(
-        SkillEffectTargetMechanicType.Team,
+        EffectTargetMechanicType.Team,
       );
       expect(result).toEqual({
-        type: SkillEffectTargetMechanicType.Team,
+        type: EffectTargetMechanicType.Team,
         team: CharacterTeam.Ally,
       });
     });
 
     it("should create Selected mechanic", () => {
       const result = mapTargetMechanicChange(
-        SkillEffectTargetMechanicType.Selected,
+        EffectTargetMechanicType.Selected,
       );
       expect(result).toEqual({
-        type: SkillEffectTargetMechanicType.Selected,
+        type: EffectTargetMechanicType.Selected,
       });
     });
 
     it("should create Circle mechanic", () => {
       const result = mapTargetMechanicChange(
-        SkillEffectTargetMechanicType.Circle,
+        EffectTargetMechanicType.Circle,
       );
       expect(result).toEqual({
-        type: SkillEffectTargetMechanicType.Circle,
+        type: EffectTargetMechanicType.Circle,
         hit_count: 1,
         radius: 5,
       });
@@ -53,10 +53,10 @@ describe("mechanic", () => {
 
     it("should create Rectangle mechanic", () => {
       const result = mapTargetMechanicChange(
-        SkillEffectTargetMechanicType.Rectangle,
+        EffectTargetMechanicType.Rectangle,
       );
       expect(result).toEqual({
-        type: SkillEffectTargetMechanicType.Rectangle,
+        type: EffectTargetMechanicType.Rectangle,
         hit_count: 1,
         width: 5,
         height: 5,
@@ -65,17 +65,17 @@ describe("mechanic", () => {
 
     it("should default to Self mechanic for unknown types", () => {
       const result = mapTargetMechanicChange(
-        "UnknownType" as SkillEffectTargetMechanicType,
+        "UnknownType" as EffectTargetMechanicType,
       );
       expect(result).toEqual({
-        type: SkillEffectTargetMechanicType.Self,
+        type: EffectTargetMechanicType.Self,
       });
     });
 
     it("should handle null/undefined input", () => {
       const result = mapTargetMechanicChange(null as any);
       expect(result).toEqual({
-        type: SkillEffectTargetMechanicType.Self,
+        type: EffectTargetMechanicType.Self,
       });
     });
   });
@@ -83,49 +83,49 @@ describe("mechanic", () => {
   describe("getDefaultTargetForMechanic", () => {
     it("should return Ally for Team mechanic", () => {
       const result = getDefaultTargetForMechanic(
-        SkillEffectTargetMechanicType.Team,
+        EffectTargetMechanicType.Team,
       );
-      expect(result).toBe(SkillEffectTarget.Ally);
+      expect(result).toBe(EffectTarget.Ally);
     });
 
     it("should return Enemy for Circle mechanic", () => {
       const result = getDefaultTargetForMechanic(
-        SkillEffectTargetMechanicType.Circle,
+        EffectTargetMechanicType.Circle,
       );
-      expect(result).toBe(SkillEffectTarget.Enemy);
+      expect(result).toBe(EffectTarget.Enemy);
     });
 
     it("should return Enemy for Rectangle mechanic", () => {
       const result = getDefaultTargetForMechanic(
-        SkillEffectTargetMechanicType.Rectangle,
+        EffectTargetMechanicType.Rectangle,
       );
-      expect(result).toBe(SkillEffectTarget.Enemy);
+      expect(result).toBe(EffectTarget.Enemy);
     });
 
     it("should return Any for Selected mechanic", () => {
       const result = getDefaultTargetForMechanic(
-        SkillEffectTargetMechanicType.Selected,
+        EffectTargetMechanicType.Selected,
       );
-      expect(result).toBe(SkillEffectTarget.Any);
+      expect(result).toBe(EffectTarget.Any);
     });
 
     it("should return Enemy for Self mechanic", () => {
       const result = getDefaultTargetForMechanic(
-        SkillEffectTargetMechanicType.Self,
+        EffectTargetMechanicType.Self,
       );
-      expect(result).toBe(SkillEffectTarget.Enemy);
+      expect(result).toBe(EffectTarget.Enemy);
     });
 
     it("should return Enemy for unknown mechanic types", () => {
       const result = getDefaultTargetForMechanic(
-        "UnknownType" as SkillEffectTargetMechanicType,
+        "UnknownType" as EffectTargetMechanicType,
       );
-      expect(result).toBe(SkillEffectTarget.Enemy);
+      expect(result).toBe(EffectTarget.Enemy);
     });
 
     it("should handle null/undefined input", () => {
       const result = getDefaultTargetForMechanic(null as any);
-      expect(result).toBe(SkillEffectTarget.Enemy);
+      expect(result).toBe(EffectTarget.Enemy);
     });
   });
 
@@ -133,19 +133,19 @@ describe("mechanic", () => {
     it("should create default targeting with Self mechanic", () => {
       const result = createDefaultTargeting();
       expect(result).toEqual({
-        target: SkillEffectTarget.Enemy,
+        target: EffectTarget.Enemy,
         target_mechanic: {
-          type: SkillEffectTargetMechanicType.Self,
+          type: EffectTargetMechanicType.Self,
         },
       });
     });
 
     it("should create default targeting with Team mechanic", () => {
-      const result = createDefaultTargeting(SkillEffectTargetMechanicType.Team);
+      const result = createDefaultTargeting(EffectTargetMechanicType.Team);
       expect(result).toEqual({
-        target: SkillEffectTarget.Ally,
+        target: EffectTarget.Ally,
         target_mechanic: {
-          type: SkillEffectTargetMechanicType.Team,
+          type: EffectTargetMechanicType.Team,
           team: CharacterTeam.Ally,
         },
       });
@@ -153,12 +153,12 @@ describe("mechanic", () => {
 
     it("should create default targeting with Circle mechanic", () => {
       const result = createDefaultTargeting(
-        SkillEffectTargetMechanicType.Circle,
+        EffectTargetMechanicType.Circle,
       );
       expect(result).toEqual({
-        target: SkillEffectTarget.Enemy,
+        target: EffectTarget.Enemy,
         target_mechanic: {
-          type: SkillEffectTargetMechanicType.Circle,
+          type: EffectTargetMechanicType.Circle,
           hit_count: 1,
           radius: 5,
         },
@@ -167,12 +167,12 @@ describe("mechanic", () => {
 
     it("should create default targeting with Rectangle mechanic", () => {
       const result = createDefaultTargeting(
-        SkillEffectTargetMechanicType.Rectangle,
+        EffectTargetMechanicType.Rectangle,
       );
       expect(result).toEqual({
-        target: SkillEffectTarget.Enemy,
+        target: EffectTarget.Enemy,
         target_mechanic: {
-          type: SkillEffectTargetMechanicType.Rectangle,
+          type: EffectTargetMechanicType.Rectangle,
           hit_count: 1,
           width: 5,
           height: 5,
@@ -182,23 +182,23 @@ describe("mechanic", () => {
 
     it("should create default targeting with Selected mechanic", () => {
       const result = createDefaultTargeting(
-        SkillEffectTargetMechanicType.Selected,
+        EffectTargetMechanicType.Selected,
       );
       expect(result).toEqual({
-        target: SkillEffectTarget.Any,
+        target: EffectTarget.Any,
         target_mechanic: {
-          type: SkillEffectTargetMechanicType.Selected,
+          type: EffectTargetMechanicType.Selected,
         },
       });
     });
 
     it("should handle all mechanic types consistently", () => {
       const mechanicTypes = [
-        SkillEffectTargetMechanicType.Self,
-        SkillEffectTargetMechanicType.Team,
-        SkillEffectTargetMechanicType.Selected,
-        SkillEffectTargetMechanicType.Circle,
-        SkillEffectTargetMechanicType.Rectangle,
+        EffectTargetMechanicType.Self,
+        EffectTargetMechanicType.Team,
+        EffectTargetMechanicType.Selected,
+        EffectTargetMechanicType.Circle,
+        EffectTargetMechanicType.Rectangle,
       ];
 
       mechanicTypes.forEach((mechanicType) => {
@@ -211,7 +211,7 @@ describe("mechanic", () => {
 
     it("should create valid targeting configurations", () => {
       const result = createDefaultTargeting(
-        SkillEffectTargetMechanicType.Circle,
+        EffectTargetMechanicType.Circle,
       );
 
       // Validate structure
@@ -221,19 +221,19 @@ describe("mechanic", () => {
 
       // Validate Circle-specific fields
       expect(result.target_mechanic.type).toBe(
-        SkillEffectTargetMechanicType.Circle,
+        EffectTargetMechanicType.Circle,
       );
       expect((result.target_mechanic as any).hit_count).toBe(1);
       expect((result.target_mechanic as any).radius).toBe(5);
     });
 
     it("should maintain type safety", () => {
-      const result = createDefaultTargeting(SkillEffectTargetMechanicType.Team);
+      const result = createDefaultTargeting(EffectTargetMechanicType.Team);
 
       // Should have correct types without TypeScript errors
       expect(result.target).toMatch(/^(ally|enemy|any)$/i);
       expect(result.target_mechanic.type).toBe(
-        SkillEffectTargetMechanicType.Team,
+        EffectTargetMechanicType.Team,
       );
     });
   });

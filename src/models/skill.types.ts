@@ -1,14 +1,7 @@
-import {
-  EntityReference,
-  FloatRange,
-  HitType,
-  Metadata,
-  Vector3,
-} from "./common.types";
+import { EntityReference, FloatRange, Metadata, Vector3 } from "./common.types";
+import { HitEffect, StatusEffect } from "./effect.types";
 import { QualityType } from "./quality.types";
 import { RequirementEvaluation } from "./requirement.types";
-import { StatType } from "./stat.types";
-import { StatusDuration } from "./status.types";
 
 export enum SkillCategory {
   None = "None",
@@ -21,62 +14,6 @@ export enum SkillCategory {
 
 export type SkillCost = {
   mana: number;
-};
-
-export enum SkillEffectTargetMechanicType {
-  Self = "Self",
-  Team = "Team",
-  Selected = "Selected",
-  Circle = "Circle",
-  Rectangle = "Rectangle",
-}
-
-export enum CharacterTeam {
-  Ally = "Ally",
-  Enemy = "Enemy",
-  Neutral = "Neutral",
-}
-
-export type SkillEffectTargetMechanic = {
-  type: SkillEffectTargetMechanicType;
-};
-
-export type SkillEffectTargetMechanicSelf = SkillEffectTargetMechanic & {
-  type: SkillEffectTargetMechanicType.Self;
-};
-
-export type SkillEffectTargetMechanicTeam = SkillEffectTargetMechanic & {
-  type: SkillEffectTargetMechanicType.Team;
-  team: CharacterTeam;
-};
-
-export type SkillEffectTargetMechanicSelected = SkillEffectTargetMechanic & {
-  type: SkillEffectTargetMechanicType.Selected;
-};
-
-export type SkillEffectTargetMechanicCircle = SkillEffectTargetMechanic & {
-  type: SkillEffectTargetMechanicType.Circle;
-  hit_count: number;
-  radius: number;
-};
-
-export type SkillEffectTargetMechanicRectangle = SkillEffectTargetMechanic & {
-  type: SkillEffectTargetMechanicType.Rectangle;
-  hit_count: number;
-  width: number;
-  height: number;
-};
-
-export enum SkillEffectTarget {
-  Ally = "Ally",
-  Enemy = "Enemy",
-  Any = "Any",
-}
-
-export type SkillEffectScaling = {
-  base: number;
-  scaling: FloatRange;
-  stat: StatType;
 };
 
 export enum SkillTargetType {
@@ -133,24 +70,6 @@ export type SkillActionAnimationNode = SkillActionNode & {
 export type SkillActionSoundNode = SkillActionNode & {
   type: SkillActionNodeType.Sound;
   sound: EntityReference;
-};
-
-export type HitEffect = {
-  hit_type: HitType;
-  scalers: SkillEffectScaling[];
-  target_mechanic: SkillEffectTargetMechanic;
-  target: SkillEffectTarget;
-  hit_sound: EntityReference;
-  can_crit: boolean;
-  can_miss: boolean;
-};
-
-export type StatusEffect = {
-  target_mechanic: SkillEffectTargetMechanic;
-  target: SkillEffectTarget;
-  durations: StatusDuration[];
-  scalers: SkillEffectScaling[];
-  status: EntityReference;
 };
 
 export type SkillActionHitEffectNode = SkillActionNode & {
@@ -228,15 +147,6 @@ export type SkillEntityDefinition = {
 };
 export const ALL_SKILL_CATEGORIES: SkillCategory[] =
   Object.values(SkillCategory).sort();
-
-export const ALL_SKILL_EFFECT_TARGET_MECHANIC_TYPES: SkillEffectTargetMechanicType[] =
-  Object.values(SkillEffectTargetMechanicType).sort();
-
-export const ALL_CHARACTER_TEAMS: CharacterTeam[] =
-  Object.values(CharacterTeam).sort();
-
-export const ALL_SKILL_EFFECT_TARGETS: SkillEffectTarget[] =
-  Object.values(SkillEffectTarget).sort();
 
 export const ALL_SKILL_TARGET_TYPES: SkillTargetType[] =
   Object.values(SkillTargetType).sort();

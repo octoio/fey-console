@@ -6,9 +6,9 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { EntityType } from "@models/common.types";
 import {
   StatusEffect,
-  SkillEffectTarget,
-  SkillEffectTargetMechanicType,
-} from "@models/skill.types";
+  EffectTarget,
+  EffectTargetMechanicType,
+} from "@models/effect.types";
 import { StatusDurationType } from "@models/status.types";
 import { StatType } from "@models/stat.types";
 
@@ -282,9 +282,9 @@ describe("StatusEffectEditor", () => {
     vi.clearAllMocks();
     mockOnChange = vi.fn();
     mockStatusEffect = {
-      target: SkillEffectTarget.Enemy,
+      target: EffectTarget.Enemy,
       target_mechanic: {
-        type: SkillEffectTargetMechanicType.Self,
+        type: EffectTargetMechanicType.Self,
       },
       durations: [
         { type: StatusDurationType.Chrono, value: 5.0 },

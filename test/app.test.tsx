@@ -1,4 +1,3 @@
-import { notification } from "antd";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { App } from "@/app";
 import { EntityType, getDefaultEntityReferences } from "@models/common.types";
@@ -15,7 +14,46 @@ const mockScanFolderForEntities = vi.mocked(
   entityScanner.scanFolderForEntities,
 );
 
-const mockNotification = vi.mocked(notification);
+// Create mock notification object
+const mockNotification = {
+  success: vi.fn(),
+  error: vi.fn(),
+  warning: vi.fn(),
+  info: vi.fn(),
+  open: vi.fn(),
+  destroy: vi.fn(),
+};
+
+// Mock AntApp.useApp to return our mock notification
+vi.mock("antd", async () => {
+  const actual = await vi.importActual<typeof import("antd")>("antd");
+  return {
+    ...actual,
+    App: Object.assign(
+      // Keep the actual App component
+      actual.App,
+      {
+        // Add useApp as a static method
+        useApp: () => ({
+          notification: mockNotification,
+          message: {
+            success: vi.fn(),
+            error: vi.fn(),
+            warning: vi.fn(),
+            info: vi.fn(),
+          },
+          modal: {
+            confirm: vi.fn(),
+            info: vi.fn(),
+            success: vi.fn(),
+            error: vi.fn(),
+            warning: vi.fn(),
+          },
+        }),
+      }
+    ),
+  };
+});
 
 vi.mock("@components/file-list", () => ({
   FileList: vi.fn(({ files }) => (
@@ -55,18 +93,6 @@ vi.mock("@components/skill-editor", () => ({
     </div>
   )),
 }));
-
-// Mock antd notification
-vi.mock("antd", async () => {
-  const actual = await vi.importActual("antd");
-  return {
-    ...actual,
-    notification: {
-      success: vi.fn(),
-      error: vi.fn(),
-    },
-  };
-});
 
 // Helper function to create mock scan result with proper types
 const createMockScanResult = (files: FileInfo[] = []) => ({

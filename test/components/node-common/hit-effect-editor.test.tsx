@@ -3,9 +3,9 @@ import { HitEffectEditor } from "@components/node-common/hit-effect-editor";
 import { HitType, EntityType } from "@models/common.types";
 import {
   HitEffect,
-  SkillEffectTarget,
-  SkillEffectTargetMechanicType,
-} from "@models/skill.types";
+  EffectTarget,
+  EffectTargetMechanicType,
+} from "@models/effect.types";
 import { StatType } from "@models/stat.types";
 import { render, screen, fireEvent } from "@testing-library/react";
 
@@ -50,25 +50,25 @@ vi.mock("@components/node-common", async () => {
             data-testid="target-select"
             value={target}
             onChange={(e) =>
-              onTargetChange(e.target.value as SkillEffectTarget)
+              onTargetChange(e.target.value as EffectTarget)
             }
           >
-            <option value={SkillEffectTarget.Enemy}>Enemy</option>
-            <option value={SkillEffectTarget.Ally}>Ally</option>
-            <option value={SkillEffectTarget.Any}>Any</option>
+            <option value={EffectTarget.Enemy}>Enemy</option>
+            <option value={EffectTarget.Ally}>Ally</option>
+            <option value={EffectTarget.Any}>Any</option>
           </select>
           <select
             data-testid="mechanic-select"
             value={targetMechanic.type}
             onChange={(e) =>
               onMechanicChange({
-                type: e.target.value as SkillEffectTargetMechanicType,
+                type: e.target.value as EffectTargetMechanicType,
               })
             }
           >
-            <option value={SkillEffectTargetMechanicType.Self}>Self</option>
-            <option value={SkillEffectTargetMechanicType.Team}>Team</option>
-            <option value={SkillEffectTargetMechanicType.Selected}>
+            <option value={EffectTargetMechanicType.Self}>Self</option>
+            <option value={EffectTargetMechanicType.Team}>Team</option>
+            <option value={EffectTargetMechanicType.Selected}>
               Selected
             </option>
           </select>
@@ -144,8 +144,8 @@ describe("HitEffectEditor", () => {
   const defaultHitEffect: HitEffect = {
     hit_type: HitType.Damage,
     scalers: [],
-    target: SkillEffectTarget.Enemy,
-    target_mechanic: { type: SkillEffectTargetMechanicType.Self },
+    target: EffectTarget.Enemy,
+    target_mechanic: { type: EffectTargetMechanicType.Self },
     hit_sound: {
       id: "test-sound-id",
       owner: "test-owner",
@@ -266,12 +266,12 @@ describe("HitEffectEditor", () => {
 
       const targetSelect = screen.getByTestId("target-select");
       fireEvent.change(targetSelect, {
-        target: { value: SkillEffectTarget.Ally },
+        target: { value: EffectTarget.Ally },
       });
 
       expect(mockOnChange).toHaveBeenCalledWith({
         ...defaultHitEffect,
-        target: SkillEffectTarget.Ally,
+        target: EffectTarget.Ally,
       });
     });
 
@@ -285,12 +285,12 @@ describe("HitEffectEditor", () => {
 
       const mechanicSelect = screen.getByTestId("mechanic-select");
       fireEvent.change(mechanicSelect, {
-        target: { value: SkillEffectTargetMechanicType.Team },
+        target: { value: EffectTargetMechanicType.Team },
       });
 
       expect(mockOnChange).toHaveBeenCalledWith({
         ...defaultHitEffect,
-        target_mechanic: { type: SkillEffectTargetMechanicType.Team },
+        target_mechanic: { type: EffectTargetMechanicType.Team },
       });
     });
   });
@@ -479,8 +479,8 @@ describe("HitEffectEditor", () => {
       const targetSelect = screen.getByTestId("target-select");
       const mechanicSelect = screen.getByTestId("mechanic-select");
 
-      expect(targetSelect).toHaveValue(SkillEffectTarget.Enemy);
-      expect(mechanicSelect).toHaveValue(SkillEffectTargetMechanicType.Self);
+      expect(targetSelect).toHaveValue(EffectTarget.Enemy);
+      expect(mechanicSelect).toHaveValue(EffectTargetMechanicType.Self);
     });
 
     it("passes correct props to NodeEntityReference", () => {
@@ -523,8 +523,8 @@ describe("HitEffectEditor", () => {
       const partialEffect: HitEffect = {
         hit_type: HitType.Heal,
         scalers: [],
-        target: SkillEffectTarget.Ally,
-        target_mechanic: { type: SkillEffectTargetMechanicType.Self },
+        target: EffectTarget.Ally,
+        target_mechanic: { type: EffectTargetMechanicType.Self },
         hit_sound: {
           id: "",
           owner: "",
@@ -542,7 +542,7 @@ describe("HitEffectEditor", () => {
 
       expect(screen.getByTestId("ant-select")).toHaveValue(HitType.Heal);
       expect(screen.getByTestId("target-select")).toHaveValue(
-        SkillEffectTarget.Ally,
+        EffectTarget.Ally,
       );
     });
 

@@ -2,22 +2,22 @@ import { Select } from "antd";
 import React from "react";
 import { FullWidthSelect } from "@components/common/styled-components";
 import {
-  ALL_SKILL_EFFECT_TARGET_MECHANIC_TYPES,
-  ALL_SKILL_EFFECT_TARGETS,
-  SkillEffectTarget,
-  SkillEffectTargetMechanic,
-  SkillEffectTargetMechanicType,
-} from "@models/skill.types";
+  ALL_EFFECT_TARGET_MECHANIC_TYPES,
+  ALL_EFFECT_TARGETS,
+  EffectTarget,
+  EffectTargetMechanic,
+  EffectTargetMechanicType,
+} from "@models/effect.types";
 import { mapTargetMechanicChange } from "@utils/mechanic";
 import { NodeField, NodeInteractive, NodeTargetMechanicFields } from "./";
 
 const { Option } = Select;
 
 interface TargetMechanicEditorProps {
-  target: SkillEffectTarget;
-  targetMechanic: SkillEffectTargetMechanic;
-  onTargetChange: (target: SkillEffectTarget) => void;
-  onMechanicChange: (mechanic: SkillEffectTargetMechanic) => void;
+  target: EffectTarget;
+  targetMechanic: EffectTargetMechanic;
+  onTargetChange: (target: EffectTarget) => void;
+  onMechanicChange: (mechanic: EffectTargetMechanic) => void;
 }
 
 export const TargetMechanicEditor: React.FC<TargetMechanicEditorProps> = ({
@@ -27,7 +27,7 @@ export const TargetMechanicEditor: React.FC<TargetMechanicEditorProps> = ({
   onMechanicChange,
 }) => {
   const handleTargetMechanicTypeChange = (
-    value: SkillEffectTargetMechanicType,
+    value: EffectTargetMechanicType,
   ) => {
     onMechanicChange(mapTargetMechanicChange(value));
   };
@@ -39,11 +39,11 @@ export const TargetMechanicEditor: React.FC<TargetMechanicEditorProps> = ({
           <FullWidthSelect
             value={target}
             onChange={(value: unknown) =>
-              onTargetChange(value as SkillEffectTarget)
+              onTargetChange(value as EffectTarget)
             }
             size="small"
           >
-            {ALL_SKILL_EFFECT_TARGETS.map((type) => (
+            {ALL_EFFECT_TARGETS.map((type) => (
               <Option key={type} value={type}>
                 {type}
               </Option>
@@ -58,12 +58,12 @@ export const TargetMechanicEditor: React.FC<TargetMechanicEditorProps> = ({
             value={targetMechanic?.type}
             onChange={(value: unknown) =>
               handleTargetMechanicTypeChange(
-                value as SkillEffectTargetMechanicType,
+                value as EffectTargetMechanicType,
               )
             }
             size="small"
           >
-            {ALL_SKILL_EFFECT_TARGET_MECHANIC_TYPES.map((type) => (
+            {ALL_EFFECT_TARGET_MECHANIC_TYPES.map((type) => (
               <Option key={type} value={type}>
                 {type}
               </Option>

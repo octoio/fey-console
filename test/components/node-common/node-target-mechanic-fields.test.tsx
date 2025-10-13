@@ -2,12 +2,12 @@
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { NodeTargetMechanicFields } from "@components/node-common/node-target-mechanic-fields";
 import {
-  SkillEffectTargetMechanicType,
-  SkillEffectTargetMechanicTeam,
-  SkillEffectTargetMechanicCircle,
-  SkillEffectTargetMechanicRectangle,
+  EffectTargetMechanicType,
+  EffectTargetMechanicTeam,
+  EffectTargetMechanicCircle,
+  EffectTargetMechanicRectangle,
   CharacterTeam,
-} from "@models/skill.types";
+} from "@models/effect.types";
 import { render, screen, fireEvent } from "@testing-library/react";
 
 // Mock styled components
@@ -117,11 +117,11 @@ describe("NodeTargetMechanicFields", () => {
   });
 
   describe("Team Mechanic", () => {
-    let teamMechanic: SkillEffectTargetMechanicTeam;
+    let teamMechanic: EffectTargetMechanicTeam;
 
     beforeEach(() => {
       teamMechanic = {
-        type: SkillEffectTargetMechanicType.Team,
+        type: EffectTargetMechanicType.Team,
         team: CharacterTeam.Ally,
       };
     });
@@ -201,11 +201,11 @@ describe("NodeTargetMechanicFields", () => {
   });
 
   describe("Circle Mechanic", () => {
-    let circleMechanic: SkillEffectTargetMechanicCircle;
+    let circleMechanic: EffectTargetMechanicCircle;
 
     beforeEach(() => {
       circleMechanic = {
-        type: SkillEffectTargetMechanicType.Circle,
+        type: EffectTargetMechanicType.Circle,
         hit_count: 5,
         radius: 2.5,
       };
@@ -338,11 +338,11 @@ describe("NodeTargetMechanicFields", () => {
   });
 
   describe("Rectangle Mechanic", () => {
-    let rectangleMechanic: SkillEffectTargetMechanicRectangle;
+    let rectangleMechanic: EffectTargetMechanicRectangle;
 
     beforeEach(() => {
       rectangleMechanic = {
-        type: SkillEffectTargetMechanicType.Rectangle,
+        type: EffectTargetMechanicType.Rectangle,
         hit_count: 3,
         width: 4.0,
         height: 6.0,
@@ -497,8 +497,8 @@ describe("NodeTargetMechanicFields", () => {
 
   describe("Edge Cases", () => {
     it("handles empty/NaN values correctly for Circle mechanic", () => {
-      const circleMechanic: SkillEffectTargetMechanicCircle = {
-        type: SkillEffectTargetMechanicType.Circle,
+      const circleMechanic: EffectTargetMechanicCircle = {
+        type: EffectTargetMechanicType.Circle,
         hit_count: 1,
         radius: 1.0,
       };
@@ -528,8 +528,8 @@ describe("NodeTargetMechanicFields", () => {
     });
 
     it("handles empty/NaN values correctly for Rectangle mechanic", () => {
-      const rectangleMechanic: SkillEffectTargetMechanicRectangle = {
-        type: SkillEffectTargetMechanicType.Rectangle,
+      const rectangleMechanic: EffectTargetMechanicRectangle = {
+        type: EffectTargetMechanicType.Rectangle,
         hit_count: 1,
         width: 1.0,
         height: 1.0,
@@ -568,7 +568,7 @@ describe("NodeTargetMechanicFields", () => {
 
     it("preserves other properties when updating specific values", () => {
       const complexCircleMechanic = {
-        type: SkillEffectTargetMechanicType.Circle,
+        type: EffectTargetMechanicType.Circle,
         hit_count: 5,
         radius: 2.5,
         extra_property: "should_be_preserved",
@@ -585,7 +585,7 @@ describe("NodeTargetMechanicFields", () => {
       fireEvent.change(inputs[0], { target: { value: "10" } });
 
       expect(mockOnUpdate).toHaveBeenCalledWith({
-        type: SkillEffectTargetMechanicType.Circle,
+        type: EffectTargetMechanicType.Circle,
         hit_count: 10,
         radius: 2.5,
         extra_property: "should_be_preserved",
@@ -595,8 +595,8 @@ describe("NodeTargetMechanicFields", () => {
 
   describe("Component Integration", () => {
     it("renders multiple NodeField and NodeInteractive components correctly", () => {
-      const rectangleMechanic: SkillEffectTargetMechanicRectangle = {
-        type: SkillEffectTargetMechanicType.Rectangle,
+      const rectangleMechanic: EffectTargetMechanicRectangle = {
+        type: EffectTargetMechanicType.Rectangle,
         hit_count: 1,
         width: 1.0,
         height: 1.0,
@@ -615,8 +615,8 @@ describe("NodeTargetMechanicFields", () => {
     });
 
     it("calls onUpdate with correct mechanic object spread", () => {
-      const teamMechanic: SkillEffectTargetMechanicTeam = {
-        type: SkillEffectTargetMechanicType.Team,
+      const teamMechanic: EffectTargetMechanicTeam = {
+        type: EffectTargetMechanicType.Team,
         team: CharacterTeam.Ally,
       };
 
@@ -631,7 +631,7 @@ describe("NodeTargetMechanicFields", () => {
       fireEvent.change(select, { target: { value: CharacterTeam.Enemy } });
 
       expect(mockOnUpdate).toHaveBeenCalledWith({
-        type: SkillEffectTargetMechanicType.Team,
+        type: EffectTargetMechanicType.Team,
         team: CharacterTeam.Enemy,
       });
 

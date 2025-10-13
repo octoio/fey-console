@@ -1,78 +1,78 @@
 import {
-  SkillEffectTargetMechanicType,
+  EffectTargetMechanicType,
   CharacterTeam,
-  SkillEffectTargetMechanicCircle,
-  SkillEffectTargetMechanicRectangle,
-  SkillEffectTargetMechanicSelf,
-  SkillEffectTargetMechanicTeam,
-  SkillEffectTargetMechanic,
-  SkillEffectTargetMechanicSelected,
-  SkillEffectTarget,
-} from "@models/skill.types";
+  EffectTargetMechanicCircle,
+  EffectTargetMechanicRectangle,
+  EffectTargetMechanicSelf,
+  EffectTargetMechanicTeam,
+  EffectTargetMechanic,
+  EffectTargetMechanicSelected,
+  EffectTarget,
+} from "@models/effect.types";
 
 // Create a new target mechanic based on type
 export const mapTargetMechanicChange = (
-  value: SkillEffectTargetMechanicType,
-): SkillEffectTargetMechanic => {
+  value: EffectTargetMechanicType,
+): EffectTargetMechanic => {
   switch (value) {
-    case SkillEffectTargetMechanicType.Self:
+    case EffectTargetMechanicType.Self:
       return {
-        type: SkillEffectTargetMechanicType.Self,
-      } as SkillEffectTargetMechanicSelf;
+        type: EffectTargetMechanicType.Self,
+      } as EffectTargetMechanicSelf;
 
-    case SkillEffectTargetMechanicType.Team:
+    case EffectTargetMechanicType.Team:
       return {
-        type: SkillEffectTargetMechanicType.Team,
+        type: EffectTargetMechanicType.Team,
         team: CharacterTeam.Ally,
-      } as SkillEffectTargetMechanicTeam;
+      } as EffectTargetMechanicTeam;
 
-    case SkillEffectTargetMechanicType.Selected:
+    case EffectTargetMechanicType.Selected:
       return {
-        type: SkillEffectTargetMechanicType.Selected,
-      } as SkillEffectTargetMechanicSelected;
+        type: EffectTargetMechanicType.Selected,
+      } as EffectTargetMechanicSelected;
 
-    case SkillEffectTargetMechanicType.Circle:
+    case EffectTargetMechanicType.Circle:
       return {
-        type: SkillEffectTargetMechanicType.Circle,
+        type: EffectTargetMechanicType.Circle,
         hit_count: 1,
         radius: 5,
-      } as SkillEffectTargetMechanicCircle;
+      } as EffectTargetMechanicCircle;
 
-    case SkillEffectTargetMechanicType.Rectangle:
+    case EffectTargetMechanicType.Rectangle:
       return {
-        type: SkillEffectTargetMechanicType.Rectangle,
+        type: EffectTargetMechanicType.Rectangle,
         hit_count: 1,
         width: 5,
         height: 5,
-      } as SkillEffectTargetMechanicRectangle;
+      } as EffectTargetMechanicRectangle;
 
     default:
       return {
-        type: SkillEffectTargetMechanicType.Self,
-      } as SkillEffectTargetMechanicSelf;
+        type: EffectTargetMechanicType.Self,
+      } as EffectTargetMechanicSelf;
   }
 };
 
 // Get appropriate default target based on mechanic type
 export const getDefaultTargetForMechanic = (
-  mechanicType: SkillEffectTargetMechanicType,
-): SkillEffectTarget => {
+  mechanicType: EffectTargetMechanicType,
+): EffectTarget => {
   switch (mechanicType) {
-    case SkillEffectTargetMechanicType.Team:
-      return SkillEffectTarget.Ally;
-    case SkillEffectTargetMechanicType.Circle:
-    case SkillEffectTargetMechanicType.Rectangle:
-      return SkillEffectTarget.Enemy;
-    case SkillEffectTargetMechanicType.Selected:
-      return SkillEffectTarget.Any;
+    case EffectTargetMechanicType.Team:
+      return EffectTarget.Ally;
+    case EffectTargetMechanicType.Circle:
+    case EffectTargetMechanicType.Rectangle:
+      return EffectTarget.Enemy;
+    case EffectTargetMechanicType.Selected:
+      return EffectTarget.Any;
     default:
-      return SkillEffectTarget.Enemy;
+      return EffectTarget.Enemy;
   }
 };
 
 // Create a complete default target configuration
 export const createDefaultTargeting = (
-  mechanicType: SkillEffectTargetMechanicType = SkillEffectTargetMechanicType.Self,
+  mechanicType: EffectTargetMechanicType = EffectTargetMechanicType.Self,
 ) => {
   return {
     target: getDefaultTargetForMechanic(mechanicType),

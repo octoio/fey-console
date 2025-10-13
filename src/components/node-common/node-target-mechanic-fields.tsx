@@ -6,20 +6,20 @@ import {
 } from "@components/common/styled-components";
 import {
   ALL_CHARACTER_TEAMS,
-  SkillEffectTargetMechanic,
-  SkillEffectTargetMechanicCircle,
-  SkillEffectTargetMechanicRectangle,
-  SkillEffectTargetMechanicTeam,
-  SkillEffectTargetMechanicType,
-} from "@models/skill.types";
+  EffectTargetMechanic,
+  EffectTargetMechanicCircle,
+  EffectTargetMechanicRectangle,
+  EffectTargetMechanicTeam,
+  EffectTargetMechanicType,
+} from "@models/effect.types";
 import { NodeField } from "./node-field";
 import { NodeInteractive } from "./node-interactive";
 
 const { Option } = Select;
 
 interface NodeTargetMechanicFieldsProps {
-  mechanic: SkillEffectTargetMechanic;
-  onUpdate: (updatedMechanic: SkillEffectTargetMechanic) => void;
+  mechanic: EffectTargetMechanic;
+  onUpdate: (updatedMechanic: EffectTargetMechanic) => void;
 }
 
 export const NodeTargetMechanicFields: React.FC<
@@ -28,12 +28,12 @@ export const NodeTargetMechanicFields: React.FC<
   if (!mechanic) return null;
 
   switch (mechanic.type) {
-    case SkillEffectTargetMechanicType.Team:
+    case EffectTargetMechanicType.Team:
       return (
         <NodeField label="Team">
           <NodeInteractive>
             <FullWidthSelect
-              value={(mechanic as SkillEffectTargetMechanicTeam).team}
+              value={(mechanic as EffectTargetMechanicTeam).team}
               onChange={(value) => {
                 const updatedMechanic = { ...mechanic, team: value };
                 onUpdate(updatedMechanic);
@@ -50,14 +50,14 @@ export const NodeTargetMechanicFields: React.FC<
         </NodeField>
       );
 
-    case SkillEffectTargetMechanicType.Circle:
+    case EffectTargetMechanicType.Circle:
       return (
         <>
           <NodeField label="Hit Count">
             <NodeInteractive>
               <FullWidthInputNumber
                 min={1}
-                value={(mechanic as SkillEffectTargetMechanicCircle).hit_count}
+                value={(mechanic as EffectTargetMechanicCircle).hit_count}
                 onChange={(value) => {
                   const updatedMechanic = {
                     ...mechanic,
@@ -74,7 +74,7 @@ export const NodeTargetMechanicFields: React.FC<
               <FullWidthInputNumber
                 min={0}
                 step={0.5}
-                value={(mechanic as SkillEffectTargetMechanicCircle).radius}
+                value={(mechanic as EffectTargetMechanicCircle).radius}
                 onChange={(value) => {
                   const updatedMechanic = { ...mechanic, radius: value || 0 };
                   onUpdate(updatedMechanic);
@@ -86,16 +86,14 @@ export const NodeTargetMechanicFields: React.FC<
         </>
       );
 
-    case SkillEffectTargetMechanicType.Rectangle:
+    case EffectTargetMechanicType.Rectangle:
       return (
         <>
           <NodeField label="Hit Count">
             <NodeInteractive>
               <FullWidthInputNumber
                 min={1}
-                value={
-                  (mechanic as SkillEffectTargetMechanicRectangle).hit_count
-                }
+                value={(mechanic as EffectTargetMechanicRectangle).hit_count}
                 onChange={(value) => {
                   const updatedMechanic = {
                     ...mechanic,
@@ -112,7 +110,7 @@ export const NodeTargetMechanicFields: React.FC<
               <FullWidthInputNumber
                 min={0}
                 step={0.5}
-                value={(mechanic as SkillEffectTargetMechanicRectangle).width}
+                value={(mechanic as EffectTargetMechanicRectangle).width}
                 onChange={(value) => {
                   const updatedMechanic = { ...mechanic, width: value || 0 };
                   onUpdate(updatedMechanic);
@@ -126,7 +124,7 @@ export const NodeTargetMechanicFields: React.FC<
               <FullWidthInputNumber
                 min={0}
                 step={0.5}
-                value={(mechanic as SkillEffectTargetMechanicRectangle).height}
+                value={(mechanic as EffectTargetMechanicRectangle).height}
                 onChange={(value) => {
                   const updatedMechanic = { ...mechanic, height: value || 0 };
                   onUpdate(updatedMechanic);

@@ -3,6 +3,9 @@ import * as path from "path";
 import { defineConfig } from "vitest/config";
 
 const config = defineConfig({
+  resolve: {
+    conditions: ["development", "browser"],
+  },
   test: {
     environment: "jsdom",
     setupFiles: ["./test/setup.ts"],

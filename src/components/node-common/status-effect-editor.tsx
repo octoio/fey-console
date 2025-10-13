@@ -3,11 +3,11 @@ import React from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 import { EntityReference, EntityType } from "@models/common.types";
 import {
-  SkillEffectScaling,
-  SkillEffectTarget,
-  SkillEffectTargetMechanic,
+  EffectScaling,
+  EffectTarget,
+  EffectTargetMechanic,
   StatusEffect,
-} from "@models/skill.types";
+} from "@models/effect.types";
 import {
   ALL_STATUS_DURATION_TYPES,
   StatusDurationType,
@@ -41,15 +41,15 @@ export const StatusEffectEditor: React.FC<StatusEffectEditorProps> = ({
     status: null,
   };
 
-  const handleTargetChange = (target: SkillEffectTarget) => {
+  const handleTargetChange = (target: EffectTarget) => {
     onChange({ ...effect, target });
   };
 
-  const handleMechanicChange = (target_mechanic: SkillEffectTargetMechanic) => {
+  const handleMechanicChange = (target_mechanic: EffectTargetMechanic) => {
     onChange({ ...effect, target_mechanic });
   };
 
-  const handleScalersChange = (scalers: SkillEffectScaling[]) => {
+  const handleScalersChange = (scalers: EffectScaling[]) => {
     onChange({ ...effect, scalers });
   };
 

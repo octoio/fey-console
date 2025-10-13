@@ -7,11 +7,11 @@ import {
   HitType,
 } from "@models/common.types";
 import {
+  EffectScaling,
+  EffectTarget,
+  EffectTargetMechanic,
   HitEffect,
-  SkillEffectScaling,
-  SkillEffectTarget,
-  SkillEffectTargetMechanic,
-} from "@models/skill.types";
+} from "@models/effect.types";
 import { createDefaultTargeting } from "@utils/mechanic";
 import {
   NodeField,
@@ -46,11 +46,11 @@ export const HitEffectEditor: React.FC<HitEffectEditorProps> = ({
     onChange({ ...effect, hit_type: value });
   };
 
-  const handleTargetChange = (target: SkillEffectTarget) => {
+  const handleTargetChange = (target: EffectTarget) => {
     onChange({ ...effect, target });
   };
 
-  const handleMechanicChange = (target_mechanic: SkillEffectTargetMechanic) => {
+  const handleMechanicChange = (target_mechanic: EffectTargetMechanic) => {
     onChange({ ...effect, target_mechanic });
   };
 
@@ -66,7 +66,7 @@ export const HitEffectEditor: React.FC<HitEffectEditorProps> = ({
     onChange({ ...effect, can_miss: e.target.checked });
   };
 
-  const handleScalersChange = (scalers: SkillEffectScaling[]) => {
+  const handleScalersChange = (scalers: EffectScaling[]) => {
     onChange({ ...effect, scalers });
   };
 

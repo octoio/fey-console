@@ -6,30 +6,48 @@ exports[`LoadingSpinner Snapshots > Combined Props Snapshots > should match snap
   style="display: flex; justify-content: center; align-items: center; height: 300px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Processing data...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -40,30 +58,48 @@ exports[`LoadingSpinner Snapshots > Combined Props Snapshots > should match snap
   style="display: flex; justify-content: center; align-items: center; height: 500px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading large dataset, this may take a few moments...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -74,30 +110,43 @@ exports[`LoadingSpinner Snapshots > Combined Props Snapshots > should match snap
   style="display: flex; justify-content: center; align-items: center; height: 50px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-sm ant-spin-spinning css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-sm ant-spin-spinning css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -108,30 +157,48 @@ exports[`LoadingSpinner Snapshots > Combined Props Snapshots > should match snap
   style="display: flex; justify-content: center; align-items: center; height: 400px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Saving...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -142,30 +209,48 @@ exports[`LoadingSpinner Snapshots > Component Structure Snapshots > should match
   style="display: flex; justify-content: center; align-items: center; height: 400px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -177,30 +262,48 @@ exports[`LoadingSpinner Snapshots > Component Structure Snapshots > should match
     style="display: flex; justify-content: center; align-items: center; height: 400px;"
   >
     <div
-      aria-busy="true"
-      aria-live="polite"
-      class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+      class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
     >
-      <span
-        class="ant-spin-dot-holder"
-      >
-        <span
-          class="ant-spin-dot ant-spin-dot-spin"
+      <div>
+        <div
+          aria-busy="true"
+          aria-live="polite"
+          class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
         >
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-        </span>
-      </span>
+          <span
+            class="ant-spin-dot-holder"
+          >
+            <span
+              class="ant-spin-dot ant-spin-dot-spin"
+            >
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+            </span>
+          </span>
+          <div
+            class="ant-spin-text"
+          >
+            Complete structure test
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-spin-container ant-spin-blur"
+      >
+        <div
+          style="min-height: 200px;"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -212,30 +315,48 @@ exports[`LoadingSpinner Snapshots > Default Props Snapshots > should match snaps
   style="display: flex; justify-content: center; align-items: center; height: 400px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -246,30 +367,48 @@ exports[`LoadingSpinner Snapshots > Edge Cases Snapshots > should match snapshot
   style="display: flex; justify-content: center; align-items: center; height: 400px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading 12345...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -280,30 +419,48 @@ exports[`LoadingSpinner Snapshots > Edge Cases Snapshots > should match snapshot
   style="display: flex; justify-content: center; align-items: center; height: 400px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Загрузка... ☕ 読み込み中
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -314,30 +471,48 @@ exports[`LoadingSpinner Snapshots > Edge Cases Snapshots > should match snapshot
   style="display: flex; justify-content: center; align-items: center; height: 9999px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -348,30 +523,48 @@ exports[`LoadingSpinner Snapshots > Edge Cases Snapshots > should match snapshot
   style="display: flex; justify-content: center; align-items: center; height: 0px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -382,30 +575,48 @@ exports[`LoadingSpinner Snapshots > Height Variations Snapshots > should match s
   style="display: flex; justify-content: center; align-items: center; height: calc(100% - 50px);"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -416,30 +627,48 @@ exports[`LoadingSpinner Snapshots > Height Variations Snapshots > should match s
   style="display: flex; justify-content: center; align-items: center; height: 600px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -450,30 +679,48 @@ exports[`LoadingSpinner Snapshots > Height Variations Snapshots > should match s
   style="display: flex; justify-content: center; align-items: center; height: 50%;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -484,30 +731,48 @@ exports[`LoadingSpinner Snapshots > Height Variations Snapshots > should match s
   style="display: flex; justify-content: center; align-items: center; height: 100px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -518,30 +783,48 @@ exports[`LoadingSpinner Snapshots > Height Variations Snapshots > should match s
   style="display: flex; justify-content: center; align-items: center; height: 100vh;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -553,30 +836,48 @@ exports[`LoadingSpinner Snapshots > Multiple Instances Snapshots > should match 
     style="display: flex; justify-content: center; align-items: center; height: 400px;"
   >
     <div
-      aria-busy="true"
-      aria-live="polite"
-      class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+      class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
     >
-      <span
-        class="ant-spin-dot-holder"
-      >
-        <span
-          class="ant-spin-dot ant-spin-dot-spin"
+      <div>
+        <div
+          aria-busy="true"
+          aria-live="polite"
+          class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
         >
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-        </span>
-      </span>
+          <span
+            class="ant-spin-dot-holder"
+          >
+            <span
+              class="ant-spin-dot ant-spin-dot-spin"
+            >
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+            </span>
+          </span>
+          <div
+            class="ant-spin-text"
+          >
+            Loading...
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-spin-container ant-spin-blur"
+      >
+        <div
+          style="min-height: 200px;"
+        />
+      </div>
     </div>
   </div>
   <div
@@ -584,30 +885,48 @@ exports[`LoadingSpinner Snapshots > Multiple Instances Snapshots > should match 
     style="display: flex; justify-content: center; align-items: center; height: 400px;"
   >
     <div
-      aria-busy="true"
-      aria-live="polite"
-      class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+      class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
     >
-      <span
-        class="ant-spin-dot-holder"
-      >
-        <span
-          class="ant-spin-dot ant-spin-dot-spin"
+      <div>
+        <div
+          aria-busy="true"
+          aria-live="polite"
+          class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
         >
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-        </span>
-      </span>
+          <span
+            class="ant-spin-dot-holder"
+          >
+            <span
+              class="ant-spin-dot ant-spin-dot-spin"
+            >
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+            </span>
+          </span>
+          <div
+            class="ant-spin-text"
+          >
+            Loading...
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-spin-container ant-spin-blur"
+      >
+        <div
+          style="min-height: 200px;"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -620,30 +939,48 @@ exports[`LoadingSpinner Snapshots > Multiple Instances Snapshots > should match 
     style="display: flex; justify-content: center; align-items: center; height: 200px;"
   >
     <div
-      aria-busy="true"
-      aria-live="polite"
-      class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+      class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
     >
-      <span
-        class="ant-spin-dot-holder"
-      >
-        <span
-          class="ant-spin-dot ant-spin-dot-spin"
+      <div>
+        <div
+          aria-busy="true"
+          aria-live="polite"
+          class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
         >
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-        </span>
-      </span>
+          <span
+            class="ant-spin-dot-holder"
+          >
+            <span
+              class="ant-spin-dot ant-spin-dot-spin"
+            >
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+            </span>
+          </span>
+          <div
+            class="ant-spin-text"
+          >
+            Loading 1
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-spin-container ant-spin-blur"
+      >
+        <div
+          style="min-height: 200px;"
+        />
+      </div>
     </div>
   </div>
   <div
@@ -651,30 +988,48 @@ exports[`LoadingSpinner Snapshots > Multiple Instances Snapshots > should match 
     style="display: flex; justify-content: center; align-items: center; height: 300px;"
   >
     <div
-      aria-busy="true"
-      aria-live="polite"
-      class="ant-spin ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+      class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
     >
-      <span
-        class="ant-spin-dot-holder"
-      >
-        <span
-          class="ant-spin-dot ant-spin-dot-spin"
+      <div>
+        <div
+          aria-busy="true"
+          aria-live="polite"
+          class="ant-spin ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
         >
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-        </span>
-      </span>
+          <span
+            class="ant-spin-dot-holder"
+          >
+            <span
+              class="ant-spin-dot ant-spin-dot-spin"
+            >
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+            </span>
+          </span>
+          <div
+            class="ant-spin-text"
+          >
+            Loading 2
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-spin-container ant-spin-blur"
+      >
+        <div
+          style="min-height: 200px;"
+        />
+      </div>
     </div>
   </div>
   <div
@@ -682,30 +1037,48 @@ exports[`LoadingSpinner Snapshots > Multiple Instances Snapshots > should match 
     style="display: flex; justify-content: center; align-items: center; height: 400px;"
   >
     <div
-      aria-busy="true"
-      aria-live="polite"
-      class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+      class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
     >
-      <span
-        class="ant-spin-dot-holder"
-      >
-        <span
-          class="ant-spin-dot ant-spin-dot-spin"
+      <div>
+        <div
+          aria-busy="true"
+          aria-live="polite"
+          class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
         >
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-          <i
-            class="ant-spin-dot-item"
-          />
-        </span>
-      </span>
+          <span
+            class="ant-spin-dot-holder"
+          >
+            <span
+              class="ant-spin-dot ant-spin-dot-spin"
+            >
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+              <i
+                class="ant-spin-dot-item"
+              />
+            </span>
+          </span>
+          <div
+            class="ant-spin-text"
+          >
+            Loading 3
+          </div>
+        </div>
+      </div>
+      <div
+        class="ant-spin-container ant-spin-blur"
+      >
+        <div
+          style="min-height: 200px;"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -717,30 +1090,48 @@ exports[`LoadingSpinner Snapshots > Size Variations Snapshots > should match sna
   style="display: flex; justify-content: center; align-items: center; height: 400px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -751,30 +1142,48 @@ exports[`LoadingSpinner Snapshots > Size Variations Snapshots > should match sna
   style="display: flex; justify-content: center; align-items: center; height: 400px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -785,30 +1194,48 @@ exports[`LoadingSpinner Snapshots > Size Variations Snapshots > should match sna
   style="display: flex; justify-content: center; align-items: center; height: 400px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -819,30 +1246,48 @@ exports[`LoadingSpinner Snapshots > Tip Text Variations Snapshots > should match
   style="display: flex; justify-content: center; align-items: center; height: 400px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Please wait...
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -853,30 +1298,43 @@ exports[`LoadingSpinner Snapshots > Tip Text Variations Snapshots > should match
   style="display: flex; justify-content: center; align-items: center; height: 400px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -887,30 +1345,48 @@ exports[`LoadingSpinner Snapshots > Tip Text Variations Snapshots > should match
   style="display: flex; justify-content: center; align-items: center; height: 400px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          This is a very long loading message that might wrap to multiple lines
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -921,30 +1397,48 @@ exports[`LoadingSpinner Snapshots > Tip Text Variations Snapshots > should match
   style="display: flex; justify-content: center; align-items: center; height: 400px;"
 >
   <div
-    aria-busy="true"
-    aria-live="polite"
-    class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-tjsggz"
+    class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
   >
-    <span
-      class="ant-spin-dot-holder"
-    >
-      <span
-        class="ant-spin-dot ant-spin-dot-spin"
+    <div>
+      <div
+        aria-busy="true"
+        aria-live="polite"
+        class="ant-spin ant-spin-lg ant-spin-spinning ant-spin-show-text css-dev-only-do-not-override-1odpy5d"
       >
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-        <i
-          class="ant-spin-dot-item"
-        />
-      </span>
-    </span>
+        <span
+          class="ant-spin-dot-holder"
+        >
+          <span
+            class="ant-spin-dot ant-spin-dot-spin"
+          >
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+            <i
+              class="ant-spin-dot-item"
+            />
+          </span>
+        </span>
+        <div
+          class="ant-spin-text"
+        >
+          Loading... 🔄 (50%)
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-spin-container ant-spin-blur"
+    >
+      <div
+        style="min-height: 200px;"
+      />
+    </div>
   </div>
 </div>
 `;

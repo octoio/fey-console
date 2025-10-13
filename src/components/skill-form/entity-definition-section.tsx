@@ -71,46 +71,44 @@ export const EntityDefinitionSection: React.FC = () => {
 
   return (
     <StyledCard title="Entity Definition">
-      <Form layout="vertical">
-        <Form.Item label="Owner">
-          <Input
-            value={skillData.owner}
-            onChange={handleOwnerChange}
-            placeholder="Entity owner (e.g., Octoio)"
-          />
-        </Form.Item>
+      <Form.Item label="Owner">
+        <Input
+          value={skillData.owner}
+          onChange={handleOwnerChange}
+          placeholder="Entity owner (e.g., Octoio)"
+        />
+      </Form.Item>
 
-        <Form.Item label="Type">
-          <Select
-            value={skillData.type as EntityType}
-            onChange={handleTypeChange}
-            disabled // Skill type can't be changed
-          >
-            <Option value={EntityType.Skill}>Skill</Option>
-          </Select>
-        </Form.Item>
+      <Form.Item label="Type">
+        <Select
+          value={skillData.type as EntityType}
+          onChange={handleTypeChange}
+          disabled // Skill type can't be changed
+        >
+          <Option value={EntityType.Skill}>Skill</Option>
+        </Select>
+      </Form.Item>
 
-        <Form.Item label="Key">
-          <Input
-            value={skillData.key}
-            onChange={handleKeyChange}
-            placeholder="Unique identifier for this skill"
-          />
-        </Form.Item>
+      <Form.Item label="Key">
+        <Input
+          value={skillData.key}
+          onChange={handleKeyChange}
+          placeholder="Unique identifier for this skill"
+        />
+      </Form.Item>
 
-        <Form.Item label="Version">
-          <Input
-            type="number"
-            min={1}
-            value={skillData.version}
-            onChange={handleVersionChange}
-          />
-        </Form.Item>
+      <Form.Item label="Version">
+        <Input
+          type="number"
+          min={1}
+          value={skillData.version}
+          onChange={handleVersionChange}
+        />
+      </Form.Item>
 
-        <Form.Item label="Generated ID">
-          <ReadOnlyInput value={id} readOnly />
-        </Form.Item>
-      </Form>
+      <Form.Item label="Generated ID">
+        <ReadOnlyInput value={id} readOnly />
+      </Form.Item>
     </StyledCard>
   );
 };

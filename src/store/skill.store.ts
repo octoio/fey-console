@@ -17,6 +17,7 @@ import {
   EntityType,
   HitType,
 } from "@models/common.types";
+import { EffectTarget, EffectTargetMechanicType } from "@models/effect.types";
 import { QualityType } from "@models/quality.types";
 import { RequirementOperator } from "@models/requirement.types";
 import {
@@ -24,8 +25,6 @@ import {
   SkillActionNode,
   SkillActionNodeType,
   SkillCategory,
-  SkillEffectTarget,
-  SkillEffectTargetMechanicType,
   SkillEntityDefinition,
   SkillIndicator,
   SkillTargetType,
@@ -459,9 +458,9 @@ export const useSkillStore = create<SkillEditorState>()(
               hit_type: HitType.Damage,
               scalers: [],
               target_mechanic: {
-                type: SkillEffectTargetMechanicType.Self,
+                type: EffectTargetMechanicType.Self,
               },
-              target: SkillEffectTarget.Enemy,
+              target: EffectTarget.Enemy,
               hit_sound: {
                 id: "",
                 owner: "Octoio",
@@ -476,9 +475,9 @@ export const useSkillStore = create<SkillEditorState>()(
           case SkillActionNodeType.Status:
             newNode.data.status_effect = {
               target_mechanic: {
-                type: SkillEffectTargetMechanicType.Self,
+                type: EffectTargetMechanicType.Self,
               },
-              target: SkillEffectTarget.Ally,
+              target: EffectTarget.Ally,
               durations: [],
               scalers: [],
               status: {

@@ -20,6 +20,7 @@ export const NODE_COLORS = {
   LIGHT_BLUE_BG: "#e6f7ff", // For Status nodes
   PALE_GREEN_BG: "#fafff0", // For Summon nodes
   LIGHT_CYAN_BG: "#e6fffb", // For Requirement nodes
+  PALE_ORANGE_BG: "#fff7e6", // For Projectile nodes
 
   // Border colors
   GRAY_BLUE_BORDER: "#ccd", // For Sequence nodes
@@ -31,6 +32,7 @@ export const NODE_COLORS = {
   BLUE_BORDER: "#91d5ff", // For Status nodes
   LIME_BORDER: "#b7eb8f", // For Summon nodes
   CYAN_BORDER: "#87e8de", // For Requirement nodes
+  ORANGE_BORDER: "#ffc069", // For Projectile nodes
 };
 
 type BaseNodeProps = {

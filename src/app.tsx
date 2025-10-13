@@ -4,7 +4,6 @@ import {
   Space,
   Typography,
   App as AntApp,
-  notification,
   Tabs,
 } from "antd";
 import React, { useState, useEffect, Suspense, lazy } from "react";
@@ -44,7 +43,8 @@ const HeaderContainer = styled(Space)`
   justify-content: space-between;
 `;
 
-export const App: React.FC = () => {
+const AppContent: React.FC = () => {
+  const { notification } = AntApp.useApp();
   const [selectedFolder, setSelectedFolder] = useState<string | null>(null);
   const [directoryHandle, setDirectoryHandle] =
     useState<FileSystemDirectoryHandle | null>(null);
@@ -125,19 +125,21 @@ export const App: React.FC = () => {
   ];
 
   return (
+    <AppContainer direction="vertical">
+      <HeaderContainer>
+        <Typography.Title level={4}>Skill Editor</Typography.Title>
+      </HeaderContainer>
+
+      <Tabs activeKey={activeTab} onChange={setActiveTab} items={tabItems} />
+    </AppContainer>
+  );
+};
+
+export const App: React.FC = () => {
+  return (
     <ConfigProvider theme={theme}>
       <AntApp>
-        <AppContainer direction="vertical">
-          <HeaderContainer>
-            <Typography.Title level={4}>Skill Editor</Typography.Title>
-          </HeaderContainer>
-
-          <Tabs
-            activeKey={activeTab}
-            onChange={setActiveTab}
-            items={tabItems}
-          />
-        </AppContainer>
+        <AppContent />
       </AntApp>
     </ConfigProvider>
   );

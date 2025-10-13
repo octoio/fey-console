@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { TargetMechanicEditor } from "@components/node-common/target-mechanic-editor";
 import {
-  SkillEffectTarget,
-  SkillEffectTargetMechanic,
-  SkillEffectTargetMechanicType,
-} from "@models/skill.types";
+  EffectTarget,
+  EffectTargetMechanic,
+  EffectTargetMechanicType,
+} from "@models/effect.types";
 import { render, screen } from "@testing-library/react";
 
 // Mock the styled-components
@@ -28,7 +28,7 @@ vi.mock("@components/common/styled-components", () => ({
 
 // Mock utility function
 vi.mock("@utils/mechanic", () => ({
-  mapTargetMechanicChange: vi.fn((type: SkillEffectTargetMechanicType) => ({
+  mapTargetMechanicChange: vi.fn((type: EffectTargetMechanicType) => ({
     type,
   })),
 }));
@@ -51,7 +51,7 @@ vi.mock("@components/node-common", () => ({
       data-testid="node-target-mechanic-fields"
       data-mechanic={JSON.stringify(mechanic)}
       onClick={() =>
-        onUpdate && onUpdate({ type: SkillEffectTargetMechanicType.Self })
+        onUpdate && onUpdate({ type: EffectTargetMechanicType.Self })
       }
     >
       Mechanic Fields
@@ -72,10 +72,10 @@ vi.mock("antd", () => ({
 
 describe("TargetMechanicEditor", () => {
   const defaultProps = {
-    target: SkillEffectTarget.Ally,
+    target: EffectTarget.Ally,
     targetMechanic: {
-      type: SkillEffectTargetMechanicType.Self,
-    } as SkillEffectTargetMechanic,
+      type: EffectTargetMechanicType.Self,
+    } as EffectTargetMechanic,
     onTargetChange: vi.fn(),
     onMechanicChange: vi.fn(),
   };
@@ -116,7 +116,7 @@ describe("TargetMechanicEditor", () => {
       render(<TargetMechanicEditor {...defaultProps} />);
 
       const selects = screen.getAllByTestId("full-width-select");
-      expect(selects[0]).toHaveAttribute("data-value", SkillEffectTarget.Ally);
+      expect(selects[0]).toHaveAttribute("data-value", EffectTarget.Ally);
     });
 
     it("should display current target mechanic type", () => {
@@ -125,7 +125,7 @@ describe("TargetMechanicEditor", () => {
       const selects = screen.getAllByTestId("full-width-select");
       expect(selects[1]).toHaveAttribute(
         "data-value",
-        SkillEffectTargetMechanicType.Self,
+        EffectTargetMechanicType.Self,
       );
     });
   });
@@ -149,7 +149,7 @@ describe("TargetMechanicEditor", () => {
   describe("Target Mechanic Integration", () => {
     it("should pass mechanic to NodeTargetMechanicFields", () => {
       const customMechanic = {
-        type: SkillEffectTargetMechanicType.Circle,
+        type: EffectTargetMechanicType.Circle,
       };
 
       render(
@@ -167,7 +167,7 @@ describe("TargetMechanicEditor", () => {
     });
 
     it("should handle empty target mechanic gracefully", () => {
-      const emptyMechanic = { type: SkillEffectTargetMechanicType.Self };
+      const emptyMechanic = { type: EffectTargetMechanicType.Self };
       render(
         <TargetMechanicEditor
           {...defaultProps}
@@ -178,7 +178,7 @@ describe("TargetMechanicEditor", () => {
       const mechanicSelect = screen.getAllByTestId("full-width-select")[1];
       expect(mechanicSelect).toHaveAttribute(
         "data-value",
-        SkillEffectTargetMechanicType.Self,
+        EffectTargetMechanicType.Self,
       );
     });
   });
@@ -192,20 +192,20 @@ describe("TargetMechanicEditor", () => {
       render(
         <TargetMechanicEditor
           {...defaultProps}
-          target={SkillEffectTarget.Enemy}
+          target={EffectTarget.Enemy}
         />,
       );
 
       const targetSelect = screen.getAllByTestId("full-width-select")[0];
       expect(targetSelect).toHaveAttribute(
         "data-value",
-        SkillEffectTarget.Enemy,
+        EffectTarget.Enemy,
       );
     });
 
     it("should handle different mechanic types", () => {
       const rectangleMechanic = {
-        type: SkillEffectTargetMechanicType.Rectangle,
+        type: EffectTargetMechanicType.Rectangle,
       };
 
       render(
@@ -218,7 +218,7 @@ describe("TargetMechanicEditor", () => {
       const mechanicSelect = screen.getAllByTestId("full-width-select")[1];
       expect(mechanicSelect).toHaveAttribute(
         "data-value",
-        SkillEffectTargetMechanicType.Rectangle,
+        EffectTargetMechanicType.Rectangle,
       );
     });
   });
@@ -236,7 +236,7 @@ describe("TargetMechanicEditor", () => {
 
   describe("Edge Cases", () => {
     it("should handle undefined mechanic type", () => {
-      const mechanicWithoutType = {} as SkillEffectTargetMechanic;
+      const mechanicWithoutType = {} as EffectTargetMechanic;
       render(
         <TargetMechanicEditor
           {...defaultProps}

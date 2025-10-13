@@ -9,7 +9,7 @@ import {
 } from "@components/common/styled-components";
 import styled from "@emotion/styled";
 import { EntityType } from "@models/common.types";
-import { SkillEffectScaling } from "@models/skill.types";
+import { EffectScaling } from "@models/effect.types";
 import { StatType } from "@models/stat.types";
 import { useSkillStore } from "@store/skill.store";
 import { NodeField } from "./node-field";
@@ -40,8 +40,8 @@ const ScalerPanel = styled(Panel)`
 `;
 
 interface NodeScalersProps {
-  scalers: SkillEffectScaling[];
-  onChange: (scalers: SkillEffectScaling[]) => void;
+  scalers: EffectScaling[];
+  onChange: (scalers: EffectScaling[]) => void;
   title?: string;
 }
 
@@ -59,7 +59,7 @@ export const NodeScalers: React.FC<NodeScalersProps> = ({
   );
 
   const handleAddScaler = () => {
-    const newScaler: SkillEffectScaling = {
+    const newScaler: EffectScaling = {
       base: 0,
       scaling: { min: 0, max: 1 },
       stat: stats[0] || StatType.AttackPower,
@@ -92,7 +92,7 @@ export const NodeScalers: React.FC<NodeScalersProps> = ({
 
   const handleScalerChange = (
     index: number,
-    field: keyof SkillEffectScaling | "min" | "max",
+    field: keyof EffectScaling | "min" | "max",
     value: number | string | StatType,
   ) => {
     const updatedScalers = [...scalers];
@@ -129,7 +129,7 @@ export const NodeScalers: React.FC<NodeScalersProps> = ({
   };
 
   // Create the panel header with a remove button
-  const getPanelHeader = (index: number, scaler: SkillEffectScaling) => (
+  const getPanelHeader = (index: number, scaler: EffectScaling) => (
     <HeaderContainer>
       <Text strong>
         {scaler.stat} ({scaler.base.toFixed(2)})

@@ -29,14 +29,12 @@ vi.mock("antd", () => ({
     step,
     size,
     addonBefore,
-    style,
   }: {
     value: number;
     onChange: (val: number | null) => void;
     step: number;
     size: string;
     addonBefore: string;
-    style: Record<string, unknown>;
   }) => (
     <input
       data-testid={`input-${addonBefore.toLowerCase()}`}
@@ -55,13 +53,11 @@ vi.mock("antd", () => ({
     onChange,
     options,
     size,
-    style,
   }: {
     value: string;
     onChange: (val: string) => void;
     options: Array<{ label: string; value: string }>;
     size: string;
-    style: Record<string, unknown>;
   }) => (
     <select
       data-testid="spawn-position-type-select"
@@ -76,7 +72,7 @@ vi.mock("antd", () => ({
       ))}
     </select>
   ),
-  Space: ({ children, direction, style }: any) => (
+  Space: ({ children, direction }: any) => (
     <div data-testid="space" data-direction={direction}>
       {children}
     </div>

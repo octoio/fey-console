@@ -21,6 +21,8 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
       height,
     }}
   >
-    <Spin size={size} tip={tip} />
+    <Spin size={size} tip={tip}>
+      <div style={{ minHeight: "200px" }} />
+    </Spin>
   </div>
 );

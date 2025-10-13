@@ -2,7 +2,7 @@
 
 exports[`FileList Snapshots > should match snapshot with empty file list 1`] = `
 <div
-  class="ant-card ant-card-bordered ant-card-small css-6wudc8 css-dev-only-do-not-override-tjsggz"
+  class="ant-card ant-card-bordered ant-card-small css-6wudc8 css-dev-only-do-not-override-1odpy5d"
 >
   <div
     class="ant-card-head"
@@ -24,23 +24,23 @@ exports[`FileList Snapshots > should match snapshot with empty file list 1`] = `
     class="ant-card-body"
   >
     <div
-      class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-1tvnk07"
+      class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-1tvnk07"
     >
       <div
         class="ant-space-item"
       >
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-outlined css-dev-only-do-not-override-tjsggz ant-input-search"
+          class="ant-input-group-wrapper ant-input-group-wrapper-outlined css-dev-only-do-not-override-1odpy5d ant-input-search"
           style="flex: 1 1 0%;"
         >
           <span
-            class="ant-input-wrapper ant-input-group css-dev-only-do-not-override-tjsggz"
+            class="ant-input-wrapper ant-input-group css-dev-only-do-not-override-1odpy5d"
           >
             <span
-              class="ant-input-affix-wrapper css-dev-only-do-not-override-tjsggz ant-input-outlined"
+              class="ant-input-affix-wrapper css-dev-only-do-not-override-1odpy5d ant-input-outlined"
             >
               <input
-                class="ant-input css-dev-only-do-not-override-tjsggz"
+                class="ant-input css-dev-only-do-not-override-1odpy5d"
                 placeholder="Search files..."
                 type="search"
                 value=""
@@ -80,7 +80,7 @@ exports[`FileList Snapshots > should match snapshot with empty file list 1`] = `
               class="ant-input-group-addon"
             >
               <button
-                class="ant-btn css-dev-only-do-not-override-tjsggz ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only ant-input-search-button"
+                class="ant-btn css-dev-only-do-not-override-1odpy5d ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only ant-input-search-button"
                 type="button"
               >
                 <span
@@ -115,7 +115,7 @@ exports[`FileList Snapshots > should match snapshot with empty file list 1`] = `
         class="ant-space-item"
       >
         <div
-          class="ant-select ant-select-outlined css-end8kr css-dev-only-do-not-override-tjsggz ant-select-single ant-select-allow-clear ant-select-show-arrow"
+          class="ant-select ant-select-outlined css-end8kr css-dev-only-do-not-override-1odpy5d ant-select-single ant-select-allow-clear ant-select-show-arrow"
           data-testid="file-type-select"
         >
           <div
@@ -181,10 +181,10 @@ exports[`FileList Snapshots > should match snapshot with empty file list 1`] = `
       </div>
     </div>
     <div
-      class="ant-list ant-list-sm ant-list-split css-1auidg5 css-dev-only-do-not-override-tjsggz"
+      class="ant-list ant-list-sm ant-list-split css-1auidg5 css-dev-only-do-not-override-1odpy5d"
     >
       <div
-        class="ant-spin-nested-loading css-dev-only-do-not-override-tjsggz"
+        class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
       >
         <div
           class="ant-spin-container"
@@ -193,7 +193,7 @@ exports[`FileList Snapshots > should match snapshot with empty file list 1`] = `
             class="ant-list-empty-text"
           >
             <div
-              class="css-dev-only-do-not-override-tjsggz ant-empty ant-empty-normal"
+              class="css-dev-only-do-not-override-1odpy5d ant-empty ant-empty-normal"
             >
               <div
                 class="ant-empty-image"
@@ -250,7 +250,7 @@ exports[`FileList Snapshots > should match snapshot with empty file list 1`] = `
 
 exports[`FileList Snapshots > should match snapshot with files without entity types 1`] = `
 <div
-  class="ant-card ant-card-bordered ant-card-small css-6wudc8 css-dev-only-do-not-override-tjsggz"
+  class="ant-card ant-card-bordered ant-card-small css-6wudc8 css-dev-only-do-not-override-1odpy5d"
 >
   <div
     class="ant-card-head"
@@ -272,23 +272,23 @@ exports[`FileList Snapshots > should match snapshot with files without entity ty
     class="ant-card-body"
   >
     <div
-      class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-1tvnk07"
+      class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-1tvnk07"
     >
       <div
         class="ant-space-item"
       >
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-outlined css-dev-only-do-not-override-tjsggz ant-input-search"
+          class="ant-input-group-wrapper ant-input-group-wrapper-outlined css-dev-only-do-not-override-1odpy5d ant-input-search"
           style="flex: 1 1 0%;"
         >
           <span
-            class="ant-input-wrapper ant-input-group css-dev-only-do-not-override-tjsggz"
+            class="ant-input-wrapper ant-input-group css-dev-only-do-not-override-1odpy5d"
           >
             <span
-              class="ant-input-affix-wrapper css-dev-only-do-not-override-tjsggz ant-input-outlined"
+              class="ant-input-affix-wrapper css-dev-only-do-not-override-1odpy5d ant-input-outlined"
             >
               <input
-                class="ant-input css-dev-only-do-not-override-tjsggz"
+                class="ant-input css-dev-only-do-not-override-1odpy5d"
                 placeholder="Search files..."
                 type="search"
                 value=""
@@ -328,7 +328,7 @@ exports[`FileList Snapshots > should match snapshot with files without entity ty
               class="ant-input-group-addon"
             >
               <button
-                class="ant-btn css-dev-only-do-not-override-tjsggz ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only ant-input-search-button"
+                class="ant-btn css-dev-only-do-not-override-1odpy5d ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only ant-input-search-button"
                 type="button"
               >
                 <span
@@ -363,7 +363,7 @@ exports[`FileList Snapshots > should match snapshot with files without entity ty
         class="ant-space-item"
       >
         <div
-          class="ant-select ant-select-outlined css-end8kr css-dev-only-do-not-override-tjsggz ant-select-single ant-select-allow-clear ant-select-show-arrow"
+          class="ant-select ant-select-outlined css-end8kr css-dev-only-do-not-override-1odpy5d ant-select-single ant-select-allow-clear ant-select-show-arrow"
           data-testid="file-type-select"
         >
           <div
@@ -429,10 +429,10 @@ exports[`FileList Snapshots > should match snapshot with files without entity ty
       </div>
     </div>
     <div
-      class="ant-list ant-list-sm ant-list-split css-1auidg5 css-dev-only-do-not-override-tjsggz"
+      class="ant-list ant-list-sm ant-list-split css-1auidg5 css-dev-only-do-not-override-1odpy5d"
     >
       <div
-        class="ant-spin-nested-loading css-dev-only-do-not-override-tjsggz"
+        class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
       >
         <div
           class="ant-spin-container"
@@ -444,7 +444,7 @@ exports[`FileList Snapshots > should match snapshot with files without entity ty
               class="ant-list-item"
             >
               <div
-                class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
+                class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
               >
                 <div
                   class="ant-space-item"
@@ -476,14 +476,14 @@ exports[`FileList Snapshots > should match snapshot with files without entity ty
                     class="css-1iyoj2o"
                   >
                     <span
-                      class="ant-typography css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography css-dev-only-do-not-override-1odpy5d"
                     >
                       <strong>
                         config.json
                       </strong>
                     </span>
                     <span
-                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-1odpy5d"
                     >
                       /config.json
                     </span>
@@ -494,7 +494,7 @@ exports[`FileList Snapshots > should match snapshot with files without entity ty
                 >
                   <div>
                     <span
-                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
                       style="background-color: rgb(135, 208, 104);"
                     >
                       JSON
@@ -507,7 +507,7 @@ exports[`FileList Snapshots > should match snapshot with files without entity ty
               class="ant-list-item"
             >
               <div
-                class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
+                class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
               >
                 <div
                   class="ant-space-item"
@@ -539,14 +539,14 @@ exports[`FileList Snapshots > should match snapshot with files without entity ty
                     class="css-1iyoj2o"
                   >
                     <span
-                      class="ant-typography css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography css-dev-only-do-not-override-1odpy5d"
                     >
                       <strong>
                         settings.xml
                       </strong>
                     </span>
                     <span
-                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-1odpy5d"
                     >
                       /settings.xml
                     </span>
@@ -557,7 +557,7 @@ exports[`FileList Snapshots > should match snapshot with files without entity ty
                 >
                   <div>
                     <span
-                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
                       style="background-color: rgb(135, 208, 104);"
                     >
                       XML
@@ -576,7 +576,7 @@ exports[`FileList Snapshots > should match snapshot with files without entity ty
 
 exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = `
 <div
-  class="ant-card ant-card-bordered ant-card-small css-6wudc8 css-dev-only-do-not-override-tjsggz"
+  class="ant-card ant-card-bordered ant-card-small css-6wudc8 css-dev-only-do-not-override-1odpy5d"
 >
   <div
     class="ant-card-head"
@@ -593,13 +593,13 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
         class="ant-card-extra"
       >
         <div
-          class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+          class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
         >
           <div
             class="ant-space-item"
           >
             <span
-              class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+              class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
               style="background-color: rgb(63, 81, 181);"
             >
               Weapon
@@ -615,23 +615,23 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
     class="ant-card-body"
   >
     <div
-      class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-1tvnk07"
+      class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-1tvnk07"
     >
       <div
         class="ant-space-item"
       >
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-outlined css-dev-only-do-not-override-tjsggz ant-input-search"
+          class="ant-input-group-wrapper ant-input-group-wrapper-outlined css-dev-only-do-not-override-1odpy5d ant-input-search"
           style="flex: 1 1 0%;"
         >
           <span
-            class="ant-input-wrapper ant-input-group css-dev-only-do-not-override-tjsggz"
+            class="ant-input-wrapper ant-input-group css-dev-only-do-not-override-1odpy5d"
           >
             <span
-              class="ant-input-affix-wrapper css-dev-only-do-not-override-tjsggz ant-input-outlined"
+              class="ant-input-affix-wrapper css-dev-only-do-not-override-1odpy5d ant-input-outlined"
             >
               <input
-                class="ant-input css-dev-only-do-not-override-tjsggz"
+                class="ant-input css-dev-only-do-not-override-1odpy5d"
                 placeholder="Search files..."
                 type="search"
                 value=""
@@ -671,7 +671,7 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
               class="ant-input-group-addon"
             >
               <button
-                class="ant-btn css-dev-only-do-not-override-tjsggz ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only ant-input-search-button"
+                class="ant-btn css-dev-only-do-not-override-1odpy5d ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only ant-input-search-button"
                 type="button"
               >
                 <span
@@ -706,7 +706,7 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
         class="ant-space-item"
       >
         <div
-          class="ant-select ant-select-outlined css-end8kr css-dev-only-do-not-override-tjsggz ant-select-single ant-select-allow-clear ant-select-show-arrow"
+          class="ant-select ant-select-outlined css-end8kr css-dev-only-do-not-override-1odpy5d ant-select-single ant-select-allow-clear ant-select-show-arrow"
           data-testid="file-type-select"
         >
           <div
@@ -772,10 +772,10 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
       </div>
     </div>
     <div
-      class="ant-list ant-list-sm ant-list-split css-1auidg5 css-dev-only-do-not-override-tjsggz"
+      class="ant-list ant-list-sm ant-list-split css-1auidg5 css-dev-only-do-not-override-1odpy5d"
     >
       <div
-        class="ant-spin-nested-loading css-dev-only-do-not-override-tjsggz"
+        class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
       >
         <div
           class="ant-spin-container"
@@ -787,7 +787,7 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
               class="ant-list-item"
             >
               <div
-                class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
+                class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
               >
                 <div
                   class="ant-space-item"
@@ -819,14 +819,14 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
                     class="css-1iyoj2o"
                   >
                     <span
-                      class="ant-typography css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography css-dev-only-do-not-override-1odpy5d"
                     >
                       <strong>
                         weapon.json
                       </strong>
                     </span>
                     <span
-                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-1odpy5d"
                     >
                       /weapons/weapon.json
                     </span>
@@ -837,13 +837,13 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
                 >
                   <div>
                     <span
-                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
                       style="background-color: rgb(135, 208, 104);"
                     >
                       JSON
                     </span>
                     <span
-                      class="ant-badge ant-badge-not-a-wrapper css-1sguh2d css-dev-only-do-not-override-tjsggz"
+                      class="ant-badge ant-badge-not-a-wrapper css-1sguh2d css-dev-only-do-not-override-1odpy5d"
                     >
                       <sup
                         class="ant-scroll-number ant-badge-count ant-badge-multiple-words"
@@ -861,7 +861,7 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
               class="ant-list-item"
             >
               <div
-                class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
+                class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
               >
                 <div
                   class="ant-space-item"
@@ -893,14 +893,14 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
                     class="css-1iyoj2o"
                   >
                     <span
-                      class="ant-typography css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography css-dev-only-do-not-override-1odpy5d"
                     >
                       <strong>
                         data.csv
                       </strong>
                     </span>
                     <span
-                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-1odpy5d"
                     >
                       /data/data.csv
                     </span>
@@ -911,7 +911,7 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
                 >
                   <div>
                     <span
-                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
                       style="background-color: rgb(135, 208, 104);"
                     >
                       CSV
@@ -924,7 +924,7 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
               class="ant-list-item"
             >
               <div
-                class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
+                class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
               >
                 <div
                   class="ant-space-item"
@@ -956,14 +956,14 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
                     class="css-1iyoj2o"
                   >
                     <span
-                      class="ant-typography css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography css-dev-only-do-not-override-1odpy5d"
                     >
                       <strong>
                         script.js
                       </strong>
                     </span>
                     <span
-                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-1odpy5d"
                     >
                       /scripts/script.js
                     </span>
@@ -974,7 +974,7 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
                 >
                   <div>
                     <span
-                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
                       style="background-color: rgb(135, 208, 104);"
                     >
                       JS
@@ -987,7 +987,7 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
               class="ant-list-item"
             >
               <div
-                class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
+                class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
               >
                 <div
                   class="ant-space-item"
@@ -1019,14 +1019,14 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
                     class="css-1iyoj2o"
                   >
                     <span
-                      class="ant-typography css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography css-dev-only-do-not-override-1odpy5d"
                     >
                       <strong>
                         style.css
                       </strong>
                     </span>
                     <span
-                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-1odpy5d"
                     >
                       /assets/style.css
                     </span>
@@ -1037,7 +1037,7 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
                 >
                   <div>
                     <span
-                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
                       style="background-color: rgb(135, 208, 104);"
                     >
                       CSS
@@ -1056,7 +1056,7 @@ exports[`FileList Snapshots > should match snapshot with mixed file types 1`] = 
 
 exports[`FileList Snapshots > should match snapshot with single file 1`] = `
 <div
-  class="ant-card ant-card-bordered ant-card-small css-6wudc8 css-dev-only-do-not-override-tjsggz"
+  class="ant-card ant-card-bordered ant-card-small css-6wudc8 css-dev-only-do-not-override-1odpy5d"
 >
   <div
     class="ant-card-head"
@@ -1073,13 +1073,13 @@ exports[`FileList Snapshots > should match snapshot with single file 1`] = `
         class="ant-card-extra"
       >
         <div
-          class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+          class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
         >
           <div
             class="ant-space-item"
           >
             <span
-              class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+              class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
               style="background-color: rgb(63, 81, 181);"
             >
               Weapon
@@ -1095,23 +1095,23 @@ exports[`FileList Snapshots > should match snapshot with single file 1`] = `
     class="ant-card-body"
   >
     <div
-      class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-1tvnk07"
+      class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-1tvnk07"
     >
       <div
         class="ant-space-item"
       >
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-outlined css-dev-only-do-not-override-tjsggz ant-input-search"
+          class="ant-input-group-wrapper ant-input-group-wrapper-outlined css-dev-only-do-not-override-1odpy5d ant-input-search"
           style="flex: 1 1 0%;"
         >
           <span
-            class="ant-input-wrapper ant-input-group css-dev-only-do-not-override-tjsggz"
+            class="ant-input-wrapper ant-input-group css-dev-only-do-not-override-1odpy5d"
           >
             <span
-              class="ant-input-affix-wrapper css-dev-only-do-not-override-tjsggz ant-input-outlined"
+              class="ant-input-affix-wrapper css-dev-only-do-not-override-1odpy5d ant-input-outlined"
             >
               <input
-                class="ant-input css-dev-only-do-not-override-tjsggz"
+                class="ant-input css-dev-only-do-not-override-1odpy5d"
                 placeholder="Search files..."
                 type="search"
                 value=""
@@ -1151,7 +1151,7 @@ exports[`FileList Snapshots > should match snapshot with single file 1`] = `
               class="ant-input-group-addon"
             >
               <button
-                class="ant-btn css-dev-only-do-not-override-tjsggz ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only ant-input-search-button"
+                class="ant-btn css-dev-only-do-not-override-1odpy5d ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only ant-input-search-button"
                 type="button"
               >
                 <span
@@ -1186,7 +1186,7 @@ exports[`FileList Snapshots > should match snapshot with single file 1`] = `
         class="ant-space-item"
       >
         <div
-          class="ant-select ant-select-outlined css-end8kr css-dev-only-do-not-override-tjsggz ant-select-single ant-select-allow-clear ant-select-show-arrow"
+          class="ant-select ant-select-outlined css-end8kr css-dev-only-do-not-override-1odpy5d ant-select-single ant-select-allow-clear ant-select-show-arrow"
           data-testid="file-type-select"
         >
           <div
@@ -1252,10 +1252,10 @@ exports[`FileList Snapshots > should match snapshot with single file 1`] = `
       </div>
     </div>
     <div
-      class="ant-list ant-list-sm ant-list-split css-1auidg5 css-dev-only-do-not-override-tjsggz"
+      class="ant-list ant-list-sm ant-list-split css-1auidg5 css-dev-only-do-not-override-1odpy5d"
     >
       <div
-        class="ant-spin-nested-loading css-dev-only-do-not-override-tjsggz"
+        class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
       >
         <div
           class="ant-spin-container"
@@ -1267,7 +1267,7 @@ exports[`FileList Snapshots > should match snapshot with single file 1`] = `
               class="ant-list-item"
             >
               <div
-                class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
+                class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
               >
                 <div
                   class="ant-space-item"
@@ -1299,14 +1299,14 @@ exports[`FileList Snapshots > should match snapshot with single file 1`] = `
                     class="css-1iyoj2o"
                   >
                     <span
-                      class="ant-typography css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography css-dev-only-do-not-override-1odpy5d"
                     >
                       <strong>
                         single-file.json
                       </strong>
                     </span>
                     <span
-                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-1odpy5d"
                     >
                       /single-file.json
                     </span>
@@ -1317,13 +1317,13 @@ exports[`FileList Snapshots > should match snapshot with single file 1`] = `
                 >
                   <div>
                     <span
-                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
                       style="background-color: rgb(135, 208, 104);"
                     >
                       JSON
                     </span>
                     <span
-                      class="ant-badge ant-badge-not-a-wrapper css-1sguh2d css-dev-only-do-not-override-tjsggz"
+                      class="ant-badge ant-badge-not-a-wrapper css-1sguh2d css-dev-only-do-not-override-1odpy5d"
                     >
                       <sup
                         class="ant-scroll-number ant-badge-count ant-badge-multiple-words"
@@ -1347,7 +1347,7 @@ exports[`FileList Snapshots > should match snapshot with single file 1`] = `
 
 exports[`FileList Snapshots > should match snapshot with standard file list 1`] = `
 <div
-  class="ant-card ant-card-bordered ant-card-small css-6wudc8 css-dev-only-do-not-override-tjsggz"
+  class="ant-card ant-card-bordered ant-card-small css-6wudc8 css-dev-only-do-not-override-1odpy5d"
 >
   <div
     class="ant-card-head"
@@ -1364,13 +1364,13 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
         class="ant-card-extra"
       >
         <div
-          class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
+          class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small"
         >
           <div
             class="ant-space-item"
           >
             <span
-              class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+              class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
               style="background-color: rgb(63, 81, 181);"
             >
               Weapon
@@ -1382,7 +1382,7 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
             class="ant-space-item"
           >
             <span
-              class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+              class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
               style="background-color: rgb(63, 81, 181);"
             >
               Equipment
@@ -1394,7 +1394,7 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
             class="ant-space-item"
           >
             <span
-              class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+              class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
               style="background-color: rgb(63, 81, 181);"
             >
               Skill
@@ -1410,23 +1410,23 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
     class="ant-card-body"
   >
     <div
-      class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-1tvnk07"
+      class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-1tvnk07"
     >
       <div
         class="ant-space-item"
       >
         <span
-          class="ant-input-group-wrapper ant-input-group-wrapper-outlined css-dev-only-do-not-override-tjsggz ant-input-search"
+          class="ant-input-group-wrapper ant-input-group-wrapper-outlined css-dev-only-do-not-override-1odpy5d ant-input-search"
           style="flex: 1 1 0%;"
         >
           <span
-            class="ant-input-wrapper ant-input-group css-dev-only-do-not-override-tjsggz"
+            class="ant-input-wrapper ant-input-group css-dev-only-do-not-override-1odpy5d"
           >
             <span
-              class="ant-input-affix-wrapper css-dev-only-do-not-override-tjsggz ant-input-outlined"
+              class="ant-input-affix-wrapper css-dev-only-do-not-override-1odpy5d ant-input-outlined"
             >
               <input
-                class="ant-input css-dev-only-do-not-override-tjsggz"
+                class="ant-input css-dev-only-do-not-override-1odpy5d"
                 placeholder="Search files..."
                 type="search"
                 value=""
@@ -1466,7 +1466,7 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
               class="ant-input-group-addon"
             >
               <button
-                class="ant-btn css-dev-only-do-not-override-tjsggz ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only ant-input-search-button"
+                class="ant-btn css-dev-only-do-not-override-1odpy5d ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-icon-only ant-input-search-button"
                 type="button"
               >
                 <span
@@ -1501,7 +1501,7 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
         class="ant-space-item"
       >
         <div
-          class="ant-select ant-select-outlined css-end8kr css-dev-only-do-not-override-tjsggz ant-select-single ant-select-allow-clear ant-select-show-arrow"
+          class="ant-select ant-select-outlined css-end8kr css-dev-only-do-not-override-1odpy5d ant-select-single ant-select-allow-clear ant-select-show-arrow"
           data-testid="file-type-select"
         >
           <div
@@ -1567,10 +1567,10 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
       </div>
     </div>
     <div
-      class="ant-list ant-list-sm ant-list-split css-1auidg5 css-dev-only-do-not-override-tjsggz"
+      class="ant-list ant-list-sm ant-list-split css-1auidg5 css-dev-only-do-not-override-1odpy5d"
     >
       <div
-        class="ant-spin-nested-loading css-dev-only-do-not-override-tjsggz"
+        class="ant-spin-nested-loading css-dev-only-do-not-override-1odpy5d"
       >
         <div
           class="ant-spin-container"
@@ -1582,7 +1582,7 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
               class="ant-list-item"
             >
               <div
-                class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
+                class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
               >
                 <div
                   class="ant-space-item"
@@ -1614,14 +1614,14 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
                     class="css-1iyoj2o"
                   >
                     <span
-                      class="ant-typography css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography css-dev-only-do-not-override-1odpy5d"
                     >
                       <strong>
                         fire-sword.json
                       </strong>
                     </span>
                     <span
-                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-1odpy5d"
                     >
                       /weapons/fire-sword.json
                     </span>
@@ -1632,13 +1632,13 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
                 >
                   <div>
                     <span
-                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
                       style="background-color: rgb(135, 208, 104);"
                     >
                       JSON
                     </span>
                     <span
-                      class="ant-badge ant-badge-not-a-wrapper css-1sguh2d css-dev-only-do-not-override-tjsggz"
+                      class="ant-badge ant-badge-not-a-wrapper css-1sguh2d css-dev-only-do-not-override-1odpy5d"
                     >
                       <sup
                         class="ant-scroll-number ant-badge-count ant-badge-multiple-words"
@@ -1656,7 +1656,7 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
               class="ant-list-item"
             >
               <div
-                class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
+                class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
               >
                 <div
                   class="ant-space-item"
@@ -1688,14 +1688,14 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
                     class="css-1iyoj2o"
                   >
                     <span
-                      class="ant-typography css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography css-dev-only-do-not-override-1odpy5d"
                     >
                       <strong>
                         heal-potion.json
                       </strong>
                     </span>
                     <span
-                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-1odpy5d"
                     >
                       /items/heal-potion.json
                     </span>
@@ -1706,13 +1706,13 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
                 >
                   <div>
                     <span
-                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
                       style="background-color: rgb(135, 208, 104);"
                     >
                       JSON
                     </span>
                     <span
-                      class="ant-badge ant-badge-not-a-wrapper css-1sguh2d css-dev-only-do-not-override-tjsggz"
+                      class="ant-badge ant-badge-not-a-wrapper css-1sguh2d css-dev-only-do-not-override-1odpy5d"
                     >
                       <sup
                         class="ant-scroll-number ant-badge-count ant-badge-multiple-words"
@@ -1730,7 +1730,7 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
               class="ant-list-item"
             >
               <div
-                class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
+                class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
               >
                 <div
                   class="ant-space-item"
@@ -1762,14 +1762,14 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
                     class="css-1iyoj2o"
                   >
                     <span
-                      class="ant-typography css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography css-dev-only-do-not-override-1odpy5d"
                     >
                       <strong>
                         fireball.json
                       </strong>
                     </span>
                     <span
-                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-1odpy5d"
                     >
                       /skills/fireball.json
                     </span>
@@ -1780,13 +1780,13 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
                 >
                   <div>
                     <span
-                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
                       style="background-color: rgb(135, 208, 104);"
                     >
                       JSON
                     </span>
                     <span
-                      class="ant-badge ant-badge-not-a-wrapper css-1sguh2d css-dev-only-do-not-override-tjsggz"
+                      class="ant-badge ant-badge-not-a-wrapper css-1sguh2d css-dev-only-do-not-override-1odpy5d"
                     >
                       <sup
                         class="ant-scroll-number ant-badge-count ant-badge-multiple-words"
@@ -1804,7 +1804,7 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
               class="ant-list-item"
             >
               <div
-                class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
+                class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
               >
                 <div
                   class="ant-space-item"
@@ -1836,14 +1836,14 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
                     class="css-1iyoj2o"
                   >
                     <span
-                      class="ant-typography css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography css-dev-only-do-not-override-1odpy5d"
                     >
                       <strong>
                         config.json
                       </strong>
                     </span>
                     <span
-                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-1odpy5d"
                     >
                       /config/config.json
                     </span>
@@ -1854,7 +1854,7 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
                 >
                   <div>
                     <span
-                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
                       style="background-color: rgb(135, 208, 104);"
                     >
                       JSON
@@ -1867,7 +1867,7 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
               class="ant-list-item"
             >
               <div
-                class="ant-space css-dev-only-do-not-override-tjsggz ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
+                class="ant-space css-dev-only-do-not-override-1odpy5d ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-srqri8"
               >
                 <div
                   class="ant-space-item"
@@ -1899,14 +1899,14 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
                     class="css-1iyoj2o"
                   >
                     <span
-                      class="ant-typography css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography css-dev-only-do-not-override-1odpy5d"
                     >
                       <strong>
                         readme.txt
                       </strong>
                     </span>
                     <span
-                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-tjsggz"
+                      class="ant-typography ant-typography-secondary css-uahybi css-dev-only-do-not-override-1odpy5d"
                     >
                       /docs/readme.txt
                     </span>
@@ -1917,7 +1917,7 @@ exports[`FileList Snapshots > should match snapshot with standard file list 1`] 
                 >
                   <div>
                     <span
-                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-tjsggz"
+                      class="ant-tag ant-tag-has-color css-10scxvy css-dev-only-do-not-override-1odpy5d"
                       style="background-color: rgb(135, 208, 104);"
                     >
                       TXT
