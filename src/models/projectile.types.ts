@@ -6,7 +6,6 @@ export type ProjectileType = "Homing";
 export interface ProjectileModel {
   reference: EntityReference;
   model_scale: Vector3;
-  collider_scale: Vector3;
 }
 
 export type ProjectileImpactType = "Hit" | "Status";
