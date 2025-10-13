@@ -1,10 +1,13 @@
-import { EntityReference, Metadata, Vector3 } from "./common.types";
+import { Metadata, Vector3 } from "./common.types";
 import { HitEffect, StatusEffect } from "./effect.types";
 
 export type ProjectileType = "Homing";
 
+export type ProjectileModelType = "Pebble" | "Fireball";
+
 export interface ProjectileModel {
-  reference: EntityReference;
+  // Using Unity prefabs for now; will switch to Sandbox .glb models in the future
+  type: ProjectileModelType;
   model_scale: Vector3;
 }
 
