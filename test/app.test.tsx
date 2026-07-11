@@ -348,7 +348,7 @@ describe("App Component", () => {
 
       await waitFor(() => {
         const skillEditor = screen.getByTestId("skill-editor");
-        expect(skillEditor).toHaveTextContent("Entities: 17");
+        expect(skillEditor).toHaveTextContent("Entities: 19");
         expect(skillEditor).toHaveTextContent("Directory: available");
       });
     });
@@ -365,7 +365,7 @@ describe("App Component", () => {
 
       // Verify that the SkillEditor is showing the expected content
       const skillEditor = screen.getByTestId("skill-editor");
-      expect(skillEditor).toHaveTextContent("Entities: 17");
+      expect(skillEditor).toHaveTextContent("Entities: 19");
       expect(skillEditor).toHaveTextContent("Files: 0");
       expect(skillEditor).toHaveTextContent("Directory: none");
     });
