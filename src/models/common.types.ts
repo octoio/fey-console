@@ -63,6 +63,8 @@ export enum EntityType {
   Projectile = "Projectile",
   Quest = "Quest",
   QuestDifficulty = "QuestDifficulty",
+  Anchor = "Anchor",
+  Stage = "Stage",
 }
 
 // Update EntityReference to use the enum
@@ -94,14 +96,8 @@ export enum TargetType {
   Portal = "Portal",
 }
 
-export enum ZoneType {
-  StartQuestZone = "StartQuestZone",
-  StayInZone = "StayInZone",
-}
-
 // Constants for all enum values
 export const ALL_ENTITY_TYPES: EntityType[] = Object.values(EntityType);
-export const ALL_ZONE_TYPES: ZoneType[] = Object.values(ZoneType);
 export const ALL_HIT_TYPES: HitType[] = Object.values(HitType);
 export const ALL_HIGHLIGHT_TYPES: HighlightType[] =
   Object.values(HighlightType);

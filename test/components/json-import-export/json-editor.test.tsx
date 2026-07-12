@@ -49,7 +49,7 @@ describe("JsonEditor", () => {
   const mockOnChange = vi.fn();
 
   const defaultProps = {
-    value: '{"test": "value"}',
+    value: "{\"test\": \"value\"}",
     onChange: mockOnChange,
   };
 
@@ -122,7 +122,7 @@ describe("JsonEditor", () => {
   });
 
   it("handles different values correctly", async () => {
-    const customValue = '{"name": "test", "value": 123}';
+    const customValue = "{\"name\": \"test\", \"value\": 123}";
     render(<JsonEditor {...defaultProps} value={customValue} />);
 
     await waitFor(() => {

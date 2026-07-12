@@ -1,31 +1,23 @@
 import { CharacterType } from "./character.types";
-import {
-  Color,
-  EntityReference,
-  Metadata,
-  ZoneType,
-} from "./common.types";
-
-export type StageType = "None" | "TheVillage" | "TheForest" | "TheFarm";
-
-export type PortalType = "Primary";
+import { Color, EntityReference, Metadata } from "./common.types";
 
 export type AchievementType = "None" | "SlimeExterminator";
 
 // Spawn types (spawn.atd)
 export interface Spawn {
-  spawn_count: number;
-  character: EntityReference;
+  spawn_count: number; // min 1
+  character: EntityReference; // Character
+  anchor: EntityReference; // Anchor
   target_adventurer_on_spawn: boolean;
 }
 
 export interface SpawnSequenceStep {
-  timing: number;
+  timing: number; // 0..1 fraction of the sequence duration
   spawns: Spawn[];
 }
 
 export interface SpawnSequence {
-  duration: number;
+  duration: number; // 1..300 seconds
   steps: SpawnSequenceStep[];
 }
 
@@ -55,159 +47,226 @@ export type QuestOrigin =
 
 export type QuestAssignee = "Player" | "Team" | "PlayerHidden" | "TeamHidden";
 
-// Objective requirements
-export type QuestObjectiveRequirementType =
-  | "Collect"
+// Conditions: single event-driven checks tracked by the server.
+// Combining conditions is the tree's job (Parallel/Any/Sequence).
+export type QuestConditionType =
   | "KillSpecific"
-  | "Activate"
-  | "Charge"
+  | "EnterAnchor"
+  | "StayInAnchor"
   | "PickQuest"
-  | "Teleport"
-  | "EnterZone"
-  | "StayInZone";
+  | "Teleport";
 
-// amount: how much of the requirement must be completed. Negative values mean ALL
-export interface QuestObjectiveRequirement {
-  type: QuestObjectiveRequirementType;
-  metadata: Metadata;
+export interface QuestConditionKillSpecific {
+  type: "KillSpecific";
+  character_types: CharacterType[]; // min 1
+  amount: number; // min 1
+}
+
+// amount: characters required inside the anchor; negative means all players
+export interface QuestConditionEnterAnchor {
+  type: "EnterAnchor";
+  anchor: EntityReference; // Anchor
   amount: number;
 }
 
-export interface QuestObjectiveRequirementCollect
-  extends QuestObjectiveRequirement {
-  type: "Collect";
+export interface QuestConditionStayInAnchor {
+  type: "StayInAnchor";
+  anchor: EntityReference; // Anchor
+  duration: number; // min 0.1
 }
 
-export interface QuestObjectiveRequirementKillSpecific
-  extends QuestObjectiveRequirement {
-  type: "KillSpecific";
-  character_types: CharacterType[];
-}
-
-export interface QuestObjectiveRequirementActivate
-  extends QuestObjectiveRequirement {
-  type: "Activate";
-}
-
-export interface QuestObjectiveRequirementCharge
-  extends QuestObjectiveRequirement {
-  type: "Charge";
-}
-
-export interface QuestObjectiveRequirementPickQuest
-  extends QuestObjectiveRequirement {
+export interface QuestConditionPickQuest {
   type: "PickQuest";
 }
 
-export interface QuestObjectiveRequirementTeleport
-  extends QuestObjectiveRequirement {
+export interface QuestConditionTeleport {
   type: "Teleport";
 }
 
-export interface QuestObjectiveRequirementEnterZone
-  extends QuestObjectiveRequirement {
-  type: "EnterZone";
-  zone_types: ZoneType[];
-}
+export type QuestCondition =
+  | QuestConditionKillSpecific
+  | QuestConditionEnterAnchor
+  | QuestConditionStayInAnchor
+  | QuestConditionPickQuest
+  | QuestConditionTeleport;
 
-export interface QuestObjectiveRequirementStayInZone
-  extends QuestObjectiveRequirement {
-  type: "StayInZone";
-  zone_types: ZoneType[];
-}
-
-export type QuestObjectiveRequirementUnion =
-  | QuestObjectiveRequirementCollect
-  | QuestObjectiveRequirementKillSpecific
-  | QuestObjectiveRequirementActivate
-  | QuestObjectiveRequirementCharge
-  | QuestObjectiveRequirementPickQuest
-  | QuestObjectiveRequirementTeleport
-  | QuestObjectiveRequirementEnterZone
-  | QuestObjectiveRequirementStayInZone;
-
-// Completion results
-export type QuestCompletionResultType =
+// Actions: fire-and-forget world mutations (no rollback)
+export type QuestActionType =
   | "Spawn"
-  | "ActivatePortal"
-  | "EnableQuestBoardQuest"
-  | "ActivateZone"
-  | "DeactivateZone"
-  | "StartSpawnSequence";
+  | "StartSpawnSequence"
+  | "ActivateAnchor"
+  | "DeactivateAnchor"
+  | "ActivatePortalToStage"
+  | "ActivatePortalToQuestStage"
+  | "Message"
+  | "EnableQuestBoardQuest";
 
-export type QuestCompletionResultActivatePortalType =
-  | "BackToTheVillage"
-  | "QuestBoardQuestStage";
-
-export interface QuestCompletionResult {
-  type: QuestCompletionResultType;
-  message: string;
-}
-
-export interface QuestCompletionResultSpawn extends QuestCompletionResult {
+export interface QuestActionSpawn {
   type: "Spawn";
-  characters: EntityReference[];
+  spawn: Spawn;
 }
 
-export interface QuestCompletionResultActivatePortal
-  extends QuestCompletionResult {
-  type: "ActivatePortal";
-  activate_portal_type: QuestCompletionResultActivatePortalType;
-  portal_type: PortalType;
-}
-
-export interface QuestCompletionResultEnableQuestBoardQuest
-  extends QuestCompletionResult {
-  type: "EnableQuestBoardQuest";
-}
-
-export interface QuestCompletionResultActivateZone
-  extends QuestCompletionResult {
-  type: "ActivateZone";
-  zone_type: ZoneType;
-}
-
-export interface QuestCompletionResultDeactivateZone
-  extends QuestCompletionResult {
-  type: "DeactivateZone";
-  zone_type: ZoneType;
-}
-
-export interface QuestCompletionResultStartSpawnSequence
-  extends QuestCompletionResult {
+export interface QuestActionStartSpawnSequence {
   type: "StartSpawnSequence";
   spawn_sequence: SpawnSequence;
 }
 
-export type QuestCompletionResultUnion =
-  | QuestCompletionResultSpawn
-  | QuestCompletionResultActivatePortal
-  | QuestCompletionResultEnableQuestBoardQuest
-  | QuestCompletionResultActivateZone
-  | QuestCompletionResultDeactivateZone
-  | QuestCompletionResultStartSpawnSequence;
+export interface QuestActionActivateAnchor {
+  type: "ActivateAnchor";
+  anchor: EntityReference; // Anchor
+}
 
-// Quest structure
-export interface QuestObjective {
+export interface QuestActionDeactivateAnchor {
+  type: "DeactivateAnchor";
+  anchor: EntityReference; // Anchor
+}
+
+export interface QuestActionActivatePortalToStage {
+  type: "ActivatePortalToStage";
+  anchor: EntityReference; // Anchor
+  destination: EntityReference; // Stage
+}
+
+// Destination resolved at runtime: the stage of the pending quest board quest
+export interface QuestActionActivatePortalToQuestStage {
+  type: "ActivatePortalToQuestStage";
+  anchor: EntityReference; // Anchor
+}
+
+export interface QuestActionMessage {
+  type: "Message";
+  message: string; // min length 1
+}
+
+export interface QuestActionEnableQuestBoardQuest {
+  type: "EnableQuestBoardQuest";
+}
+
+export type QuestAction =
+  | QuestActionSpawn
+  | QuestActionStartSpawnSequence
+  | QuestActionActivateAnchor
+  | QuestActionDeactivateAnchor
+  | QuestActionActivatePortalToStage
+  | QuestActionActivatePortalToQuestStage
+  | QuestActionMessage
+  | QuestActionEnableQuestBoardQuest;
+
+// Execution tree — mirrors the skill action node pattern.
+// Node ids are explicit, unique within a quest, and name nodes in network
+// records; they survive data edits (future hot reload).
+export type QuestNodeType =
+  | "Sequence"
+  | "Parallel"
+  | "Any"
+  | "Timer"
+  | "Objective"
+  | "Action";
+
+export type QuestTimerTimeoutType = "Fail" | "Complete";
+
+export interface QuestNodeBase {
+  type: QuestNodeType;
+  id: number; // 0..65535, unique within a quest
+  name: string;
+}
+
+export interface QuestSequenceNode extends QuestNodeBase {
+  type: "Sequence";
+  children: QuestNode[]; // min 1
+}
+
+export interface QuestParallelNode extends QuestNodeBase {
+  type: "Parallel";
+  children: QuestNode[]; // min 1
+}
+
+// First child to complete wins; losing branches are cancelled without rollback
+export interface QuestAnyNode extends QuestNodeBase {
+  type: "Any";
+  children: QuestNode[]; // min 1
+}
+
+export interface QuestTimerNode extends QuestNodeBase {
+  type: "Timer";
+  duration: number; // min 0.1
+  child: QuestNode;
+  on_timeout: QuestTimerTimeoutType;
+}
+
+export interface QuestObjectiveNode extends QuestNodeBase {
+  type: "Objective";
   metadata: Metadata;
   is_optional: boolean;
-  requirements: QuestObjectiveRequirementUnion[];
+  condition: QuestCondition;
 }
 
-export interface QuestStep {
-  objectives: QuestObjective[];
-  completion_results: QuestCompletionResultUnion[];
+export interface QuestActionNode extends QuestNodeBase {
+  type: "Action";
+  action: QuestAction;
 }
+
+export type QuestNode =
+  | QuestSequenceNode
+  | QuestParallelNode
+  | QuestAnyNode
+  | QuestTimerNode
+  | QuestObjectiveNode
+  | QuestActionNode;
 
 export interface Quest {
   metadata: Metadata;
   origin: QuestOrigin;
   assignee: QuestAssignee;
-  difficulty: EntityReference;
-  steps: QuestStep[];
-  stage_to_go_from_quest_board: StageType;
+  difficulty: EntityReference; // QuestDifficulty
+  stage: EntityReference; // Stage
+  root: QuestNode;
   is_repeatable: boolean;
   achievement_on_complete: AchievementType;
-  required_achievements: AchievementType[];
-  start_results: QuestCompletionResultUnion[];
+  required_achievements: AchievementType[]; // min 1
 }
+
+export type QuestEntityDefinition = {
+  id: string;
+  owner: string;
+  type: string;
+  key: string;
+  version: number;
+  entity: Quest;
+};
+
+// Traversal helpers, mirror of QuestNodeWalker in the Unity codebase
+export const questNodeChildren = (node: QuestNode): QuestNode[] => {
+  switch (node.type) {
+    case "Sequence":
+    case "Parallel":
+    case "Any":
+      return node.children;
+    case "Timer":
+      return [node.child];
+    default:
+      return [];
+  }
+};
+
+export const questNodesDepthFirst = (root: QuestNode): QuestNode[] => [
+  root,
+  ...questNodeChildren(root).flatMap(questNodesDepthFirst),
+];
+
+export const collectDuplicateQuestNodeIds = (root: QuestNode): number[] => {
+  const seen = new Set<number>();
+  const duplicates = new Set<number>();
+  for (const node of questNodesDepthFirst(root)) {
+    if (seen.has(node.id)) duplicates.add(node.id);
+    seen.add(node.id);
+  }
+  return [...duplicates];
+};
+
+export const nextQuestNodeId = (root: QuestNode): number => {
+  const used = new Set(questNodesDepthFirst(root).map((node) => node.id));
+  let id = 0;
+  while (used.has(id)) id++;
+  return id;
+};

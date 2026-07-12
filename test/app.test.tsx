@@ -94,6 +94,17 @@ vi.mock("@components/skill-editor", () => ({
   )),
 }));
 
+// Mock the lazy-loaded StageEditor
+vi.mock("@components/stage-editor", () => ({
+  StageEditor: vi.fn(({ entityReferences, files, directoryHandle }) => (
+    <div data-testid="stage-editor">
+      <div>Entities: {Object.keys(entityReferences).length}</div>
+      <div>Files: {files.length}</div>
+      <div>Directory: {directoryHandle ? "available" : "none"}</div>
+    </div>
+  )),
+}));
+
 // Helper function to create mock scan result with proper types
 const createMockScanResult = (files: FileInfo[] = []) => ({
   entities: getDefaultEntityReferences(),
@@ -122,6 +133,9 @@ describe("App Component", () => {
       expect(screen.getByText("File List")).toBeInTheDocument();
       expect(
         screen.getByRole("tab", { name: "Skill Editor" }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("tab", { name: "Stage Editor" }),
       ).toBeInTheDocument();
     });
 
@@ -160,6 +174,16 @@ describe("App Component", () => {
 
       await waitFor(() => {
         expect(screen.getByTestId("skill-editor")).toBeInTheDocument();
+      });
+    });
+
+    it("should switch to Stage Editor tab", async () => {
+      render(<App />);
+
+      fireEvent.click(screen.getByRole("tab", { name: "Stage Editor" }));
+
+      await waitFor(() => {
+        expect(screen.getByTestId("stage-editor")).toBeInTheDocument();
       });
     });
 
@@ -348,7 +372,7 @@ describe("App Component", () => {
 
       await waitFor(() => {
         const skillEditor = screen.getByTestId("skill-editor");
-        expect(skillEditor).toHaveTextContent("Entities: 19");
+        expect(skillEditor).toHaveTextContent("Entities: 21");
         expect(skillEditor).toHaveTextContent("Directory: available");
       });
     });
@@ -365,7 +389,7 @@ describe("App Component", () => {
 
       // Verify that the SkillEditor is showing the expected content
       const skillEditor = screen.getByTestId("skill-editor");
-      expect(skillEditor).toHaveTextContent("Entities: 19");
+      expect(skillEditor).toHaveTextContent("Entities: 21");
       expect(skillEditor).toHaveTextContent("Files: 0");
       expect(skillEditor).toHaveTextContent("Directory: none");
     });
