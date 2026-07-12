@@ -73,10 +73,10 @@ describe("useJsonOperations Hook", () => {
       const { result } = renderHook(() => useJsonOperations());
 
       act(() => {
-        result.current.setJsonInput('{"test": "data"}');
+        result.current.setJsonInput("{\"test\": \"data\"}");
       });
 
-      expect(result.current.jsonInput).toBe('{"test": "data"}');
+      expect(result.current.jsonInput).toBe("{\"test\": \"data\"}");
     });
 
     it("should update error state", () => {
@@ -110,10 +110,10 @@ describe("useJsonOperations Hook", () => {
 
       // Update jsonInput should clear both
       act(() => {
-        result.current.setJsonInput('{"new": "data"}');
+        result.current.setJsonInput("{\"new\": \"data\"}");
       });
 
-      expect(result.current.jsonInput).toBe('{"new": "data"}');
+      expect(result.current.jsonInput).toBe("{\"new\": \"data\"}");
       expect(result.current.error).toBe("Initial error");
       expect(result.current.success).toBe("Initial success");
     });
@@ -121,7 +121,7 @@ describe("useJsonOperations Hook", () => {
 
   describe("Export Operations", () => {
     it("should export JSON successfully", () => {
-      const mockJsonData = '{"skill": "exported", "version": 1}';
+      const mockJsonData = "{\"skill\": \"exported\", \"version\": 1}";
       mockExportToJson.mockReturnValue(mockJsonData);
 
       const { result } = renderHook(() => useJsonOperations());
@@ -191,7 +191,7 @@ describe("useJsonOperations Hook", () => {
     });
 
     it("should clear previous states on successful export", () => {
-      const mockJsonData = '{"skill": "test"}';
+      const mockJsonData = "{\"skill\": \"test\"}";
       mockExportToJson.mockReturnValue(mockJsonData);
 
       const { result } = renderHook(() => useJsonOperations());
@@ -213,7 +213,7 @@ describe("useJsonOperations Hook", () => {
 
   describe("Import Operations", () => {
     it("should import JSON successfully", () => {
-      const testJsonInput = '{"skill": "imported", "version": 2}';
+      const testJsonInput = "{\"skill\": \"imported\", \"version\": 2}";
 
       const { result } = renderHook(() => useJsonOperations());
 
@@ -234,7 +234,7 @@ describe("useJsonOperations Hook", () => {
 
     it("should handle import errors with Error instance", () => {
       const mockError = new Error("Invalid JSON format");
-      const invalidJson = '{"invalid": json}';
+      const invalidJson = "{\"invalid\": json}";
       mockImportFromJson.mockImplementation(() => {
         throw mockError;
       });
@@ -265,7 +265,7 @@ describe("useJsonOperations Hook", () => {
       const { result } = renderHook(() => useJsonOperations());
 
       act(() => {
-        result.current.setJsonInput('{"test": "data"}');
+        result.current.setJsonInput("{\"test\": \"data\"}");
         result.current.handleImport();
       });
 
@@ -284,7 +284,7 @@ describe("useJsonOperations Hook", () => {
     });
 
     it("should clear previous states on successful import", () => {
-      const testJsonInput = '{"skill": "test"}';
+      const testJsonInput = "{\"skill\": \"test\"}";
 
       const { result } = renderHook(() => useJsonOperations());
 
@@ -309,10 +309,10 @@ describe("useJsonOperations Hook", () => {
       const { result } = renderHook(() => useJsonOperations());
 
       act(() => {
-        result.current.handleInputChange('{"new": "input"}');
+        result.current.handleInputChange("{\"new\": \"input\"}");
       });
 
-      expect(result.current.jsonInput).toBe('{"new": "input"}');
+      expect(result.current.jsonInput).toBe("{\"new\": \"input\"}");
       expect(result.current.error).toBeNull();
       expect(result.current.success).toBeNull();
     });
@@ -344,10 +344,10 @@ describe("useJsonOperations Hook", () => {
 
       // Change input should clear both
       act(() => {
-        result.current.handleInputChange('{"changed": "input"}');
+        result.current.handleInputChange("{\"changed\": \"input\"}");
       });
 
-      expect(result.current.jsonInput).toBe('{"changed": "input"}');
+      expect(result.current.jsonInput).toBe("{\"changed\": \"input\"}");
       expect(result.current.error).toBeNull();
       expect(result.current.success).toBeNull();
     });
@@ -412,7 +412,7 @@ describe("useJsonOperations Hook", () => {
 
     it("should handle special characters in JSON", () => {
       const specialJson =
-        '{"unicode": "🚀", "quotes": "\\"nested\\"", "newlines": "line1\\nline2"}';
+        "{\"unicode\": \"🚀\", \"quotes\": \"\\\"nested\\\"\", \"newlines\": \"line1\\nline2\"}";
 
       const { result } = renderHook(() => useJsonOperations());
 
@@ -431,19 +431,19 @@ describe("useJsonOperations Hook", () => {
       const { result } = renderHook(() => useJsonOperations());
 
       // Export -> modify -> import flow
-      mockExportToJson.mockReturnValue('{"version": 1}');
+      mockExportToJson.mockReturnValue("{\"version\": 1}");
 
       act(() => {
         result.current.handleExport();
       });
 
-      expect(result.current.jsonInput).toBe('{"version": 1}');
+      expect(result.current.jsonInput).toBe("{\"version\": 1}");
 
       act(() => {
-        result.current.handleInputChange('{"version": 2}');
+        result.current.handleInputChange("{\"version\": 2}");
       });
 
-      expect(result.current.jsonInput).toBe('{"version": 2}');
+      expect(result.current.jsonInput).toBe("{\"version\": 2}");
       expect(result.current.error).toBeNull();
       expect(result.current.success).toBeNull();
 
@@ -451,7 +451,7 @@ describe("useJsonOperations Hook", () => {
         result.current.handleImport();
       });
 
-      expect(mockImportFromJson).toHaveBeenCalledWith('{"version": 2}');
+      expect(mockImportFromJson).toHaveBeenCalledWith("{\"version\": 2}");
       expect(result.current.success).toBe("JSON imported successfully.");
     });
 
@@ -481,8 +481,8 @@ describe("useJsonOperations Hook", () => {
 
   describe("Integration Scenarios", () => {
     it("should support complete export-modify-import workflow", () => {
-      const originalJson = '{"skill": "original", "version": 1}';
-      const modifiedJson = '{"skill": "modified", "version": 2}';
+      const originalJson = "{\"skill\": \"original\", \"version\": 1}";
+      const modifiedJson = "{\"skill\": \"modified\", \"version\": 2}";
 
       mockExportToJson.mockReturnValue(originalJson);
 
@@ -514,7 +514,7 @@ describe("useJsonOperations Hook", () => {
     });
 
     it("should handle error recovery in workflow", () => {
-      mockExportToJson.mockReturnValue('{"valid": "json"}');
+      mockExportToJson.mockReturnValue("{\"valid\": \"json\"}");
       mockImportFromJson.mockImplementationOnce(() => {
         throw new Error("Invalid format");
       });
@@ -606,7 +606,7 @@ describe("useJsonOperations Hook", () => {
           result.current.handleInputChange(`{"iteration": ${i}}`);
       });
 
-      expect(result.current.jsonInput).toBe('{"iteration": 99}');
+      expect(result.current.jsonInput).toBe("{\"iteration\": 99}");
     });
 
     it("should not leak memory on unmount", () => {
@@ -619,7 +619,7 @@ describe("useJsonOperations Hook", () => {
     it("should handle concurrent operations", () => {
       const { result } = renderHook(() => useJsonOperations());
 
-      mockExportToJson.mockReturnValue('{"concurrent": "test"}');
+      mockExportToJson.mockReturnValue("{\"concurrent\": \"test\"}");
 
       // Simulate concurrent export and import
       act(() => {
@@ -627,7 +627,7 @@ describe("useJsonOperations Hook", () => {
       });
 
       act(() => {
-        result.current.handleInputChange('{"modified": "data"}');
+        result.current.handleInputChange("{\"modified\": \"data\"}");
       });
 
       act(() => {
@@ -635,7 +635,7 @@ describe("useJsonOperations Hook", () => {
       });
 
       expect(mockExportToJson).toHaveBeenCalled();
-      expect(mockImportFromJson).toHaveBeenCalledWith('{"modified": "data"}');
+      expect(mockImportFromJson).toHaveBeenCalledWith("{\"modified\": \"data\"}");
       expect(result.current.success).toBe("JSON imported successfully.");
     });
   });

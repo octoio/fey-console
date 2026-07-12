@@ -24,6 +24,12 @@ const SkillEditor = lazy(() =>
   })),
 );
 
+const StageEditor = lazy(() =>
+  import("@components/stage-editor").then((module) => ({
+    default: module.StageEditor,
+  })),
+);
+
 // Ant Design custom theme configuration
 const theme = {
   token: {
@@ -115,6 +121,19 @@ const AppContent: React.FC = () => {
       children: (
         <Suspense fallback={<LoadingSpinner tip="Loading Skill Editor..." />}>
           <SkillEditor
+            entityReferences={entityReferences}
+            files={files}
+            directoryHandle={directoryHandle}
+          />
+        </Suspense>
+      ),
+    },
+    {
+      key: "4",
+      label: "Stage Editor",
+      children: (
+        <Suspense fallback={<LoadingSpinner tip="Loading Stage Editor..." />}>
+          <StageEditor
             entityReferences={entityReferences}
             files={files}
             directoryHandle={directoryHandle}

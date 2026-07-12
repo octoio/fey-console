@@ -156,7 +156,7 @@ describe("NodeScalers", () => {
           (button) =>
             button.textContent?.includes("Delete") ||
             button.getAttribute("aria-label")?.includes("delete") ||
-            button.querySelector('[data-testid="delete-icon"]'),
+            button.querySelector("[data-testid=\"delete-icon\"]"),
         );
 
       if (deleteButtons.length > 0) {
