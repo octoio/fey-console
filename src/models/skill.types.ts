@@ -12,6 +12,7 @@ export enum SkillCategory {
   Utility = "Utility",
   Healing = "Healing",
   Control = "Control",
+  Mobility = "Mobility",
 }
 
 export type SkillCost = {
@@ -37,6 +38,7 @@ export enum SkillActionNodeType {
   Status = "Status",
   Summon = "Summon",
   Projectile = "Projectile",
+  Move = "Move",
   Requirement = "Requirement",
 }
 
@@ -96,6 +98,25 @@ export type SkillActionSummonNode = SkillActionNode & {
   controlled?: boolean;
 };
 
+export enum SkillMoveMode {
+  Dash = "Dash",
+  Blink = "Blink",
+  ShadowStep = "ShadowStep",
+  Swap = "Swap",
+}
+
+/**
+ * Moves the caster. Dash: `distance` units over `duration` s, through bodies (needs both > 0).
+ * Blink and ShadowStep: instant, `distance` is the range (duration 0). Swap: trades places with
+ * the target (both 0).
+ */
+export type SkillActionMoveNode = SkillActionNode & {
+  type: SkillActionNodeType.Move;
+  mode: SkillMoveMode;
+  distance: number;
+  duration: number;
+};
+
 export enum ProjectileSpawnPositionType {
   Character = "Character",
   World = "World",
@@ -145,6 +166,10 @@ export type Skill = {
   indicators: SkillIndicator[];
   /** true: the caster cannot walk from the start of the cast until it completes or is cancelled. */
   root_while_casting?: boolean;
+  /** true: casting this skill cancels the cast in progress (a dash). */
+  cancels_cast?: boolean;
+  /** How many casts can be stocked; one charge comes back every cooldown. Absent = 1. */
+  charges?: number;
   /** Fire while the character knows the skill. */
   triggers?: Trigger[];
 };
@@ -165,6 +190,9 @@ export const ALL_SKILL_TARGET_TYPES: SkillTargetType[] =
 
 export const ALL_SKILL_ACTION_NODE_TYPES: SkillActionNodeType[] =
   Object.values(SkillActionNodeType).sort();
+
+export const ALL_SKILL_MOVE_MODES: SkillMoveMode[] =
+  Object.values(SkillMoveMode).sort();
 
 export const ALL_SKILL_INDICATOR_POSITIONS: SkillIndicatorPosition[] =
   Object.values(SkillIndicatorPosition).sort();

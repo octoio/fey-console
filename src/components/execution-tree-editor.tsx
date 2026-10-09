@@ -24,6 +24,7 @@ import { RequirementNode } from "./nodetypes/requirement-node";
 import { SequenceNode } from "./nodetypes/sequence-node";
 import { SoundNode } from "./nodetypes/sound-node";
 import { StatusNode } from "./nodetypes/status-node";
+import { MoveNode } from "./nodetypes/move-node";
 import { SummonNode } from "./nodetypes/summon-node";
 
 const { Title, Text } = Typography;
@@ -59,6 +60,7 @@ export const ExecutionTreeEditor: React.FC = () => {
         [SkillActionNodeType.Hit]: HitEffectNode,
         [SkillActionNodeType.Status]: StatusNode,
         [SkillActionNodeType.Summon]: SummonNode,
+        [SkillActionNodeType.Move]: MoveNode,
         [SkillActionNodeType.Projectile]: ProjectileNode,
         [SkillActionNodeType.Requirement]: RequirementNode,
       }) as Record<SkillActionNodeType, React.FC<NodeProps>>,

@@ -27,6 +27,7 @@ import {
   SkillCategory,
   SkillEntityDefinition,
   SkillIndicator,
+  SkillMoveMode,
   SkillTargetType,
 } from "@models/skill.types";
 
@@ -498,6 +499,11 @@ export const useSkillStore = create<SkillEditorState>()(
               version: 1,
             };
             newNode.data.position_offset = { x: 0, y: 0, z: 0 };
+            break;
+          case SkillActionNodeType.Move:
+            newNode.data.mode = SkillMoveMode.Dash;
+            newNode.data.distance = 4;
+            newNode.data.duration = 0.25;
             break;
           case SkillActionNodeType.Projectile:
             newNode.data.projectile = {
