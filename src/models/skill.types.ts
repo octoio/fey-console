@@ -2,6 +2,7 @@ import { EntityReference, FloatRange, Metadata, Vector3 } from "./common.types";
 import { HitEffect, StatusEffect } from "./effect.types";
 import { QualityType } from "./quality.types";
 import { RequirementEvaluation } from "./requirement.types";
+import { Trigger } from "./trigger.types";
 
 export enum SkillCategory {
   None = "None",
@@ -144,6 +145,8 @@ export type Skill = {
   indicators: SkillIndicator[];
   /** true: the caster cannot walk from the start of the cast until it completes or is cancelled. */
   root_while_casting?: boolean;
+  /** Fire while the character knows the skill. */
+  triggers?: Trigger[];
 };
 
 export type SkillEntityDefinition = {

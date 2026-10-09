@@ -1,4 +1,5 @@
 import { HitType } from "./common.types";
+import { Trigger } from "./trigger.types";
 
 export enum StatusDurationType {
   Chrono = "Chrono",
@@ -98,4 +99,6 @@ export type Status = {
   };
   mechanic: StatusEffectMechanic;
   stack: StatusStack;
+  /** Fire while the character has the status. */
+  triggers?: Trigger[];
 };
