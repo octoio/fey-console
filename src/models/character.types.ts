@@ -1,5 +1,6 @@
 import { Color, EntityReference, Metadata, Vector3 } from "./common.types";
 import { StatusEffect } from "./effect.types";
+import { LevelGrowth, XpChart } from "./progression.types";
 import { StatSheet } from "./stat.types";
 
 export enum CharacterType {
@@ -59,8 +60,12 @@ export type Character = {
   foot_step_sound: EntityReference;
   hit_sound: EntityReference;
   enrage?: Enrage;
-  /** Starting level (default 1). Never changes stats; scales the XP a kill pays. */
+  /** Character level curve (default: the game's). */
+  xp_chart?: XpChart;
+  /** Starting level (default 1). Stats change only through level_growth; scales the XP a kill pays and the damage rule against the opponent's level. */
   level?: number;
+  /** Per-level stat growth and level cap. */
+  level_growth?: LevelGrowth;
   /** Normal (default), Elite or Boss. */
   rank?: MonsterRank;
   /** true: goes for hostile healers instead of the threat holder. */

@@ -1,6 +1,7 @@
 import { EntityReference, FloatRange, Metadata, Vector3 } from "./common.types";
 import { HitEffect, StatusEffect } from "./effect.types";
 import { QualityType } from "./quality.types";
+import { SkillExperience } from "./progression.types";
 import { RequirementEvaluation } from "./requirement.types";
 import { Trigger } from "./trigger.types";
 
@@ -164,6 +165,8 @@ export type Skill = {
   execution_root: SkillActionNode;
   cast_distance: FloatRange;
   indicators: SkillIndicator[];
+  /** Skill XP earned on use and how the level scales the skill; absent = no XP. */
+  experience?: SkillExperience;
   /** true: the caster cannot walk from the start of the cast until it completes or is cancelled. */
   root_while_casting?: boolean;
   /** true: casting this skill cancels the cast in progress (a dash). */
