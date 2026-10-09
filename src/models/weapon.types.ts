@@ -50,6 +50,8 @@ export type Weapon = {
   random_stat_affixes: StatAffix[];
   basic_attack?: EntityReference;
   model_anchor_set: ModelAnchorSet;
+  /** Character level needed to equip it (absent: any; min 2). */
+  min_level?: number;
 };
 
 export type WeaponEntityDefinition = {

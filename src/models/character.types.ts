@@ -70,6 +70,10 @@ export type Character = {
   rank?: MonsterRank;
   /** true: goes for hostile healers instead of the threat holder. */
   hunts_healers?: boolean;
+  /** Equipment (entity references) a new player character wears. */
+  starting_equipment?: EntityReference[];
+  /** Weapons (entity references) a new player character wields. */
+  starting_weapons?: EntityReference[];
 };
 
 export type CharacterEntityDefinition = {

@@ -1,7 +1,7 @@
 import { CharacterType, MonsterRank } from "./character.types";
+import { Color, EntityReference, Metadata } from "./common.types";
 import { QualityType } from "./quality.types";
 import { StatType } from "./stat.types";
-import { Color, EntityReference, Metadata } from "./common.types";
 
 export type AchievementType = "None" | "SlimeExterminator" | "BoarDefender";
 
@@ -79,7 +79,8 @@ export type QuestConditionType =
   | "EnterAnchor"
   | "StayInAnchor"
   | "PickQuest"
-  | "Teleport";
+  | "Teleport"
+  | "Interact";
 
 export interface QuestConditionKillSpecific {
   type: "KillSpecific";
@@ -103,10 +104,18 @@ export interface QuestConditionStayInAnchor {
 
 export interface QuestConditionPickQuest {
   type: "PickQuest";
+  quest?: EntityReference; // Quest: only picking this quest counts (absent: any)
 }
 
 export interface QuestConditionTeleport {
   type: "Teleport";
+  stage?: EntityReference; // Stage: only arriving there counts (absent: any other stage)
+}
+
+// A player uses an active zone anchor (a shrine, a lever) within its radius
+export interface QuestConditionInteract {
+  type: "Interact";
+  anchor: EntityReference; // Anchor (a zone)
 }
 
 export type QuestCondition =
@@ -114,7 +123,8 @@ export type QuestCondition =
   | QuestConditionEnterAnchor
   | QuestConditionStayInAnchor
   | QuestConditionPickQuest
-  | QuestConditionTeleport;
+  | QuestConditionTeleport
+  | QuestConditionInteract;
 
 // Actions: fire-and-forget world mutations (no rollback)
 export type QuestActionType =
@@ -189,7 +199,8 @@ export type QuestNodeType =
   | "Objective"
   | "Action";
 
-export type QuestTimerTimeoutType = "Fail" | "Complete";
+// Restart: the child subtree and the timer start over
+export type QuestTimerTimeoutType = "Fail" | "Complete" | "Restart";
 
 export interface QuestNodeBase {
   type: QuestNodeType;
