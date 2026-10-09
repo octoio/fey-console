@@ -86,6 +86,12 @@ export type SkillActionSummonNode = SkillActionNode & {
   type: SkillActionNodeType.Summon;
   summon_entity: EntityReference;
   position_offset: Vector3;
+  /** Seconds the summon lives; absent = until it dies or its summoner does. */
+  lifetime?: number;
+  /** How many summons of this entity one summoner may have alive. */
+  max_alive?: number;
+  /** The summoner steers the summon for its lifetime while its body idles. */
+  controlled?: boolean;
 };
 
 export enum ProjectileSpawnPositionType {

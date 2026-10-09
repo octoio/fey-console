@@ -18,6 +18,7 @@ export type StatusDuration = {
 export enum StatusEffectMechanicType {
   StatChange = "StatChange",
   HitOverTime = "HitOverTime",
+  Control = "Control",
 }
 
 export const ALL_STATUS_EFFECT_MECHANIC_TYPES: StatusEffectMechanicType[] =
@@ -36,6 +37,24 @@ export type StatusEffectMechanicHitOverTime = StatusEffectMechanic & {
   type: "HitOverTime";
   hit: HitType;
   tick_rate: number;
+};
+
+/** How a Control status moves controllers while it lasts. */
+export enum StatusControlMode {
+  /** Controllers of the afflicted characters rotate among them. */
+  Shuffle = "Shuffle",
+  /** The caster and the first afflicted character exchange controllers. */
+  SwapWithSource = "SwapWithSource",
+  /** The caster takes control of the afflicted character. */
+  Dominate = "Dominate",
+}
+
+export const ALL_STATUS_CONTROL_MODES: StatusControlMode[] =
+  Object.values(StatusControlMode).sort();
+
+export type StatusEffectMechanicControl = StatusEffectMechanic & {
+  type: "Control";
+  mode: StatusControlMode;
 };
 
 export enum StatusStackScalingStrategy {
