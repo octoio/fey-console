@@ -50,6 +50,8 @@ export type Character = {
   foot_step_sound: EntityReference;
   hit_sound: EntityReference;
   enrage?: Enrage;
+  /** Starting level (default 1). Never changes stats; scales the XP a kill pays. */
+  level?: number;
   /** true: goes for hostile healers instead of the threat holder. */
   hunts_healers?: boolean;
 };
