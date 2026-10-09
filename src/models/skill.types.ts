@@ -1,7 +1,7 @@
 import { EntityReference, FloatRange, Metadata, Vector3 } from "./common.types";
 import { HitEffect, StatusEffect } from "./effect.types";
-import { QualityType } from "./quality.types";
 import { SkillExperience } from "./progression.types";
+import { QualityType } from "./quality.types";
 import { RequirementEvaluation } from "./requirement.types";
 import { Trigger } from "./trigger.types";
 

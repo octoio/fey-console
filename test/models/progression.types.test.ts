@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import type { Character } from "@models/character.types";
 import {
   damageLevelFactor,
   levelGrowthAt,
@@ -7,7 +8,6 @@ import {
   xpLevelFactor,
   xpRequired,
 } from "@models/progression.types";
-import type { Character } from "@models/character.types";
 import type { Skill } from "@models/skill.types";
 
 const adventurerChart = { base: 250, increment: 125, growth: 1.3 };
