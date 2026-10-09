@@ -1,4 +1,5 @@
 import { Color, Metadata, Transform } from "./common.types";
+import { CharacterTeam } from "./effect.types";
 
 // Anchor entity (anchor.atd): gameplay markers owned by a stage.
 // Transforms are relative to the stage's StageOrigin.
@@ -30,6 +31,7 @@ export interface AnchorZone extends AnchorBase {
 
 export interface AnchorSpawnPoint extends AnchorBase {
   type: AnchorType.SpawnPoint;
+  team?: CharacterTeam; // Ally marks where the party appears on entering the stage
 }
 
 export interface AnchorPortal extends AnchorBase {

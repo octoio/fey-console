@@ -1,7 +1,7 @@
 import { CharacterType } from "./character.types";
 import { Color, EntityReference, Metadata } from "./common.types";
 
-export type AchievementType = "None" | "SlimeExterminator";
+export type AchievementType = "None" | "SlimeExterminator" | "BoarDefender";
 
 // Spawn types (spawn.atd)
 export interface Spawn {
@@ -59,6 +59,7 @@ export type QuestConditionType =
 export interface QuestConditionKillSpecific {
   type: "KillSpecific";
   character_types: CharacterType[]; // min 1
+  character?: EntityReference; // Character: only deaths of this definition count
   amount: number; // min 1
 }
 
