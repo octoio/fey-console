@@ -66,6 +66,8 @@ export enum CrowdControlEffect {
   Root = "Root",
   /** Cannot cast, a running cast is interrupted; movement is unaffected. */
   Silence = "Silence",
+  /** The target attacks the status source (monsters only; blocks nothing). */
+  Taunt = "Taunt",
 }
 
 export const ALL_CROWD_CONTROL_EFFECTS: CrowdControlEffect[] =

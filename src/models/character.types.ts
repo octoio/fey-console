@@ -1,4 +1,5 @@
 import { Color, EntityReference, Metadata, Vector3 } from "./common.types";
+import { StatusEffect } from "./effect.types";
 import { StatSheet } from "./stat.types";
 
 export enum CharacterType {
@@ -30,6 +31,12 @@ export type CharacterVariant = {
   scale: Vector3;
 };
 
+/** After `after` seconds in combat the effects are applied to the monster itself. */
+export type Enrage = {
+  after: number;
+  effects: StatusEffect[];
+};
+
 export type Character = {
   metadata: Metadata;
   type: CharacterType;
@@ -42,6 +49,9 @@ export type Character = {
   drop_table: EntityReference;
   foot_step_sound: EntityReference;
   hit_sound: EntityReference;
+  enrage?: Enrage;
+  /** true: goes for hostile healers instead of the threat holder. */
+  hunts_healers?: boolean;
 };
 
 export type CharacterEntityDefinition = {
