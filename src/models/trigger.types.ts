@@ -17,6 +17,16 @@ export enum TriggerOn {
   StatusApplied = "StatusApplied",
   /** The owner took damage that was not dodged. */
   DamageTaken = "DamageTaken",
+  /** The owner died (equipment and skill triggers only). */
+  Death = "Death",
+  /** A living teammate of the owner died. */
+  AllyDeath = "AllyDeath",
+  /** The owner started a cast. */
+  CastStart = "CastStart",
+  /** The owner finished a cast. */
+  CastFinish = "CastFinish",
+  /** The owner healed past max health; the amount is the overheal. */
+  Overheal = "Overheal",
 }
 
 export const ALL_TRIGGER_ONS: TriggerOn[] = Object.values(TriggerOn).sort();
