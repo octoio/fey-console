@@ -10,6 +10,7 @@ export enum SkillCategory {
   Defense = "Defense",
   Utility = "Utility",
   Healing = "Healing",
+  Control = "Control",
 }
 
 export type SkillCost = {

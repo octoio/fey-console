@@ -65,6 +65,7 @@ export enum EntityType {
   QuestDifficulty = "QuestDifficulty",
   Anchor = "Anchor",
   Stage = "Stage",
+  SkillStone = "SkillStone",
 }
 
 // Update EntityReference to use the enum
