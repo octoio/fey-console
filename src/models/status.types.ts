@@ -21,6 +21,7 @@ export enum StatusEffectMechanicType {
   HitOverTime = "HitOverTime",
   Control = "Control",
   CrowdControl = "CrowdControl",
+  Shield = "Shield",
 }
 
 export const ALL_STATUS_EFFECT_MECHANIC_TYPES: StatusEffectMechanicType[] =
@@ -77,6 +78,11 @@ export const ALL_CROWD_CONTROL_EFFECTS: CrowdControlEffect[] =
 export type StatusEffectMechanicCrowdControl = StatusEffectMechanic & {
   type: "CrowdControl";
   effect: CrowdControlEffect;
+};
+
+/** A damage-absorbing pool sized by the status effect's scaler; soaked before health. */
+export type StatusEffectMechanicShield = StatusEffectMechanic & {
+  type: "Shield";
 };
 
 export enum StatusStackScalingStrategy {
