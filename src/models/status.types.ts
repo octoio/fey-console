@@ -19,6 +19,7 @@ export enum StatusEffectMechanicType {
   StatChange = "StatChange",
   HitOverTime = "HitOverTime",
   Control = "Control",
+  CrowdControl = "CrowdControl",
 }
 
 export const ALL_STATUS_EFFECT_MECHANIC_TYPES: StatusEffectMechanicType[] =
@@ -55,6 +56,24 @@ export const ALL_STATUS_CONTROL_MODES: StatusControlMode[] =
 export type StatusEffectMechanicControl = StatusEffectMechanic & {
   type: "Control";
   mode: StatusControlMode;
+};
+
+/** What a CrowdControl status takes away from the afflicted. A slow is a StatChange on MovementSpeedModifier. */
+export enum CrowdControlEffect {
+  /** Cannot move or cast; a running cast is interrupted. */
+  Stun = "Stun",
+  /** Cannot move; casting is unaffected. */
+  Root = "Root",
+  /** Cannot cast, a running cast is interrupted; movement is unaffected. */
+  Silence = "Silence",
+}
+
+export const ALL_CROWD_CONTROL_EFFECTS: CrowdControlEffect[] =
+  Object.values(CrowdControlEffect).sort();
+
+export type StatusEffectMechanicCrowdControl = StatusEffectMechanic & {
+  type: "CrowdControl";
+  effect: CrowdControlEffect;
 };
 
 export enum StatusStackScalingStrategy {

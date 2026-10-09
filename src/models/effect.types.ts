@@ -81,6 +81,8 @@ export type StatusEffect = {
   durations: StatusDuration[];
   scalers: EffectScaling[];
   status: EntityReference;
+  /** true: remove the status from the targets instead of applying it (durations and scalers must be empty). */
+  dispel?: boolean;
 };
 
 export const ALL_CHARACTER_TEAMS: CharacterTeam[] =

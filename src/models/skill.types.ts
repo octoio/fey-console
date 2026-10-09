@@ -141,6 +141,8 @@ export type Skill = {
   execution_root: SkillActionNode;
   cast_distance: FloatRange;
   indicators: SkillIndicator[];
+  /** true: the caster cannot walk from the start of the cast until it completes or is cancelled. */
+  root_while_casting?: boolean;
 };
 
 export type SkillEntityDefinition = {
