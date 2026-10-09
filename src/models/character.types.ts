@@ -11,6 +11,15 @@ export enum CharacterType {
 export const ALL_CHARACTER_TYPES: CharacterType[] =
   Object.values(CharacterType).sort();
 
+/** How dangerous a monster is: drop tables gate and tilt their rewards by it. */
+export enum MonsterRank {
+  Normal = "Normal",
+  Elite = "Elite",
+  Boss = "Boss",
+}
+
+export const ALL_MONSTER_RANKS: MonsterRank[] = Object.values(MonsterRank);
+
 export enum CharacterVariantColorType {
   Primary = "Primary",
   Secondary = "Secondary",
@@ -52,6 +61,8 @@ export type Character = {
   enrage?: Enrage;
   /** Starting level (default 1). Never changes stats; scales the XP a kill pays. */
   level?: number;
+  /** Normal (default), Elite or Boss. */
+  rank?: MonsterRank;
   /** true: goes for hostile healers instead of the threat holder. */
   hunts_healers?: boolean;
 };
