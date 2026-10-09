@@ -1,4 +1,6 @@
-import { CharacterType } from "./character.types";
+import { CharacterType, MonsterRank } from "./character.types";
+import { QualityType } from "./quality.types";
+import { StatType } from "./stat.types";
 import { Color, EntityReference, Metadata } from "./common.types";
 
 export type AchievementType = "None" | "SlimeExterminator" | "BoarDefender";
@@ -27,12 +29,35 @@ export type QuestDifficultyType =
   | "Normal"
   | "Hard"
   | "Insane"
-  | "Impossible";
+  | "Impossible"
+  | "Nightmare";
+
+// A monster modifier of a tier: the final stat value is multiplied (1.3 = +30%).
+export interface TierAffix {
+  name: string;
+  stat: StatType;
+  multiplier: number; // >= 0.05
+  min_rank?: MonsterRank; // only monsters of this rank or above
+}
+
+// What a difficulty changes when the quest board offers it as a tier. The lowest order is the
+// base tier and must change nothing. Semantics: fey-rs docs/systems/tiers.md.
+export interface QuestTier {
+  order: number; // unique among tiers, >= 0
+  level_bonus?: number;
+  extra_adds?: number; // extra Normal-rank adds, 0.34 = a third more
+  affixes?: TierAffix[];
+  rarity_tilt?: number;
+  guarantee_min_quality?: QualityType;
+  gold_multiplier?: number; // >= 0.1
+}
 
 export interface QuestDifficulty {
   metadata: Metadata;
   type: QuestDifficultyType;
   color: Color;
+  // absent: the quest board never offers this difficulty
+  tier?: QuestTier;
 }
 
 export type QuestOrigin =
