@@ -27,6 +27,7 @@ export enum SkillTargetType {
   Any = "Any",
   Position = "Position",
   None = "None",
+  DeadAlly = "DeadAlly",
 }
 
 export enum SkillActionNodeType {

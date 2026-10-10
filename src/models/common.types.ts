@@ -82,6 +82,7 @@ export enum HitType {
   Heal = "Heal",
   Threat = "Threat",
   Mana = "Mana",
+  Revive = "Revive",
 }
 
 export enum HighlightType {
