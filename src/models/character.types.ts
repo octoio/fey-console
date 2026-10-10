@@ -12,6 +12,22 @@ export enum CharacterType {
 export const ALL_CHARACTER_TYPES: CharacterType[] =
   Object.values(CharacterType).sort();
 
+/**
+ * Whom a character sides with. Separate from the controller: who steers a body (an AI
+ * brain or any client) changes at runtime, its faction does not. Whether two factions
+ * fight is decided by the game rules (hostile, neutral or friendly), not per character.
+ * Players are Adventurers.
+ */
+export enum Faction {
+  Adventurers = "Adventurers",
+  Wilds = "Wilds",
+  Slimes = "Slimes",
+  Crypt = "Crypt",
+  Neutral = "Neutral",
+}
+
+export const ALL_FACTIONS: Faction[] = Object.values(Faction);
+
 /** How dangerous a monster is: drop tables gate and tilt their rewards by it. */
 export enum MonsterRank {
   Normal = "Normal",
@@ -51,6 +67,8 @@ export type Character = {
   metadata: Metadata;
   type: CharacterType;
   variant?: CharacterVariant;
+  /** The side the character fights for (default Neutral: attacked by nobody, attacks nobody). */
+  faction?: Faction;
   pivot_offset: Vector3;
   vision_range: number;
   auto_attack: EntityReference;
