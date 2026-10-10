@@ -17,12 +17,18 @@ import {
   createDefaultAnchor,
 } from "@models/anchor.types";
 import { EntityReferences, EntityType } from "@models/common.types";
-import { createDefaultStage, StageEntityDefinition } from "@models/stage.types";
+import {
+  createDefaultObstacle,
+  createDefaultStage,
+  Obstacle,
+  StageEntityDefinition,
+} from "@models/stage.types";
 import { useSkillStore } from "@store/skill.store";
 import { FileInfo } from "@utils/entity-scanner";
 import { fileUtils } from "@utils/file-utils";
 import { AnchorCard } from "./anchor-card";
 import { ColorInput, MetadataInput } from "./field-inputs";
+import { ObstacleCard } from "./obstacle-card";
 import {
   createAnchorDefinition,
   createStageDefinition,
@@ -148,6 +154,14 @@ export const StageEditor: React.FC<StageEditorProps> = ({
       ],
     });
     setNewAnchorKey("");
+  };
+
+  const obstacles: Obstacle[] = stage?.obstacles ?? [];
+
+  const setObstacles = (next: Obstacle[]) => {
+    if (!stage) return;
+    // An empty list is saved as no field at all (the ATD field is optional)
+    updateStage({ ...stage, obstacles: next.length > 0 ? next : undefined });
   };
 
   const updateAnchor = (index: number, definition: AnchorEntityDefinition) => {
@@ -321,6 +335,42 @@ export const StageEditor: React.FC<StageEditorProps> = ({
                   isNew={unsavedKeys.has(definition.key)}
                   onChange={(updated) => updateAnchor(index, updated)}
                   onRemove={() => removeAnchor(index)}
+                />
+              ))}
+            </Space>
+          </Card>
+
+          <Card
+            size="small"
+            title={`Obstacles (${obstacles.length})`}
+            extra={
+              <Button
+                size="small"
+                onClick={() =>
+                  setObstacles([...obstacles, createDefaultObstacle()])
+                }
+              >
+                Add Obstacle
+              </Button>
+            }
+          >
+            <Space direction="vertical" style={{ width: "100%" }}>
+              {obstacles.length === 0 && (
+                <Empty description="No obstacles: the stage is open ground" />
+              )}
+              {obstacles.map((obstacle, index) => (
+                <ObstacleCard
+                  key={index}
+                  index={index}
+                  obstacle={obstacle}
+                  onChange={(updated) =>
+                    setObstacles(
+                      obstacles.map((o, i) => (i === index ? updated : o)),
+                    )
+                  }
+                  onRemove={() =>
+                    setObstacles(obstacles.filter((_, i) => i !== index))
+                  }
                 />
               ))}
             </Space>

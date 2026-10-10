@@ -280,4 +280,74 @@ describe("StageEditor", () => {
     });
     expect(screen.getByText("Anchors (1)")).toBeInTheDocument();
   });
+
+  it("adds, edits and saves obstacles", async () => {
+    renderEditor([]);
+
+    fireEvent.change(
+      screen.getByPlaceholderText("New stage key (e.g. TheSwamp)"),
+      { target: { value: "TheSwamp" } },
+    );
+    fireEvent.click(screen.getByText("Create Stage"));
+    await waitFor(() => {
+      expect(screen.getByText("Stage: TheSwamp")).toBeInTheDocument();
+    });
+    expect(
+      screen.getByText("No obstacles: the stage is open ground"),
+    ).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("Add Obstacle"));
+    await waitFor(() => {
+      expect(screen.getByText("Obstacles (1)")).toBeInTheDocument();
+    });
+    // A new obstacle is a circle: only the radius is editable
+    expect(
+      screen.getByRole("spinbutton", { name: "obstacle 0 radius" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("spinbutton", { name: "obstacle 0 half_x" }),
+    ).not.toBeInTheDocument();
+
+    fireEvent.change(
+      screen.getByRole("spinbutton", { name: "obstacle 0 radius" }),
+      { target: { value: "2.5" } },
+    );
+    fireEvent.click(screen.getByText("Save Stage & Anchors"));
+
+    await waitFor(() => {
+      expect(mockWriteFile).toHaveBeenCalledTimes(1);
+    });
+    const written = mockWriteFile.mock.calls[0][2] as string;
+    const saved = JSON.parse(written);
+    expect(saved.entity.obstacles).toEqual([
+      { kind: "Rock", shape: "Circle", x: 0, z: 0, radius: 2.5 },
+    ]);
+  });
+
+  it("removes the last obstacle and drops the field", async () => {
+    renderEditor([]);
+
+    fireEvent.change(
+      screen.getByPlaceholderText("New stage key (e.g. TheSwamp)"),
+      { target: { value: "TheSwamp" } },
+    );
+    fireEvent.click(screen.getByText("Create Stage"));
+    await waitFor(() => {
+      expect(screen.getByText("Stage: TheSwamp")).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByText("Add Obstacle"));
+    await waitFor(() => {
+      expect(screen.getByText("Obstacles (1)")).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByText("Remove"));
+    await waitFor(() => {
+      expect(screen.getByText("Obstacles (0)")).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByText("Save Stage & Anchors"));
+    await waitFor(() => {
+      expect(mockWriteFile).toHaveBeenCalledTimes(1);
+    });
+    const saved = JSON.parse(mockWriteFile.mock.calls[0][2] as string);
+    expect("obstacles" in saved.entity).toBe(false);
+  });
 });
