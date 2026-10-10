@@ -65,6 +65,10 @@ export type EffectScaling = {
   stat: StatType;
 };
 
+// Resistance that mitigates a damage hit: Armor (Physical) or MagicResist (Magical)
+export type DamageSchool = "Physical" | "Magical";
+export const ALL_DAMAGE_SCHOOLS: DamageSchool[] = ["Physical", "Magical"];
+
 export type HitEffect = {
   hit_type: HitType;
   scalers: EffectScaling[];
@@ -73,6 +77,8 @@ export type HitEffect = {
   hit_sound: EntityReference;
   can_crit: boolean;
   can_miss: boolean;
+  // Damage and Heal only; absent: each scaler goes to the school of its stat
+  school?: DamageSchool;
 };
 
 export type StatusEffect = {

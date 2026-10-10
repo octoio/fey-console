@@ -161,6 +161,63 @@ describe("HitEffectEditor", () => {
     vi.clearAllMocks();
   });
 
+  describe("School", () => {
+    it("sets the school on a damage hit", () => {
+      render(
+        <HitEffectEditor
+          hitEffect={defaultHitEffect}
+          onChange={mockOnChange}
+        />,
+      );
+      fireEvent.change(screen.getByTestId("hit-school"), {
+        target: { value: "Magical" },
+      });
+      expect(mockOnChange).toHaveBeenCalledWith({
+        ...defaultHitEffect,
+        school: "Magical",
+      });
+    });
+
+    it("clearing the school removes the field", () => {
+      render(
+        <HitEffectEditor
+          hitEffect={{ ...defaultHitEffect, school: "Physical" }}
+          onChange={mockOnChange}
+        />,
+      );
+      fireEvent.change(screen.getByTestId("hit-school"), {
+        target: { value: "" },
+      });
+      expect(mockOnChange).toHaveBeenCalledWith(defaultHitEffect);
+    });
+
+    it("hides the school for a threat hit and drops it on change", () => {
+      render(
+        <HitEffectEditor
+          hitEffect={{ ...defaultHitEffect, hit_type: HitType.Threat }}
+          onChange={mockOnChange}
+        />,
+      );
+      expect(screen.queryByTestId("hit-school")).not.toBeInTheDocument();
+    });
+
+    it("changing to a non-school hit type drops the school", () => {
+      render(
+        <HitEffectEditor
+          hitEffect={{ ...defaultHitEffect, school: "Magical" }}
+          onChange={mockOnChange}
+        />,
+      );
+      fireEvent.change(screen.getByTestId("ant-select"), {
+        target: { value: HitType.Threat },
+      });
+      expect(mockOnChange).toHaveBeenCalledWith({
+        ...defaultHitEffect,
+        hit_type: HitType.Threat,
+      });
+    });
+  });
+
   describe("Rendering", () => {
     it("renders all main components", () => {
       render(
@@ -170,7 +227,7 @@ describe("HitEffectEditor", () => {
         />,
       );
 
-      expect(screen.getAllByTestId("node-field")).toHaveLength(2); // Hit Type and checkbox fields
+      expect(screen.getAllByTestId("node-field")).toHaveLength(3); // Hit Type, School and checkbox fields
       expect(screen.getByTestId("target-mechanic-editor")).toBeInTheDocument();
       expect(screen.getByTestId("node-entity-reference")).toBeInTheDocument();
       expect(screen.getByTestId("node-scalers")).toBeInTheDocument();

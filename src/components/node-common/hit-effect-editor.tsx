@@ -7,6 +7,8 @@ import {
   HitType,
 } from "@models/common.types";
 import {
+  ALL_DAMAGE_SCHOOLS,
+  DamageSchool,
   EffectScaling,
   EffectTarget,
   EffectTargetMechanic,
@@ -22,6 +24,14 @@ import {
 } from "./";
 
 const { Option } = Select;
+
+// The effect with its school set, or without the key when there is none
+const withSchool = (effect: HitEffect, school?: DamageSchool): HitEffect => {
+  const copy: HitEffect = { ...effect };
+  if (school) copy.school = school;
+  else delete copy.school;
+  return copy;
+};
 
 interface HitEffectEditorProps {
   hitEffect: HitEffect;
@@ -43,7 +53,18 @@ export const HitEffectEditor: React.FC<HitEffectEditorProps> = ({
   };
 
   const handleHitTypeChange = (value: HitType) => {
-    onChange({ ...effect, hit_type: value });
+    // a school only exists on Damage and Heal hits
+    const keepSchool = value === HitType.Damage || value === HitType.Heal;
+    onChange(
+      withSchool(
+        { ...effect, hit_type: value },
+        keepSchool ? effect.school : undefined,
+      ),
+    );
+  };
+
+  const handleSchoolChange = (value: DamageSchool | undefined) => {
+    onChange(withSchool(effect, value || undefined));
   };
 
   const handleTargetChange = (target: EffectTarget) => {
@@ -88,6 +109,29 @@ export const HitEffectEditor: React.FC<HitEffectEditorProps> = ({
           </Select>
         </NodeInteractive>
       </NodeField>
+
+      {(effect.hit_type === HitType.Damage ||
+        effect.hit_type === HitType.Heal) && (
+        <NodeField label="School">
+          <NodeInteractive>
+            <Select
+              style={{ width: "100%" }}
+              value={effect.school}
+              onChange={handleSchoolChange}
+              size="small"
+              allowClear
+              placeholder="From scaler stats"
+              data-testid="hit-school"
+            >
+              {ALL_DAMAGE_SCHOOLS.map((school) => (
+                <Option key={school} value={school}>
+                  {school}
+                </Option>
+              ))}
+            </Select>
+          </NodeInteractive>
+        </NodeField>
+      )}
 
       <TargetMechanicEditor
         target={effect.target}

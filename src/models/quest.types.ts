@@ -206,6 +206,11 @@ export interface QuestNodeBase {
   type: QuestNodeType;
   id: number; // 0..65535, unique within a quest
   name: string;
+  // Sequence/Parallel/Any/Timer: true = the Parallel above does not wait for this node. Only a direct
+  // child of a Parallel may be optional (Objective uses is_optional).
+  optional?: boolean;
+  // Optional nodes only: granted to the party when the quest completes with this node completed
+  bonus_achievement?: AchievementType;
 }
 
 export interface QuestSequenceNode extends QuestNodeBase {
