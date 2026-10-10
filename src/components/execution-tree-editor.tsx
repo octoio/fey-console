@@ -18,13 +18,13 @@ import { autoLayoutNodes } from "@utils/auto-layout";
 import { AnimationNode } from "./nodetypes/animation-node";
 import { DelayNode } from "./nodetypes/delay-node";
 import { HitEffectNode } from "./nodetypes/hit-effect-node";
+import { MoveNode } from "./nodetypes/move-node";
 import { ParallelNode } from "./nodetypes/parallel-node";
 import { ProjectileNode } from "./nodetypes/projectile-node";
 import { RequirementNode } from "./nodetypes/requirement-node";
 import { SequenceNode } from "./nodetypes/sequence-node";
 import { SoundNode } from "./nodetypes/sound-node";
 import { StatusNode } from "./nodetypes/status-node";
-import { MoveNode } from "./nodetypes/move-node";
 import { SummonNode } from "./nodetypes/summon-node";
 
 const { Title, Text } = Typography;

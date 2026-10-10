@@ -42,6 +42,8 @@ export const ALL_WEAPON_SHEATHE_LOCATIONS: WeaponSheatheLocation[] =
 export type Weapon = {
   metadata: Metadata;
   category: WeaponCategory;
+  /** Equip slot the weapon occupies; explicit data, not derived from the category. */
+  hand: WeaponEquipIndex;
   quality: QualityType;
   sheathe_location: WeaponSheatheLocation;
   icon_reference: EntityReference;
