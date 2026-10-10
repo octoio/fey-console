@@ -93,9 +93,24 @@ export enum StatusStackScalingStrategy {
 export const ALL_STATUS_STACK_SCALING_STRATEGIES: StatusStackScalingStrategy[] =
   Object.values(StatusStackScalingStrategy).sort();
 
+/** What happens when a status already at its maximum stack size is applied again. */
+export enum StatusFullStackRule {
+  /** No stack is replaced; the duration of the whole stack is reset (the default when unset). */
+  RefreshAll = "RefreshAll",
+  /** The oldest application drops and the new one is added. */
+  ReplaceOldest = "ReplaceOldest",
+  /** The weakest stack is swapped for the new one, only if the new one is stronger. */
+  ReplaceWeakest = "ReplaceWeakest",
+}
+
+export const ALL_STATUS_FULL_STACK_RULES: StatusFullStackRule[] =
+  Object.values(StatusFullStackRule).sort();
+
 export type StatusStack = {
   size: number;
   scaling_strategy: StatusStackScalingStrategy;
+  /** Absent means RefreshAll. */
+  full_stack?: StatusFullStackRule;
 };
 
 export type Status = {
