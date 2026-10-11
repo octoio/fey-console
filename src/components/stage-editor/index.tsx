@@ -1,4 +1,5 @@
 import {
+  Alert,
   App as AntApp,
   Button,
   Card,
@@ -17,6 +18,8 @@ import {
   createDefaultAnchor,
 } from "@models/anchor.types";
 import { EntityReferences, EntityType } from "@models/common.types";
+import { GeneratorKind, createDefaultGeneratorSpec } from "@models/generator.types";
+import { RoomPrefabEntityDefinition } from "@models/roomprefab.types";
 import {
   createDefaultObstacle,
   createDefaultStage,
@@ -26,8 +29,10 @@ import {
 import { useSkillStore } from "@store/skill.store";
 import { FileInfo } from "@utils/entity-scanner";
 import { fileUtils } from "@utils/file-utils";
+import { bindingProblems } from "@utils/mapgen-check";
 import { AnchorCard } from "./anchor-card";
 import { ColorInput, MetadataInput } from "./field-inputs";
+import { GeneratorCard } from "./generator-card";
 import { ObstacleCard } from "./obstacle-card";
 import {
   createAnchorDefinition,
@@ -61,6 +66,9 @@ export const StageEditor: React.FC<StageEditorProps> = ({
     AnchorEntityDefinition[]
   >([]);
   const [unsavedKeys, setUnsavedKeys] = useState<Set<string>>(new Set());
+  const [prefabKinds, setPrefabKinds] = useState<Map<string, GeneratorKind>>(
+    new Map(),
+  );
   const [newStageKey, setNewStageKey] = useState("");
   const [newAnchorKey, setNewAnchorKey] = useState("");
   const [newAnchorType, setNewAnchorType] = useState<AnchorType>(
@@ -71,6 +79,31 @@ export const StageEditor: React.FC<StageEditorProps> = ({
   useEffect(() => {
     setEntityReferences(entityReferences);
   }, [entityReferences, setEntityReferences]);
+
+  // The generator kind of every RoomPrefab file, to check the prefabs a spec names
+  useEffect(() => {
+    if (!directoryHandle) return;
+    let cancelled = false;
+    (async () => {
+      const kinds = new Map<string, GeneratorKind>();
+      for (const file of files.filter(
+        (f) => f.entityType === EntityType.RoomPrefab,
+      )) {
+        try {
+          const def: RoomPrefabEntityDefinition = JSON.parse(
+            await fileUtils.readFile(directoryHandle, file.path),
+          );
+          kinds.set(def.key, def.entity.generator);
+        } catch {
+          // an unreadable prefab counts as unknown
+        }
+      }
+      if (!cancelled) setPrefabKinds(kinds);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [files, directoryHandle]);
 
   const stageFiles = files.filter(
     (file) => file.entityType === EntityType.Stage,
@@ -375,6 +408,35 @@ export const StageEditor: React.FC<StageEditorProps> = ({
               ))}
             </Space>
           </Card>
+
+          {stage.generator ? (
+            <>
+              <GeneratorCard
+                spec={stage.generator}
+                prefabKind={(reference) => prefabKinds.get(reference.key)}
+                onChange={(generator) => updateStage({ ...stage, generator })}
+                onRemove={() => updateStage({ ...stage, generator: undefined })}
+              />
+              <Space direction="vertical" style={{ width: "100%" }}>
+                {bindingProblems(
+                  anchorDefinitions.map((d) => ({
+                    key: d.key,
+                    binding: d.entity.binding,
+                  })),
+                ).map((problem) => (
+                  <Alert key={problem} type="error" showIcon message={problem} />
+                ))}
+              </Space>
+            </>
+          ) : (
+            <Button
+              onClick={() =>
+                updateStage({ ...stage, generator: createDefaultGeneratorSpec() })
+              }
+            >
+              Add Generator
+            </Button>
+          )}
 
           <Button type="primary" onClick={saveStage} disabled={!directoryHandle}>
             Save Stage & Anchors

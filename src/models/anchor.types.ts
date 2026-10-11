@@ -1,5 +1,6 @@
 import { Color, Metadata, Transform } from "./common.types";
 import { CharacterTeam } from "./effect.types";
+import { AnchorBinding } from "./generator.types";
 
 // Anchor entity (anchor.atd): gameplay markers owned by a stage.
 // Transforms are relative to the stage's StageOrigin.
@@ -19,6 +20,7 @@ export interface AnchorBase {
   type: AnchorType;
   metadata: Metadata;
   transform: Transform;
+  binding?: AnchorBinding; // on a generated stage: which generated slot this anchor is
 }
 
 export interface AnchorZone extends AnchorBase {

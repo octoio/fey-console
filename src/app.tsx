@@ -30,6 +30,12 @@ const StageEditor = lazy(() =>
   })),
 );
 
+const PrefabEditor = lazy(() =>
+  import("@components/prefab-editor").then((module) => ({
+    default: module.PrefabEditor,
+  })),
+);
+
 // Ant Design custom theme configuration
 const theme = {
   token: {
@@ -138,6 +144,15 @@ const AppContent: React.FC = () => {
             files={files}
             directoryHandle={directoryHandle}
           />
+        </Suspense>
+      ),
+    },
+    {
+      key: "5",
+      label: "Room Prefab Editor",
+      children: (
+        <Suspense fallback={<LoadingSpinner tip="Loading Prefab Editor..." />}>
+          <PrefabEditor files={files} directoryHandle={directoryHandle} />
         </Suspense>
       ),
     },

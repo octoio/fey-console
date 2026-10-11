@@ -8,6 +8,7 @@ import {
   AnchorType,
   createDefaultAnchor,
 } from "@models/anchor.types";
+import { ALL_ANCHOR_SLOTS, AnchorSlot } from "@models/generator.types";
 import { ColorInput, MetadataInput, Vector3Input } from "./field-inputs";
 
 const { Text } = Typography;
@@ -36,6 +37,7 @@ export const AnchorCard: React.FC<AnchorCardProps> = ({
       ...next,
       metadata: anchor.metadata,
       transform: anchor.transform,
+      binding: anchor.binding,
     });
   };
 
@@ -106,6 +108,46 @@ export const AnchorCard: React.FC<AnchorCardProps> = ({
             })
           }
         />
+
+        <Space wrap>
+          <Text strong>binding</Text>
+          <Select
+            size="small"
+            style={{ width: 150 }}
+            allowClear
+            placeholder="none"
+            value={anchor.binding?.slot}
+            aria-label={`${definition.key} binding slot`}
+            onChange={(slot: AnchorSlot | undefined) =>
+              updateAnchor({
+                ...anchor,
+                binding: slot
+                  ? { ...(anchor.binding ?? {}), slot }
+                  : undefined,
+              })
+            }
+            options={ALL_ANCHOR_SLOTS.map((slot) => ({ value: slot, label: slot }))}
+          />
+          {anchor.binding && (
+            <InputNumber
+              size="small"
+              min={0}
+              prefix={<Text type="secondary">ordinal</Text>}
+              value={anchor.binding.ordinal}
+              placeholder="0"
+              aria-label={`${definition.key} binding ordinal`}
+              onChange={(ordinal) =>
+                updateAnchor({
+                  ...anchor,
+                  binding: {
+                    slot: anchor.binding!.slot,
+                    ...(ordinal === null ? {} : { ordinal }),
+                  },
+                })
+              }
+            />
+          )}
+        </Space>
 
         {anchor.type === AnchorType.Zone && (
           <Space direction="vertical" style={{ width: "100%" }}>

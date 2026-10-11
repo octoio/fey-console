@@ -130,3 +130,6 @@ Fey Console is part of the larger Fey Game Development Ecosystem:
 ## License
 
 See LICENSE file for details.
+
+## Map generation data
+The console edits the map generator's data contract (`generator.atd`, `room_prefab.atd` in `fey-data`): the Room Prefab Editor tab (RoomPrefab entities, top-down canvas with +x right and +z up) and, in the Stage Editor, the stage `generator` spec and anchor `binding`. Live checks in `src/utils/mapgen-check.ts` port the spec checks of `fey-data/lib/mapgen_check.ml` (the OCaml code is the reference). Not ported yet (backlog): the quest-demand checks (`demands`, `apply_demands`), which need the quest graph; prefab pools per theme do not exist in the schema.
