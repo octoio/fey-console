@@ -31,6 +31,16 @@ export interface Obstacle {
   half_z?: number; // Box
   yaw?: number; // Box, degrees
   blocks_sight?: boolean; // default true
+  prop?: string; // prop kind, model key or model id, resolved by the client catalog
+}
+
+// Non-colliding scenery named by prop kind, model key or model id.
+export interface StageProp {
+  prop: string;
+  x: number;
+  z: number;
+  yaw?: number;
+  scale?: number;
 }
 
 export const createDefaultObstacle = (
@@ -49,6 +59,7 @@ export interface Stage {
   anchors: EntityReference[]; // Anchor
   quest?: EntityReference; // Quest
   obstacles?: Obstacle[]; // solid level geometry (optional)
+  decor?: StageProp[]; // non-colliding scenery (optional)
 }
 
 export type StageEntityDefinition = {

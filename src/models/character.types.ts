@@ -2,6 +2,7 @@ import { Color, EntityReference, Metadata, Vector3 } from "./common.types";
 import { StatusEffect } from "./effect.types";
 import { LevelGrowth, XpChart } from "./progression.types";
 import { StatSheet } from "./stat.types";
+import { VisualLayer } from "./weapon-class.types";
 
 export enum CharacterType {
   Adventurer = "Adventurer",
@@ -67,6 +68,10 @@ export type Character = {
   metadata: Metadata;
   type: CharacterType;
   variant?: CharacterVariant;
+  /** Sprite family folder of the pipeline output (monsters). */
+  sprite_family?: string;
+  /** Sprite layers the monster owns. */
+  visual_layers?: VisualLayer[];
   /** The side the character fights for (default Neutral: attacked by nobody, attacks nobody). */
   faction?: Faction;
   pivot_offset: Vector3;
