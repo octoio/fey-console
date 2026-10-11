@@ -1,4 +1,5 @@
 import { Color, EntityReference, Metadata } from "./common.types";
+import { GeneratorSpec } from "./generator.types";
 
 // Obstacle (stage.atd): solid level geometry. The kind is presentation only; the shape decides
 // the collision. A circle uses radius; a box uses half_x / half_z (and yaw in degrees).
@@ -60,6 +61,7 @@ export interface Stage {
   quest?: EntityReference; // Quest
   obstacles?: Obstacle[]; // solid level geometry (optional)
   decor?: StageProp[]; // non-colliding scenery (optional)
+  generator?: GeneratorSpec; // map generator spec (generator.atd); every anchor then needs a binding
 }
 
 export type StageEntityDefinition = {
