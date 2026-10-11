@@ -4,17 +4,17 @@ A modern React-based web console for creating, editing, and managing game entiti
 
 ## Overview
 
-Fey Console is a TypeScript/React application that provides intuitive interfaces for creating and editing game entity definitions. It supports 16 different entity types with specialized editors for Skills (advanced node-based interface) and generic form-based editors for all other entities.
+Fey Console is a TypeScript/React application that provides intuitive interfaces for creating and editing game entity definitions. It supports 22 different entity types with specialized editors for Skills (advanced node-based interface) and generic form-based editors for all other entities.
 
 ## Features
 
-- **Multi-Entity Support**: Handles 16 game entity types (weapons, characters, skills, equipment, audio, animations, etc.)
+- **Multi-Entity Support**: Handles 22 game entity types (weapons, characters, skills, equipment, audio, animations, etc.)
 - **Specialized Skill Editor**: Advanced node-based editor with execution trees for complex skill definitions
 - **Generic Entity Editor**: Clean form-based interface for all other entity types
 - **File Management**: Local file system integration with File System Access API
 - **JSON Preview**: Read-only JSON viewing with copy-to-clipboard functionality
 - **Type Safety**: Full TypeScript implementation with strict type checking
-- **Comprehensive Testing**: 1200+ tests with full coverage reporting
+- **Comprehensive Testing**: about 1190 tests (71 files) with coverage reporting
 
 ## Quick Start
 
@@ -73,7 +73,7 @@ Landing Page → File Manager → Entity Selection → Appropriate Editor
 ## Entity System
 
 ### Supported Entity Types
-The console supports 16 game entity types:
+The console supports 22 game entity types:
 - **Combat**: Weapons, Characters, Skills, Equipment
 - **Assets**: Audio, Animation, Model, Image
 - **Systems**: Status effects, Quality definitions, Stats, Requirements
