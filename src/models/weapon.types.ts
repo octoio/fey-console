@@ -2,6 +2,7 @@ import { StatAffix } from "./affix.types";
 import { EntityReference, IntRange, Metadata } from "./common.types";
 import { ModelAnchorSet } from "./model.types";
 import { QualityType } from "./quality.types";
+import { VisualLayer } from "./weapon-class.types";
 
 export enum WeaponCategory {
   None = "None",
@@ -41,6 +42,10 @@ export const ALL_WEAPON_SHEATHE_LOCATIONS: WeaponSheatheLocation[] =
 
 export type Weapon = {
   metadata: Metadata;
+  /** Overrides the weapon class that lists the category. */
+  weapon_class?: EntityReference;
+  /** Sprite layer drawn when the weapon is held. */
+  visual?: VisualLayer;
   category: WeaponCategory;
   /** Equip slot the weapon occupies; explicit data, not derived from the category. */
   hand: WeaponEquipIndex;

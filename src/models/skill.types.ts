@@ -174,6 +174,8 @@ export type Skill = {
   cancels_cast?: boolean;
   /** How many casts can be stocked; one charge comes back every cooldown. Absent = 1. */
   charges?: number;
+  /** Seconds from the start of the cast to the hit moment (clip rate = impact time / hit_delay). */
+  hit_delay?: number;
   /** Fire while the character knows the skill. */
   triggers?: Trigger[];
 };
