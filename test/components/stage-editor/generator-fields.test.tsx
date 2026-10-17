@@ -7,7 +7,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 const stagePath = join(
   __dirname,
-  "../../../../../fey/Assets/StreamingAssets/json/stage/thecrypt.stage.json",
+  "../../../../fey-rs/data/json/stage/thecrypt.stage.json",
 );
 
 const inline: GeneratorSpec = {

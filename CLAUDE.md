@@ -1,6 +1,6 @@
 # fey-console - agent guide
 
-React/TypeScript/Vite editor (Ant Design, ReactFlow, Zustand, Vitest) for Fey's entity JSON (`<name>.<type>.json`). The data types come from the ATD schemas of `../fey-data`; the JSON lives in `../fey/Assets/StreamingAssets/json`. Overview: [`README.md`](README.md).
+React/TypeScript/Vite editor (Ant Design, ReactFlow, Zustand, Vitest) for Fey's entity JSON (`<name>.<type>.json`). The data types come from the ATD schemas of `../fey-data`; the JSON lives in `../fey-rs/data/json`. Overview: [`README.md`](README.md).
 
 ## Commands
 ```sh
