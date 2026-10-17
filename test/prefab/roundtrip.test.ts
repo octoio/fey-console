@@ -45,7 +45,7 @@ describe("RoomPrefab JSON", () => {
 });
 
 // Round trip against the shipped game data when the sibling repo is checked out
-const JSON_DIR = join(__dirname, "../../../../fey/Assets/StreamingAssets/json");
+const JSON_DIR = join(__dirname, "../../../fey-rs/data/json");
 const shipped = existsSync(JSON_DIR);
 
 const files = (dir: string, suffix: string) =>

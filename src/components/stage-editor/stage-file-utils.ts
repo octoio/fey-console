@@ -16,7 +16,7 @@ export const entityFileName = (type: EntityType, key: string): string =>
   `${key.toLowerCase()}.${type.toLowerCase()}.json`;
 
 // Prefer the entity's existing file; otherwise place it next to its siblings,
-// falling back to a directory named after the type (mirrors StreamingAssets/json)
+// falling back to a directory named after the type (mirrors data/json of fey-rs)
 export const entityFilePath = (
   files: FileInfo[],
   type: EntityType,

@@ -116,8 +116,7 @@ npm run coverage:open  # Open coverage report in browser
 Fey Console is part of the larger Fey Game Development Ecosystem:
 
 1. **Create/Edit**: Use Fey Console to create and edit entity definitions
-2. **Process**: fey-data pipeline validates and generates C# code from JSON files
-3. **Integrate**: Generated files update fey-game-mock Unity project assets
+2. **Process**: the fey-data pipeline validates the JSON files (`fey-rs/data/json`), rewrites the entity reference index and generates the Rust types of `fey-rs`
 
 ## Contributing
 

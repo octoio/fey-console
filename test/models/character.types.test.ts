@@ -28,10 +28,7 @@ describe("character.types faction", () => {
   });
 
   it("is filled in every character of the game data checkout, when there is one", () => {
-    const dir = join(
-      __dirname,
-      "../../../fey/Assets/StreamingAssets/json/character",
-    );
+    const dir = join(__dirname, "../../../fey-rs/data/json/character");
     if (!existsSync(dir)) {
       return;
     }
