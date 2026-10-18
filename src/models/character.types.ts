@@ -68,9 +68,9 @@ export type Character = {
   metadata: Metadata;
   type: CharacterType;
   variant?: CharacterVariant;
-  /** Sprite family folder of the pipeline output (monsters). */
-  sprite_family?: string;
-  /** Sprite layers the monster owns. */
+  /** Model family the character is drawn with: the pack key is `<family>[-<variant>]`. */
+  model_family?: string;
+  /** Look layers the monster owns. */
   visual_layers?: VisualLayer[];
   /** The side the character fights for (default Neutral: attacked by nobody, attacks nobody). */
   faction?: Faction;
