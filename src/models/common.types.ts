@@ -68,6 +68,7 @@ export enum EntityType {
   SkillStone = "SkillStone",
   WeaponClass = "WeaponClass",
   RoomPrefab = "RoomPrefab",
+  Balance = "Balance",
 }
 
 // Update EntityReference to use the enum
