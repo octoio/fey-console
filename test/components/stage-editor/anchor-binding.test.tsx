@@ -29,3 +29,44 @@ describe("AnchorCard binding", { timeout: 30000 }, () => {
     expect(screen.queryByRole("spinbutton", { name: "P binding ordinal" })).toBeNull();
   });
 });
+
+describe("AnchorCard lamp post", { timeout: 30000 }, () => {
+  // Shape of a saved lamp post anchor with a Marker template binding
+  const saved = createAnchorDefinition(
+    "Lamp",
+    JSON.parse(
+      JSON.stringify({
+        type: "LampPost",
+        metadata: { title: "Lamp Post", description: "" },
+        transform: {
+          position: { x: 0.5, y: 0, z: -1.5 },
+          rotation: { x: 0, y: 0, z: 0 },
+          scale: { x: 1, y: 1, z: 1 },
+        },
+        model: "HStreetlamp",
+        binding: { slot: "Marker", every: true },
+      }),
+    ),
+  );
+
+  it("round-trips through the editor model without dropping a field", () => {
+    expect(JSON.parse(JSON.stringify(saved)).entity).toEqual(saved.entity);
+    expect(saved.entity.type).toBe(AnchorType.LampPost);
+  });
+
+  it("edits the model and keeps the Marker binding", () => {
+    const onChange = vi.fn();
+    render(<AnchorCard definition={saved} isNew={false} onChange={onChange} onRemove={vi.fn()} />);
+    fireEvent.change(screen.getByRole("textbox", { name: "Lamp lamp post model" }), {
+      target: { value: "Other" },
+    });
+    const entity = onChange.mock.calls.at(-1)?.[0].entity;
+    expect(entity.model).toBe("Other");
+    expect(entity.binding).toEqual({ slot: AnchorSlot.Marker, every: true });
+  });
+
+  it("creates a lamp post from the type switch with its model field", () => {
+    const anchor = createDefaultAnchor(AnchorType.LampPost);
+    expect(anchor).toMatchObject({ type: "LampPost", model: "" });
+  });
+});
