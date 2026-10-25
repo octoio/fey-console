@@ -9,6 +9,7 @@ export enum AnchorType {
   SpawnPoint = "SpawnPoint",
   Portal = "Portal",
   QuestBoard = "QuestBoard",
+  LampPost = "LampPost",
 }
 
 export enum ZoneDetectionType {
@@ -44,11 +45,17 @@ export interface AnchorQuestBoard extends AnchorBase {
   type: AnchorType.QuestBoard;
 }
 
+export interface AnchorLampPost extends AnchorBase {
+  type: AnchorType.LampPost;
+  model: string; // key of the pack prop that stands there (min length 1)
+}
+
 export type Anchor =
   | AnchorZone
   | AnchorSpawnPoint
   | AnchorPortal
-  | AnchorQuestBoard;
+  | AnchorQuestBoard
+  | AnchorLampPost;
 
 export type AnchorEntityDefinition = {
   id: string;
@@ -90,5 +97,7 @@ export const createDefaultAnchor = (type: AnchorType): Anchor => {
       return { ...base, type: AnchorType.Portal };
     case AnchorType.QuestBoard:
       return { ...base, type: AnchorType.QuestBoard };
+    case AnchorType.LampPost:
+      return { ...base, type: AnchorType.LampPost, model: "" };
   }
 };

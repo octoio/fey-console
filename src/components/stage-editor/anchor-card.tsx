@@ -1,4 +1,4 @@
-import { Button, Card, Checkbox, InputNumber, Select, Space, Tag, Typography } from "antd";
+import { Button, Card, Checkbox, Input, InputNumber, Select, Space, Tag, Typography } from "antd";
 import React from "react";
 import {
   ALL_ANCHOR_TYPES,
@@ -128,7 +128,7 @@ export const AnchorCard: React.FC<AnchorCardProps> = ({
             }
             options={ALL_ANCHOR_SLOTS.map((slot) => ({ value: slot, label: slot }))}
           />
-          {anchor.binding && (
+          {anchor.binding && !anchor.binding.every && (
             <InputNumber
               size="small"
               min={0}
@@ -140,14 +140,46 @@ export const AnchorCard: React.FC<AnchorCardProps> = ({
                 updateAnchor({
                   ...anchor,
                   binding: {
-                    slot: anchor.binding!.slot,
-                    ...(ordinal === null ? {} : { ordinal }),
+                    ...anchor.binding!,
+                    ordinal: ordinal ?? undefined,
                   },
                 })
               }
             />
           )}
+          {anchor.binding && (
+            <Checkbox
+              checked={anchor.binding.every ?? false}
+              aria-label={`${definition.key} binding every`}
+              onChange={(event) =>
+                updateAnchor({
+                  ...anchor,
+                  binding: {
+                    slot: anchor.binding!.slot,
+                    ...(event.target.checked ? { every: true } : {}),
+                  },
+                })
+              }
+            >
+              every
+            </Checkbox>
+          )}
         </Space>
+
+        {anchor.type === AnchorType.LampPost && (
+          <Space wrap>
+            <Text strong>model</Text>
+            <Input
+              size="small"
+              style={{ width: 200 }}
+              value={anchor.model}
+              aria-label={`${definition.key} lamp post model`}
+              onChange={(event) =>
+                updateAnchor({ ...anchor, model: event.target.value })
+              }
+            />
+          </Space>
+        )}
 
         {anchor.type === AnchorType.Zone && (
           <Space direction="vertical" style={{ width: "100%" }}>

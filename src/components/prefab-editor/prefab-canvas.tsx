@@ -13,6 +13,7 @@ export const SLOT_COLORS: Record<AnchorSlot, string> = {
   [AnchorSlot.Shrine]: "#f08c00",
   [AnchorSlot.Chest]: "#a67c00",
   [AnchorSlot.ObjectiveZone]: "#5c940d",
+  [AnchorSlot.Marker]: "#868e96",
 };
 
 interface PrefabCanvasProps {

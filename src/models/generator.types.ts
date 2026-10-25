@@ -23,6 +23,7 @@ export enum AnchorSlot {
   Shrine = "Shrine",
   Chest = "Chest",
   ObjectiveZone = "ObjectiveZone",
+  Marker = "Marker",
 }
 
 export enum RoomSize {
@@ -138,6 +139,7 @@ export interface GeneratorSpec {
 export interface AnchorBinding {
   slot: AnchorSlot;
   ordinal?: number; // default 0
+  every?: boolean; // template: one anchor per slot in the layout (ordinal must be absent)
 }
 
 export const GENERATOR_VERSION = 2;
