@@ -23,6 +23,9 @@ export enum AnchorSlot {
   Shrine = "Shrine",
   Chest = "Chest",
   ObjectiveZone = "ObjectiveZone",
+  TrailSpawn = "TrailSpawn",
+  WaterSpawn = "WaterSpawn",
+  Cocoon = "Cocoon",
   Marker = "Marker",
 }
 
