@@ -13,6 +13,9 @@ export const SLOT_COLORS: Record<AnchorSlot, string> = {
   [AnchorSlot.Shrine]: "#f08c00",
   [AnchorSlot.Chest]: "#a67c00",
   [AnchorSlot.ObjectiveZone]: "#5c940d",
+  [AnchorSlot.TrailSpawn]: "#e8590c",
+  [AnchorSlot.WaterSpawn]: "#1098ad",
+  [AnchorSlot.Cocoon]: "#c2255c",
   [AnchorSlot.Marker]: "#868e96",
 };
 
