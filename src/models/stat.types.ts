@@ -28,6 +28,7 @@ export enum StatType {
   ExperienceModifier = "ExperienceModifier",
   GoldModifier = "GoldModifier",
   LifeSteal = "LifeSteal",
+  HealthGlobeChance = "HealthGlobeChance",
 }
 
 /**

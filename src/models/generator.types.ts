@@ -27,6 +27,7 @@ export enum AnchorSlot {
   WaterSpawn = "WaterSpawn",
   Cocoon = "Cocoon",
   Marker = "Marker",
+  Healing = "Healing",
 }
 
 export enum RoomSize {

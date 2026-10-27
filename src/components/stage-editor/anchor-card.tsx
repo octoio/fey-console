@@ -166,18 +166,36 @@ export const AnchorCard: React.FC<AnchorCardProps> = ({
           )}
         </Space>
 
-        {anchor.type === AnchorType.LampPost && (
+        {(anchor.type === AnchorType.LampPost ||
+          anchor.type === AnchorType.HealingShrine) && (
           <Space wrap>
             <Text strong>model</Text>
             <Input
               size="small"
               style={{ width: 200 }}
               value={anchor.model}
-              aria-label={`${definition.key} lamp post model`}
+              aria-label={`${definition.key} ${
+                anchor.type === AnchorType.LampPost ? "lamp post" : "shrine"
+              } model`}
               onChange={(event) =>
                 updateAnchor({ ...anchor, model: event.target.value })
               }
             />
+            {anchor.type === AnchorType.HealingShrine && (
+              <>
+                <Text strong>price</Text>
+                <InputNumber
+                  size="small"
+                  min={1}
+                  precision={0}
+                  value={anchor.price}
+                  aria-label={`${definition.key} shrine price`}
+                  onChange={(price) =>
+                    updateAnchor({ ...anchor, price: price ?? 1 })
+                  }
+                />
+              </>
+            )}
           </Space>
         )}
 

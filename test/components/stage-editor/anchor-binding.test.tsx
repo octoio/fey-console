@@ -70,3 +70,39 @@ describe("AnchorCard lamp post", { timeout: 30000 }, () => {
     expect(anchor).toMatchObject({ type: "LampPost", model: "" });
   });
 });
+
+describe("AnchorCard healing shrine", { timeout: 30000 }, () => {
+  const saved = createAnchorDefinition(
+    "Shrine",
+    JSON.parse(
+      JSON.stringify({
+        type: "HealingShrine",
+        metadata: { title: "Healing Shrine", description: "" },
+        transform: {
+          position: { x: 0, y: 0, z: 0 },
+          rotation: { x: 0, y: 0, z: 0 },
+          scale: { x: 1, y: 1, z: 1 },
+        },
+        model: "HShrine",
+        price: 20,
+        binding: { slot: "Healing", every: true },
+      }),
+    ),
+  );
+
+  it("round-trips through the editor model without dropping a field", () => {
+    expect(JSON.parse(JSON.stringify(saved)).entity).toEqual(saved.entity);
+    expect(saved.entity.type).toBe(AnchorType.HealingShrine);
+  });
+
+  it("edits the price and keeps the Healing binding", () => {
+    const onChange = vi.fn();
+    render(<AnchorCard definition={saved} isNew={false} onChange={onChange} onRemove={vi.fn()} />);
+    fireEvent.change(screen.getByRole("spinbutton", { name: "Shrine shrine price" }), {
+      target: { value: "35" },
+    });
+    const entity = onChange.mock.calls.at(-1)?.[0].entity;
+    expect(entity.price).toBe(35);
+    expect(entity.binding).toEqual({ slot: AnchorSlot.Healing, every: true });
+  });
+});
