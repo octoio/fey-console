@@ -10,6 +10,7 @@ export enum AnchorType {
   Portal = "Portal",
   QuestBoard = "QuestBoard",
   LampPost = "LampPost",
+  HealingShrine = "HealingShrine",
 }
 
 export enum ZoneDetectionType {
@@ -50,12 +51,19 @@ export interface AnchorLampPost extends AnchorBase {
   model: string; // key of the pack prop that stands there (min length 1)
 }
 
+export interface AnchorHealingShrine extends AnchorBase {
+  type: AnchorType.HealingShrine;
+  model: string; // key of the pack prop that stands there (min length 1)
+  price: number; // gold at level 1 for one use (min 1); the sim scales it like the gold drops
+}
+
 export type Anchor =
   | AnchorZone
   | AnchorSpawnPoint
   | AnchorPortal
   | AnchorQuestBoard
-  | AnchorLampPost;
+  | AnchorLampPost
+  | AnchorHealingShrine;
 
 export type AnchorEntityDefinition = {
   id: string;
@@ -99,5 +107,7 @@ export const createDefaultAnchor = (type: AnchorType): Anchor => {
       return { ...base, type: AnchorType.QuestBoard };
     case AnchorType.LampPost:
       return { ...base, type: AnchorType.LampPost, model: "" };
+    case AnchorType.HealingShrine:
+      return { ...base, type: AnchorType.HealingShrine, model: "", price: 1 };
   }
 };
