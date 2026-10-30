@@ -80,7 +80,7 @@ export type QuestConditionType =
   | "StayInAnchor"
   | "PickQuest"
   | "Teleport"
-  | "Interact";
+  | "Channel";
 
 export interface QuestConditionKillSpecific {
   type: "KillSpecific";
@@ -112,10 +112,16 @@ export interface QuestConditionTeleport {
   stage?: EntityReference; // Stage: only arriving there counts (absent: any other stage)
 }
 
-// A player uses an active zone anchor (a shrine, a lever) within its radius
-export interface QuestConditionInteract {
-  type: "Interact";
-  anchor: EntityReference; // Anchor (a zone)
+// A player stands in the zone of one of the anchors and channels `seconds` (0: a plain use, a lever
+// or a chest); an anchor is freed once, done when `amount` are. `spawns` appear when a channel
+// starts; `raises_stone` makes each freed anchor raise one skill of the completion stone.
+export interface QuestConditionChannel {
+  type: "Channel";
+  anchors: EntityReference[]; // Anchor (zones), min 1
+  amount: number; // min 1
+  seconds: number; // min 0
+  spawns: Spawn[];
+  raises_stone: boolean;
 }
 
 export type QuestCondition =
@@ -124,7 +130,7 @@ export type QuestCondition =
   | QuestConditionStayInAnchor
   | QuestConditionPickQuest
   | QuestConditionTeleport
-  | QuestConditionInteract;
+  | QuestConditionChannel;
 
 // Actions: fire-and-forget world mutations (no rollback)
 export type QuestActionType =

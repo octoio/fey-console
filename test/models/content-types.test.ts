@@ -19,13 +19,19 @@ const ref = (type: EntityType, key: string): EntityReference => ({
 });
 
 describe("quest conditions of the content update", () => {
-  it("Interact names a zone anchor", () => {
+  it("Channel with seconds 0 names its zone anchors", () => {
     const c: QuestCondition = {
-      type: "Interact",
-      anchor: ref(EntityType.Anchor, "TheClearingShrine"),
+      type: "Channel",
+      anchors: [ref(EntityType.Anchor, "TheClearingShrine")],
+      amount: 1,
+      seconds: 0,
+      spawns: [],
+      raises_stone: false,
     };
-    expect(c.type).toBe("Interact");
-    expect(JSON.parse(JSON.stringify(c)).anchor.key).toBe("TheClearingShrine");
+    expect(c.type).toBe("Channel");
+    expect(JSON.parse(JSON.stringify(c)).anchors[0].key).toBe(
+      "TheClearingShrine",
+    );
   });
 
   it("Teleport and PickQuest take an optional entity filter", () => {
