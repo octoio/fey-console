@@ -44,7 +44,8 @@ export interface TierAffix {
 // base tier and must change nothing. Semantics: fey-rs docs/systems/tiers.md.
 export interface QuestTier {
   order: number; // unique among tiers, >= 0
-  level_bonus?: number;
+  /** How fast the run's clock raises the monsters' levels and the director's credits (default 1, the base tier's; >= 0.1). */
+  rate?: number;
   extra_adds?: number; // extra Normal-rank adds, 0.34 = a third more
   affixes?: TierAffix[];
   rarity_tilt?: number;
