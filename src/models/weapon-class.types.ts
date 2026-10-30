@@ -25,7 +25,7 @@ export interface WeaponClass {
 
 // Presentation layer of a weapon, equipment item or monster (visual.atd).
 export interface VisualLayer {
-  sheet: string;
+  layer: string;
   socket?: string;
   sort: number;
   only_for_classes?: EntityReference[];
