@@ -93,6 +93,8 @@ export type Character = {
   rank?: MonsterRank;
   /** true: goes for hostile healers instead of the threat holder. */
   hunts_healers?: boolean;
+  /** What the director pays in credits to spawn this monster in a wave (>= 1; absent = the default cost). Bosses are never bought. */
+  director_cost?: number;
   /** Equipment (entity references) a new player character wears. */
   starting_equipment?: EntityReference[];
   /** Weapons (entity references) a new player character wields. */
