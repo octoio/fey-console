@@ -24,13 +24,9 @@ export interface SpawnSequence {
 }
 
 // Quest difficulty entity
-export type QuestDifficultyType =
-  | "Easy"
-  | "Normal"
-  | "Hard"
-  | "Insane"
-  | "Impossible"
-  | "Nightmare";
+// Normal, Hard and Nightmare are the run tiers the lobby offers; Custom is the lobby's own, whose
+// tier record is where the knobs start.
+export type QuestDifficultyType = "Normal" | "Hard" | "Nightmare" | "Custom";
 
 // A monster modifier of a tier: the final stat value is multiplied (1.3 = +30%).
 export interface TierAffix {
@@ -40,7 +36,7 @@ export interface TierAffix {
   min_rank?: MonsterRank; // only monsters of this rank or above
 }
 
-// What a difficulty changes when the quest board offers it as a tier. The lowest order is the
+// What a difficulty changes when the party picks it as the tier of a run. The lowest order is the
 // base tier and must change nothing. Semantics: fey-rs docs/systems/tiers.md.
 export interface QuestTier {
   order: number; // unique among tiers, >= 0
@@ -57,7 +53,7 @@ export interface QuestDifficulty {
   metadata: Metadata;
   type: QuestDifficultyType;
   color: Color;
-  // absent: the quest board never offers this difficulty
+  // absent: the lobby never offers this difficulty
   tier?: QuestTier;
 }
 
