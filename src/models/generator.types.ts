@@ -28,6 +28,8 @@ export enum AnchorSlot {
   Cocoon = "Cocoon",
   Marker = "Marker",
   Healing = "Healing",
+  Lever = "Lever",
+  GatePack = "GatePack",
 }
 
 export enum RoomSize {

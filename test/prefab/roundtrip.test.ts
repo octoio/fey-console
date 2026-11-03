@@ -48,6 +48,9 @@ describe("RoomPrefab JSON", () => {
 const JSON_DIR = join(__dirname, "../../../fey-rs/data/json");
 const shipped = existsSync(JSON_DIR);
 
+// -0 and 0 are the same number in the data; the editor writes 0
+const noNegativeZero = (_key: string, value: unknown) => (Object.is(value, -0) ? 0 : value);
+
 const files = (dir: string, suffix: string) =>
   shipped && existsSync(join(JSON_DIR, dir))
     ? readdirSync(join(JSON_DIR, dir)).filter((f) => f.endsWith(suffix))
@@ -58,7 +61,10 @@ describe.skipIf(!shipped)("shipped mapgen data", () => {
     const names = files("roomprefab", ".roomprefab.json");
     expect(names.length).toBeGreaterThan(0);
     for (const name of names) {
-      const original = JSON.parse(readFileSync(join(JSON_DIR, "roomprefab", name), "utf8"));
+      const original = JSON.parse(
+        readFileSync(join(JSON_DIR, "roomprefab", name), "utf8"),
+        noNegativeZero,
+      );
       usePrefabStore.getState().open(original as RoomPrefabEntityDefinition);
       const saved = JSON.parse(serializeDefinition(usePrefabStore.getState().definition));
       expect(saved).toEqual(original);
