@@ -65,7 +65,7 @@ export enum EntityType {
   QuestDifficulty = "QuestDifficulty",
   Anchor = "Anchor",
   Stage = "Stage",
-  SkillStone = "SkillStone",
+  SkillBook = "SkillBook",
   WeaponClass = "WeaponClass",
   RoomPrefab = "RoomPrefab",
   Balance = "Balance",

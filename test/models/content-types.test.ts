@@ -26,7 +26,7 @@ describe("quest conditions of the content update", () => {
       amount: 1,
       seconds: 0,
       spawns: [],
-      raises_stone: false,
+      raises_book: false,
     };
     expect(c.type).toBe("Channel");
     expect(JSON.parse(JSON.stringify(c)).anchors[0].key).toBe(
