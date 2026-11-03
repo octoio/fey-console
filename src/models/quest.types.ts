@@ -111,14 +111,14 @@ export interface QuestConditionTeleport {
 
 // A player stands in the zone of one of the anchors and channels `seconds` (0: a plain use, a lever
 // or a chest); an anchor is freed once, done when `amount` are. `spawns` appear when a channel
-// starts; `raises_stone` makes each freed anchor raise one skill of the completion stone.
+// starts; `raises_book` makes each freed anchor raise one skill of the completion book.
 export interface QuestConditionChannel {
   type: "Channel";
   anchors: EntityReference[]; // Anchor (zones), min 1
   amount: number; // min 1
   seconds: number; // min 0
   spawns: Spawn[];
-  raises_stone: boolean;
+  raises_book: boolean;
 }
 
 export type QuestCondition =
