@@ -18,6 +18,8 @@ export const SLOT_COLORS: Record<AnchorSlot, string> = {
   [AnchorSlot.Cocoon]: "#c2255c",
   [AnchorSlot.Marker]: "#868e96",
   [AnchorSlot.Healing]: "#2f9e44",
+  [AnchorSlot.Lever]: "#fab005",
+  [AnchorSlot.GatePack]: "#c92a2a",
 };
 
 interface PrefabCanvasProps {
