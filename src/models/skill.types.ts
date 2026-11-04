@@ -172,6 +172,8 @@ export type Skill = {
   root_while_casting?: boolean;
   /** true: casting this skill cancels the cast in progress (a dash). */
   cancels_cast?: boolean;
+  /** false: no interrupt cancels a cast of this skill and the HUD offers no "interrupt!" (a boss that is immune). Absent = true. */
+  interruptible?: boolean;
   /** How many casts can be stocked; one charge comes back every cooldown. Absent = 1. */
   charges?: number;
   /** Seconds from the start of the cast to the hit moment (clip rate = impact time / hit_delay). */
