@@ -15,7 +15,6 @@ export type ProjectileModelType = "Pebble" | "Fireball";
 export interface ProjectileModel {
   // Using Unity prefabs for now; will switch to Sandbox .glb models in the future
   type: ProjectileModelType;
-  model_scale: Vector3;
 }
 
 export type ProjectileImpactType = "Hit" | "Status";
@@ -85,7 +84,7 @@ export type ProjectileEntity =
 
 const baseProjectile = (): Omit<Projectile, "type"> => ({
   metadata: { title: "", description: "" },
-  model: { type: "Fireball", model_scale: { x: 1, y: 1, z: 1 } },
+  model: { type: "Fireball" },
   lifetime: 5,
   spawn_offset: { x: 0, y: 0, z: 0 },
   max_hit_count: 1,
