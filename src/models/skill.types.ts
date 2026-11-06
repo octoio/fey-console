@@ -1,4 +1,4 @@
-import { EntityReference, FloatRange, Metadata, Vector3 } from "./common.types";
+import { EntityReference, Metadata, Vector3 } from "./common.types";
 import { HitEffect, StatusEffect } from "./effect.types";
 import { SkillExperience } from "./progression.types";
 import { QualityType } from "./quality.types";
@@ -15,6 +15,11 @@ export enum SkillCategory {
   Control = "Control",
   Mobility = "Mobility",
 }
+
+/** How far the target may be from the caster; no rule reads a shortest reach. */
+export type CastDistance = {
+  max: number;
+};
 
 export type SkillCost = {
   mana: number;
@@ -164,7 +169,7 @@ export type Skill = {
   cooldown: number;
   target_type: SkillTargetType;
   execution_root: SkillActionNode;
-  cast_distance: FloatRange;
+  cast_distance: CastDistance;
   indicators: SkillIndicator[];
   /** Skill XP earned on use and how the level scales the skill; absent = no XP. */
   experience?: SkillExperience;

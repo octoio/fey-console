@@ -108,7 +108,6 @@ const mockSkillData: SkillEntityDefinition = {
     },
     indicators: [],
     cast_distance: {
-      min: 1,
       max: 10,
     },
   },

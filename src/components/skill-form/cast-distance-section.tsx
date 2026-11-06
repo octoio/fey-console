@@ -12,17 +12,11 @@ export const CastDistanceSection: React.FC = () => {
   if (!skillData) return null;
   const { entity } = skillData;
 
-  const handleCastDistanceChange = (
-    field: "min" | "max",
-    value: number | string | null,
-  ) => {
+  const handleMaxChange = (value: number | string | null) => {
     try {
       const numValue =
         typeof value === "string" ? parseFloat(value) || 0 : value || 0;
-      updateCastDistance(
-        field === "min" ? numValue : entity.cast_distance.min,
-        field === "max" ? numValue : entity.cast_distance.max,
-      );
+      updateCastDistance(numValue);
     } catch (error) {
       console.error("Failed to update cast distance:", error);
     }
@@ -30,21 +24,12 @@ export const CastDistanceSection: React.FC = () => {
 
   return (
     <StyledCard title="Cast Distance">
-      <Form.Item label="Minimum">
-        <FullWidthInputNumber
-          min={0}
-          step={0.1}
-          value={entity.cast_distance.min}
-          onChange={(value) => handleCastDistanceChange("min", value)}
-        />
-      </Form.Item>
-
       <Form.Item label="Maximum">
         <FullWidthInputNumber
           min={0}
           step={0.1}
           value={entity.cast_distance.max}
-          onChange={(value) => handleCastDistanceChange("max", value)}
+          onChange={handleMaxChange}
         />
       </Form.Item>
     </StyledCard>

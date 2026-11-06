@@ -49,7 +49,6 @@ describe("useSkillStore", () => {
           },
           indicators: [],
           cast_distance: {
-            min: 1,
             max: 1,
           },
         },
@@ -128,10 +127,9 @@ describe("useSkillStore", () => {
       const { result } = renderHook(() => useSkillStore());
 
       act(() => {
-        result.current.updateCastDistance(2, 10);
+        result.current.updateCastDistance(10);
       });
 
-      expect(result.current.skillData?.entity.cast_distance.min).toBe(2);
       expect(result.current.skillData?.entity.cast_distance.max).toBe(10);
     });
   });
@@ -501,7 +499,7 @@ describe("useSkillStore", () => {
             version: 1,
           },
           indicators: [],
-          cast_distance: { min: 1, max: 5 },
+          cast_distance: { max: 5 },
         },
       };
 
@@ -752,7 +750,7 @@ describe("useSkillStore", () => {
             version: 1,
           },
           indicators: [],
-          cast_distance: { min: 3, max: 8 },
+          cast_distance: { max: 8 },
         },
       };
 

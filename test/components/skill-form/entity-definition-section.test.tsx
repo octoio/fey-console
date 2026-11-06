@@ -50,7 +50,6 @@ describe("EntityDefinitionSection", () => {
       },
       indicators: [],
       cast_distance: {
-        min: 1.0,
         max: 5.0,
       },
     },

@@ -52,7 +52,7 @@ interface SkillEditorState {
     targetType: SkillTargetType,
   ) => void;
   updateCost: (mana: number) => void;
-  updateCastDistance: (min: number, max: number) => void;
+  updateCastDistance: (max: number) => void;
 
   // Node management
   addNode: (nodeType: SkillActionNodeType, parentId: string | null) => void;
@@ -123,7 +123,6 @@ const defaultSkill: SkillEntityDefinition = {
     },
     indicators: [],
     cast_distance: {
-      min: 1,
       max: 1,
     },
   },
@@ -369,10 +368,10 @@ export const useSkillStore = create<SkillEditorState>()(
         }));
       },
 
-      updateCastDistance: (min, max) => {
+      updateCastDistance: (max) => {
         get().updateSkillEntity((entity) => ({
           ...entity,
-          cast_distance: { min, max },
+          cast_distance: { max },
         }));
       },
 
