@@ -51,7 +51,6 @@ describe("BasicInfoForm", () => {
       },
       indicators: [],
       cast_distance: {
-        min: 1,
         max: 1,
       },
     },

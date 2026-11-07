@@ -50,7 +50,6 @@ describe("CastDistanceSection", () => {
       },
       indicators: [],
       cast_distance: {
-        min: 1.0,
         max: 5.0,
       },
     },
@@ -69,17 +68,14 @@ describe("CastDistanceSection", () => {
       render(<CastDistanceSection />);
 
       expect(screen.getByText("Cast Distance")).toBeInTheDocument();
-      expect(screen.getByText("Minimum")).toBeInTheDocument();
       expect(screen.getByText("Maximum")).toBeInTheDocument();
     });
 
     it("should render with correct initial values", () => {
       render(<CastDistanceSection />);
 
-      const minInput = screen.getByDisplayValue("1.0");
       const maxInput = screen.getByDisplayValue("5.0");
 
-      expect(minInput).toBeInTheDocument();
       expect(maxInput).toBeInTheDocument();
     });
 
@@ -94,68 +90,6 @@ describe("CastDistanceSection", () => {
     });
   });
 
-  describe("Minimum Distance Field Interactions", () => {
-    it("should update minimum distance when input changes", async () => {
-      render(<CastDistanceSection />);
-
-      const minInput = screen.getByDisplayValue("1.0");
-      fireEvent.change(minInput, { target: { value: "2.5" } });
-
-      await waitFor(() => {
-        expect(mockUpdateCastDistance).toHaveBeenCalledWith(2.5, 5.0);
-      });
-    });
-
-    it("should handle decimal values for minimum distance", async () => {
-      render(<CastDistanceSection />);
-
-      const minInput = screen.getByDisplayValue("1.0");
-      fireEvent.change(minInput, { target: { value: "1.75" } });
-
-      await waitFor(() => {
-        expect(mockUpdateCastDistance).toHaveBeenCalledWith(1.75, 5.0);
-      });
-    });
-
-    it("should handle zero minimum distance", async () => {
-      render(<CastDistanceSection />);
-
-      const minInput = screen.getByDisplayValue("1.0");
-      fireEvent.change(minInput, { target: { value: "0" } });
-
-      await waitFor(() => {
-        expect(mockUpdateCastDistance).toHaveBeenCalledWith(0, 5.0);
-      });
-    });
-
-    it("should handle empty minimum distance input", async () => {
-      render(<CastDistanceSection />);
-
-      const minInput = screen.getByDisplayValue("1.0");
-      fireEvent.change(minInput, { target: { value: "" } });
-
-      await waitFor(() => {
-        expect(mockUpdateCastDistance).toHaveBeenCalledWith(0, 5.0);
-      });
-    });
-
-    it("should handle invalid minimum distance input", async () => {
-      render(<CastDistanceSection />);
-
-      const minInput = screen.getByDisplayValue("1.0");
-
-      // When invalid input is entered, Ant Design InputNumber doesn't call onChange
-      // It maintains the invalid value in the display but doesn't trigger updates
-      fireEvent.change(minInput, { target: { value: "invalid" } });
-
-      // The component should still be rendered and functional after invalid input
-      expect(screen.getByText("Cast Distance")).toBeInTheDocument();
-
-      // The mock should not have been called due to invalid input
-      expect(mockUpdateCastDistance).not.toHaveBeenCalled();
-    });
-  });
-
   describe("Maximum Distance Field Interactions", () => {
     it("should update maximum distance when input changes", async () => {
       render(<CastDistanceSection />);
@@ -164,7 +98,7 @@ describe("CastDistanceSection", () => {
       fireEvent.change(maxInput, { target: { value: "10.0" } });
 
       await waitFor(() => {
-        expect(mockUpdateCastDistance).toHaveBeenCalledWith(1.0, 10.0);
+        expect(mockUpdateCastDistance).toHaveBeenCalledWith(10.0);
       });
     });
 
@@ -175,7 +109,7 @@ describe("CastDistanceSection", () => {
       fireEvent.change(maxInput, { target: { value: "7.25" } });
 
       await waitFor(() => {
-        expect(mockUpdateCastDistance).toHaveBeenCalledWith(1.0, 7.25);
+        expect(mockUpdateCastDistance).toHaveBeenCalledWith(7.25);
       });
     });
 
@@ -186,7 +120,7 @@ describe("CastDistanceSection", () => {
       fireEvent.change(maxInput, { target: { value: "100" } });
 
       await waitFor(() => {
-        expect(mockUpdateCastDistance).toHaveBeenCalledWith(1.0, 100);
+        expect(mockUpdateCastDistance).toHaveBeenCalledWith(100);
       });
     });
 
@@ -197,7 +131,7 @@ describe("CastDistanceSection", () => {
       fireEvent.change(maxInput, { target: { value: "" } });
 
       await waitFor(() => {
-        expect(mockUpdateCastDistance).toHaveBeenCalledWith(1.0, 0);
+        expect(mockUpdateCastDistance).toHaveBeenCalledWith(0);
       });
     });
 
@@ -219,47 +153,30 @@ describe("CastDistanceSection", () => {
   });
 
   describe("Form Integration", () => {
-    it("should preserve all skill data when updating minimum distance", async () => {
-      render(<CastDistanceSection />);
-
-      const minInput = screen.getByDisplayValue("1.0");
-      fireEvent.change(minInput, { target: { value: "3" } });
-
-      await waitFor(() => {
-        expect(mockUpdateCastDistance).toHaveBeenCalledWith(3, 5.0);
-      });
-
-      // Verify maximum distance is preserved
-      expect(mockUpdateCastDistance).not.toHaveBeenCalledWith(3, 0);
-    });
-
-    it("should preserve all skill data when updating maximum distance", async () => {
+    it("should pass the new maximum distance to the store", async () => {
       render(<CastDistanceSection />);
 
       const maxInput = screen.getByDisplayValue("5.0");
       fireEvent.change(maxInput, { target: { value: "8" } });
 
       await waitFor(() => {
-        expect(mockUpdateCastDistance).toHaveBeenCalledWith(1.0, 8);
+        expect(mockUpdateCastDistance).toHaveBeenCalledWith(8);
       });
-
-      // Verify minimum distance is preserved
-      expect(mockUpdateCastDistance).not.toHaveBeenCalledWith(0, 8);
     });
 
     it("should handle rapid successive updates", async () => {
       render(<CastDistanceSection />);
 
-      const minInput = screen.getByDisplayValue("1.0");
+      const maxInput = screen.getByDisplayValue("5.0");
 
       // Simulate rapid changes
-      fireEvent.change(minInput, { target: { value: "2" } });
-      fireEvent.change(minInput, { target: { value: "3" } });
-      fireEvent.change(minInput, { target: { value: "4" } });
+      fireEvent.change(maxInput, { target: { value: "2" } });
+      fireEvent.change(maxInput, { target: { value: "3" } });
+      fireEvent.change(maxInput, { target: { value: "4" } });
 
       await waitFor(() => {
         expect(mockUpdateCastDistance).toHaveBeenCalledTimes(3);
-        expect(mockUpdateCastDistance).toHaveBeenLastCalledWith(4, 5.0);
+        expect(mockUpdateCastDistance).toHaveBeenLastCalledWith(4);
       });
     });
   });
@@ -277,11 +194,11 @@ describe("CastDistanceSection", () => {
 
       render(<CastDistanceSection />);
 
-      const minInput = screen.getByDisplayValue("1.0");
+      const maxInput = screen.getByDisplayValue("5.0");
 
       // The component should handle the error gracefully without crashing
       expect(() => {
-        fireEvent.change(minInput, { target: { value: "2" } });
+        fireEvent.change(maxInput, { target: { value: "2" } });
       }).not.toThrow();
 
       // Component should still be rendered and functional after the error
@@ -293,13 +210,13 @@ describe("CastDistanceSection", () => {
     it("should handle null value gracefully", async () => {
       render(<CastDistanceSection />);
 
-      const minInput = screen.getByDisplayValue("1.0");
+      const maxInput = screen.getByDisplayValue("5.0");
 
       // Simulate null value (can happen with InputNumber)
-      fireEvent.change(minInput, { target: { value: null } });
+      fireEvent.change(maxInput, { target: { value: null } });
 
       await waitFor(() => {
-        expect(mockUpdateCastDistance).toHaveBeenCalledWith(0, 5.0);
+        expect(mockUpdateCastDistance).toHaveBeenCalledWith(0);
       });
     });
   });
@@ -310,13 +227,12 @@ describe("CastDistanceSection", () => {
 
       const inputs = screen.getAllByRole("spinbutton");
 
-      expect(inputs).toHaveLength(2);
+      expect(inputs).toHaveLength(1);
     });
 
     it("should display current cast distance values", () => {
       render(<CastDistanceSection />);
 
-      expect(screen.getByDisplayValue("1.0")).toBeInTheDocument();
       expect(screen.getByDisplayValue("5.0")).toBeInTheDocument();
     });
   });
@@ -332,7 +248,6 @@ describe("CastDistanceSection", () => {
     it("should have proper form structure with labels", () => {
       render(<CastDistanceSection />);
 
-      expect(screen.getByText("Minimum")).toBeInTheDocument();
       expect(screen.getByText("Maximum")).toBeInTheDocument();
     });
   });
@@ -344,7 +259,6 @@ describe("CastDistanceSection", () => {
         entity: {
           ...mockSkillData.entity,
           cast_distance: {
-            min: 0,
             max: 0,
           },
         },
@@ -359,7 +273,7 @@ describe("CastDistanceSection", () => {
 
       // Both inputs will have value "0.0", so we need to check they both exist
       const zeroInputs = screen.getAllByDisplayValue("0.0");
-      expect(zeroInputs).toHaveLength(2);
+      expect(zeroInputs).toHaveLength(1);
     });
 
     it("should handle large distance values", () => {
@@ -368,7 +282,6 @@ describe("CastDistanceSection", () => {
         entity: {
           ...mockSkillData.entity,
           cast_distance: {
-            min: 50.5,
             max: 999.9,
           },
         },
@@ -381,7 +294,6 @@ describe("CastDistanceSection", () => {
 
       render(<CastDistanceSection />);
 
-      expect(screen.getByDisplayValue("50.5")).toBeInTheDocument();
       expect(screen.getByDisplayValue("999.9")).toBeInTheDocument();
     });
 
@@ -391,7 +303,6 @@ describe("CastDistanceSection", () => {
         entity: {
           ...mockSkillData.entity,
           cast_distance: {
-            min: 1.123456,
             max: 5.987654,
           },
         },
@@ -405,7 +316,6 @@ describe("CastDistanceSection", () => {
       render(<CastDistanceSection />);
 
       // Should display the precise values
-      expect(screen.getByDisplayValue("1.123456")).toBeInTheDocument();
       expect(screen.getByDisplayValue("5.987654")).toBeInTheDocument();
     });
   });
