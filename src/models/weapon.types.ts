@@ -18,6 +18,8 @@ export enum WeaponCategory {
   Staff = "Staff",
   Wand = "Wand",
   Shield = "Shield",
+  Spear = "Spear",
+  Focus = "Focus",
 }
 
 export const ALL_WEAPON_CATEGORIES: WeaponCategory[] =
@@ -49,6 +51,8 @@ export type Weapon = {
   category: WeaponCategory;
   /** Equip slot the weapon occupies; explicit data, not derived from the category. */
   hand: WeaponEquipIndex;
+  /** Off-hand categories this weapon allows next to it (empty: none); only a main-hand weapon lists any, and only off-hand categories. */
+  off_hands: WeaponCategory[];
   quality: QualityType;
   sheathe_location: WeaponSheatheLocation;
   icon_reference: EntityReference;
