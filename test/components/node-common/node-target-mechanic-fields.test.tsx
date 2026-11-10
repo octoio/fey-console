@@ -5,6 +5,7 @@ import {
   EffectTargetMechanicType,
   EffectTargetMechanicTeam,
   EffectTargetMechanicCircle,
+  EffectTargetMechanicCone,
   EffectTargetMechanicRectangle,
   CharacterTeam,
 } from "@models/effect.types";
@@ -492,6 +493,44 @@ describe("NodeTargetMechanicFields", () => {
       expect(inputs[2]).toHaveAttribute("min", "0");
       expect(inputs[2]).toHaveAttribute("step", "0.5");
       expect(inputs[2]).toHaveAttribute("data-size", "small");
+    });
+  });
+
+  describe("Cone Mechanic", () => {
+    const cone: EffectTargetMechanicCone = {
+      type: EffectTargetMechanicType.Cone,
+      hit_count: 3,
+      radius: 6,
+      angle: 90,
+      behind: true,
+    };
+
+    it("renders hit count, radius and angle fields", () => {
+      render(
+        <NodeTargetMechanicFields mechanic={cone} onUpdate={mockOnUpdate} />,
+      );
+
+      const labels = screen.getAllByTestId("field-label");
+      expect(labels.map((l) => l.textContent)).toEqual([
+        "Hit Count",
+        "Radius",
+        "Angle (degrees)",
+      ]);
+      const inputs = screen.getAllByTestId("full-width-input-number");
+      expect(inputs[0]).toHaveValue(3);
+      expect(inputs[1]).toHaveValue(6);
+      expect(inputs[2]).toHaveValue(90);
+    });
+
+    it("changes the angle and keeps the other fields, behind included", () => {
+      render(
+        <NodeTargetMechanicFields mechanic={cone} onUpdate={mockOnUpdate} />,
+      );
+
+      const inputs = screen.getAllByTestId("full-width-input-number");
+      fireEvent.change(inputs[2], { target: { value: "120" } });
+
+      expect(mockOnUpdate).toHaveBeenCalledWith({ ...cone, angle: 120 });
     });
   });
 

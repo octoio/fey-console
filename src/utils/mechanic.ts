@@ -2,6 +2,7 @@ import {
   EffectTargetMechanicType,
   CharacterTeam,
   EffectTargetMechanicCircle,
+  EffectTargetMechanicCone,
   EffectTargetMechanicRectangle,
   EffectTargetMechanicSelf,
   EffectTargetMechanicTeam,
@@ -46,6 +47,14 @@ export const mapTargetMechanicChange = (
         height: 5,
       } as EffectTargetMechanicRectangle;
 
+    case EffectTargetMechanicType.Cone:
+      return {
+        type: EffectTargetMechanicType.Cone,
+        hit_count: 1,
+        radius: 5,
+        angle: 90,
+      } as EffectTargetMechanicCone;
+
     default:
       return {
         type: EffectTargetMechanicType.Self,
@@ -62,6 +71,7 @@ export const getDefaultTargetForMechanic = (
       return EffectTarget.Ally;
     case EffectTargetMechanicType.Circle:
     case EffectTargetMechanicType.Rectangle:
+    case EffectTargetMechanicType.Cone:
       return EffectTarget.Enemy;
     case EffectTargetMechanicType.Selected:
       return EffectTarget.Any;

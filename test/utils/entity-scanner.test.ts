@@ -122,6 +122,25 @@ describe("entity-scanner", () => {
       });
     });
 
+    it("should index an Achievement entity", async () => {
+      const achievement = JSON.stringify({
+        type: "Achievement",
+        owner: "test",
+        key: "firstblood",
+        id: "test:Achievement:firstblood:1",
+        version: 1,
+      });
+      const mockHandle = createMockFileSystemHandle({
+        "firstblood.achievement.json": achievement,
+      });
+
+      const result = await scanFolderForEntities("test", mockHandle as any);
+
+      expect(result.entities.Achievement).toHaveLength(1);
+      expect(result.entities.Achievement[0].key).toBe("firstblood");
+      expect(consoleSpy.warn).not.toHaveBeenCalled();
+    });
+
     it("should handle nested directories", async () => {
       const weaponEntity = JSON.stringify({
         type: "Weapon",

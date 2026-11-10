@@ -43,6 +43,21 @@ export interface Stat {
   metadata: Metadata;
   type: StatType;
   color: Color;
+  /** Bounds of the final stat, applied after the conversions; an absent bound is open. */
+  clamp?: StatClamp;
+  /** What the attributes (Vit, Str, Int, Dex) add to this stat. */
+  conversions?: StatConversion[];
+}
+
+export interface StatClamp {
+  min?: number;
+  max?: number;
+}
+
+/** One term of the stat: `stat += raw attribute * per_point`. */
+export interface StatConversion {
+  attribute: StatType;
+  per_point: number;
 }
 
 /**
@@ -73,4 +88,6 @@ export interface StatSheet {
   experience_modifier: number;
   gold_modifier: number;
   life_steal: number;
+  /** The chance a kill drops a health globe (absent = 0). */
+  health_globe_chance?: number;
 }

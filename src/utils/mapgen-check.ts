@@ -2,6 +2,7 @@ import { EntityReference } from "@models/common.types";
 import {
   AnchorBinding,
   GeneratorKind,
+  GENERATOR_VERSION,
   GeneratorSpec,
   PathRule,
   RoomRequirement,
@@ -202,8 +203,10 @@ export const parHints = (spec: GeneratorSpec): string[] => {
 
 export const hintsFor = (spec: GeneratorSpec): string[] => {
   const hints = parHints(spec);
-  if (spec.version !== 2)
-    hints.push(`generator version ${spec.version}: the current version is 2`);
+  if (spec.version !== GENERATOR_VERSION)
+    hints.push(
+      `generator version ${spec.version}: the current version is ${GENERATOR_VERSION}`,
+    );
   if (spec.seed_policy === SeedPolicy.Fixed)
     hints.push("Fixed seed: every run gets the same layout");
   return hints;

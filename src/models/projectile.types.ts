@@ -1,5 +1,6 @@
 import { Metadata, Vector3 } from "./common.types";
 import { HitEffect, StatusEffect } from "./effect.types";
+import { ProjectileVfx } from "./vfx.types";
 
 export type ProjectileType = "Homing" | "Straight" | "Arc" | "Beam";
 
@@ -42,6 +43,8 @@ export interface Projectile {
   max_hit_count: number;
   on_impact: (ProjectileImpactHit | ProjectileImpactStatus)[];
   on_end: (ProjectileImpactHit | ProjectileImpactStatus)[];
+  /** body rides the projectile, trail streams behind it, impact plays where it lands; presentation only. */
+  vfx?: ProjectileVfx;
 }
 
 export interface ProjectileHoming extends Projectile {

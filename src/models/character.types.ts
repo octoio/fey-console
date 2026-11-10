@@ -8,6 +8,7 @@ export enum CharacterType {
   Adventurer = "Adventurer",
   Slime = "Slime",
   Boar = "Boar",
+  Beast = "Beast",
 }
 
 export const ALL_CHARACTER_TYPES: CharacterType[] =
@@ -64,6 +65,16 @@ export type Enrage = {
   effects: StatusEffect[];
 };
 
+/**
+ * A breeding nest: placed on its anchor, no brain, never moves. When its health falls to `burst_at`
+ * (a fraction of the maximum, 0.05..0.95) it bursts once: `burst_count` monsters of `burst` come out.
+ */
+export type Nest = {
+  burst_at: number;
+  burst: EntityReference; // Character
+  burst_count: number; // min 1
+};
+
 export type Character = {
   metadata: Metadata;
   type: CharacterType;
@@ -82,6 +93,8 @@ export type Character = {
   drop_table: EntityReference;
   foot_step_sound: EntityReference;
   hit_sound: EntityReference;
+  /** Played where the character dies (absent: the generic death sound). */
+  death_sound?: EntityReference;
   enrage?: Enrage;
   /** Character level curve (default: the game's). */
   xp_chart?: XpChart;
@@ -93,6 +106,12 @@ export type Character = {
   rank?: MonsterRank;
   /** true: goes for hostile healers instead of the threat holder. */
   hunts_healers?: boolean;
+  /** true: not slowed by water ground. */
+  swims?: boolean;
+  /** true: cannot be targeted or seen until it acts (starts a cast, or an area effect hits it). */
+  lurks?: boolean;
+  /** Present: the character is a breeding nest. */
+  nest?: Nest;
   /** What the director pays in credits to spawn this monster in a wave (>= 1; absent = the default cost). Bosses are never bought. */
   director_cost?: number;
   /** Equipment (entity references) a new player character wears. */

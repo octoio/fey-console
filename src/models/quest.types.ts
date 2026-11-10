@@ -1,27 +1,9 @@
+import { AchievementType } from "./achievement.types";
 import { CharacterType, MonsterRank } from "./character.types";
 import { Color, EntityReference, Metadata } from "./common.types";
 import { QualityType } from "./quality.types";
+import { Spawn, SpawnSequence } from "./spawn.types";
 import { StatType } from "./stat.types";
-
-export type AchievementType = "None" | "SlimeExterminator" | "BoarDefender";
-
-// Spawn types (spawn.atd)
-export interface Spawn {
-  spawn_count: number; // min 1
-  character: EntityReference; // Character
-  anchor: EntityReference; // Anchor
-  target_adventurer_on_spawn: boolean;
-}
-
-export interface SpawnSequenceStep {
-  timing: number; // 0..1 fraction of the sequence duration
-  spawns: Spawn[];
-}
-
-export interface SpawnSequence {
-  duration: number; // 1..300 seconds
-  steps: SpawnSequenceStep[];
-}
 
 // Quest difficulty entity
 // Normal, Hard and Nightmare are the run tiers the lobby offers; Custom is the lobby's own, whose
@@ -77,6 +59,7 @@ export type QuestConditionType =
   | "StayInAnchor"
   | "PickQuest"
   | "Teleport"
+  | "Interact"
   | "Channel";
 
 export interface QuestConditionKillSpecific {
@@ -137,8 +120,11 @@ export type QuestActionType =
   | "DeactivateAnchor"
   | "ActivatePortalToStage"
   | "ActivatePortalToQuestStage"
+  | "OpenGate"
   | "Message"
-  | "EnableQuestBoardQuest";
+  | "EnableQuestBoardQuest"
+  | "StartEscalation"
+  | "SpawnAtRemains";
 
 export interface QuestActionSpawn {
   type: "Spawn";
@@ -163,6 +149,8 @@ export interface QuestActionDeactivateAnchor {
 export interface QuestActionActivatePortalToStage {
   type: "ActivatePortalToStage";
   anchor: EntityReference; // Anchor
+  /** Set: the portal opens where the latest dead character of this definition fell. */
+  remains_of?: EntityReference; // Character
   destination: EntityReference; // Stage
 }
 
@@ -170,6 +158,12 @@ export interface QuestActionActivatePortalToStage {
 export interface QuestActionActivatePortalToQuestStage {
   type: "ActivatePortalToQuestStage";
   anchor: EntityReference; // Anchor
+}
+
+// Opens the gate with this id on the stage the quest is played on (see stage.types)
+export interface QuestActionOpenGate {
+  type: "OpenGate";
+  gate: string; // min length 1
 }
 
 export interface QuestActionMessage {
@@ -181,6 +175,25 @@ export interface QuestActionEnableQuestBoardQuest {
   type: "EnableQuestBoardQuest";
 }
 
+// The nests breed: one `spawn` per `interval` seconds between the living nests, at most `cap` alive
+// per nest. The bred monsters give XP and loot only when `rewards`.
+export interface QuestActionStartEscalation {
+  type: "StartEscalation";
+  nest: EntityReference; // Character
+  spawn: EntityReference; // Character
+  interval: number; // min 1
+  cap: number; // min 1
+  rewards: boolean;
+}
+
+// `character` rises where the latest dead `remains_of` character fell
+export interface QuestActionSpawnAtRemains {
+  type: "SpawnAtRemains";
+  character: EntityReference; // Character
+  remains_of: EntityReference; // Character
+  target_adventurer_on_spawn: boolean;
+}
+
 export type QuestAction =
   | QuestActionSpawn
   | QuestActionStartSpawnSequence
@@ -188,8 +201,11 @@ export type QuestAction =
   | QuestActionDeactivateAnchor
   | QuestActionActivatePortalToStage
   | QuestActionActivatePortalToQuestStage
+  | QuestActionOpenGate
   | QuestActionMessage
-  | QuestActionEnableQuestBoardQuest;
+  | QuestActionEnableQuestBoardQuest
+  | QuestActionStartEscalation
+  | QuestActionSpawnAtRemains;
 
 // Execution tree — mirrors the skill action node pattern.
 // Node ids are explicit, unique within a quest, and name nodes in network
@@ -269,6 +285,8 @@ export interface Quest {
   is_repeatable: boolean;
   achievement_on_complete: AchievementType;
   required_achievements: AchievementType[]; // min 1
+  /** true: clearing this quest ends the run as a win (absent = false). */
+  ends_run?: boolean;
 }
 
 export type QuestEntityDefinition = {

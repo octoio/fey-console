@@ -4,6 +4,7 @@ import { StageEditor } from "@components/stage-editor";
 
 
 import { EntityType, getDefaultEntityReferences } from "@models/common.types";
+import { GENERATOR_VERSION } from "@models/generator.types";
 import { usePrefabStore } from "@store/prefab.store";
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { FileInfo } from "@utils/entity-scanner";
@@ -178,7 +179,7 @@ describe("StageEditor generator", { timeout: 30000 }, () => {
     await waitFor(() => expect(mockWriteFile).toHaveBeenCalled());
     const text = mockWriteFile.mock.calls[0][2] as string;
     const saved = JSON.parse(text);
-    expect(saved.entity.generator.version).toBe(2);
+    expect(saved.entity.generator.version).toBe(GENERATOR_VERSION);
     expect(saved.entity.generator.par).toEqual({ boss_path: { min: 200, max: 150 } });
   });
 
