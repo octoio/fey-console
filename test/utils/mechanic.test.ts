@@ -63,6 +63,16 @@ describe("mechanic", () => {
       });
     });
 
+    it("should create Cone mechanic", () => {
+      const result = mapTargetMechanicChange(EffectTargetMechanicType.Cone);
+      expect(result).toEqual({
+        type: EffectTargetMechanicType.Cone,
+        hit_count: 1,
+        radius: 5,
+        angle: 90,
+      });
+    });
+
     it("should default to Self mechanic for unknown types", () => {
       const result = mapTargetMechanicChange(
         "UnknownType" as EffectTargetMechanicType,
@@ -98,6 +108,13 @@ describe("mechanic", () => {
     it("should return Enemy for Rectangle mechanic", () => {
       const result = getDefaultTargetForMechanic(
         EffectTargetMechanicType.Rectangle,
+      );
+      expect(result).toBe(EffectTarget.Enemy);
+    });
+
+    it("should return Enemy for Cone mechanic", () => {
+      const result = getDefaultTargetForMechanic(
+        EffectTargetMechanicType.Cone,
       );
       expect(result).toBe(EffectTarget.Enemy);
     });

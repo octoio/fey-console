@@ -11,6 +11,7 @@ export enum AnchorType {
   QuestBoard = "QuestBoard",
   LampPost = "LampPost",
   HealingShrine = "HealingShrine",
+  Lever = "Lever",
 }
 
 export enum ZoneDetectionType {
@@ -31,11 +32,13 @@ export interface AnchorZone extends AnchorBase {
   radius: number; // min 0.1
   color: Color;
   show_vfx: boolean;
+  models?: string[]; // keys of the pack props the zone can stand as; absent = a bare disc
 }
 
 export interface AnchorSpawnPoint extends AnchorBase {
   type: AnchorType.SpawnPoint;
   team?: CharacterTeam; // Ally marks where the party appears on entering the stage
+  radius?: number; // the monsters' area around the anchor (min 0.5); absent = a point
 }
 
 export interface AnchorPortal extends AnchorBase {
@@ -57,13 +60,19 @@ export interface AnchorHealingShrine extends AnchorBase {
   price: number; // gold at level 1 for one use (min 1); the sim scales it like the gold drops
 }
 
+export interface AnchorLever extends AnchorBase {
+  type: AnchorType.Lever;
+  model: string; // key of the pack prop that stands there (min length 1)
+}
+
 export type Anchor =
   | AnchorZone
   | AnchorSpawnPoint
   | AnchorPortal
   | AnchorQuestBoard
   | AnchorLampPost
-  | AnchorHealingShrine;
+  | AnchorHealingShrine
+  | AnchorLever;
 
 export type AnchorEntityDefinition = {
   id: string;
@@ -109,5 +118,7 @@ export const createDefaultAnchor = (type: AnchorType): Anchor => {
       return { ...base, type: AnchorType.LampPost, model: "" };
     case AnchorType.HealingShrine:
       return { ...base, type: AnchorType.HealingShrine, model: "", price: 1 };
+    case AnchorType.Lever:
+      return { ...base, type: AnchorType.Lever, model: "" };
   }
 };

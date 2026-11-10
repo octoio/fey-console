@@ -5,18 +5,10 @@ export type XpChart = {
   growth: number;
 };
 
-/** What each level above 1 adds to a character; absent fields add nothing. */
+/** The level cap of a character; a level gives no stats by itself (3 points to spend per level gained). */
 export type LevelGrowth = {
   /** Level cap: XP stops accruing there. */
   max_level?: number;
-  vit?: number;
-  str?: number;
-  int?: number;
-  dex?: number;
-  health?: number;
-  mana?: number;
-  armor?: number;
-  magic_resist?: number;
 };
 
 /** A skill earns xp_per_use each time a cast completes; its level scales it. */
@@ -42,23 +34,6 @@ export const xpRequired = (chart: XpChart, level: number): number => {
     required += Math.max(0, Math.floor(chart.increment * chart.growth ** k));
   }
   return required;
-};
-
-/** Stats a character of `level` has gained from its growth (level counts up to max_level). */
-export const levelGrowthAt = (
-  growth: LevelGrowth,
-  level: number,
-): Record<string, number> => {
-  const capped =
-    growth.max_level === undefined ? level : Math.min(level, growth.max_level);
-  const n = Math.max(1, capped) - 1;
-  const out: Record<string, number> = {};
-  for (const [stat, per] of Object.entries(growth)) {
-    if (stat !== "max_level" && typeof per === "number") {
-      out[stat] = Math.max(0, per) * n;
-    }
-  }
-  return out;
 };
 
 const countedSkillLevels = (level: number): number =>

@@ -68,6 +68,7 @@ export enum EntityType {
   SkillBook = "SkillBook",
   WeaponClass = "WeaponClass",
   RoomPrefab = "RoomPrefab",
+  Achievement = "Achievement",
   Balance = "Balance",
 }
 

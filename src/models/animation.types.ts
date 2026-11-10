@@ -24,6 +24,15 @@ export enum AnimationCue {
   CastAttack = "CastAttack",
   CastChannel = "CastChannel",
   HitBlocked = "HitBlocked",
+  /** A bow or other ranged weapon loosing a shot. */
+  AttackShoot = "AttackShoot",
+  /** Standing; with a variant, a class's own stance. */
+  Idle = "Idle",
+  Walk = "Walk",
+  Run = "Run",
+  /** Taking a hit. */
+  Hit = "Hit",
+  Death = "Death",
 }
 
 export const ALL_ANIMATION_CUES: AnimationCue[] = Object.values(AnimationCue);

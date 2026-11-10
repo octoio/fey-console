@@ -1,4 +1,6 @@
 import { EntityReference, FloatRange, IntRange } from "./common.types";
+import { Spawn } from "./spawn.types";
+import { StatusDuration } from "./status.types";
 
 // Map generation data contract (generator.atd). The generator itself is Rust-only; these types
 // are the spec it reads. Optional fields are absent in the JSON, never null.
@@ -48,6 +50,7 @@ export enum PathRule {
 export enum GeneratorKind {
   Crypt = "Crypt",
   Forest = "Forest",
+  Swamp = "Swamp",
 }
 
 export enum SeedPolicy {
@@ -105,6 +108,7 @@ export interface RoomRequirement {
 export interface ConnectionRules {
   main_path: IntRange;
   loops: IntRange;
+  maze?: boolean; // loops may end in the entrance and the boss arena and join main-path rooms only
   dead_ends: boolean;
   branch_len: IntRange;
 }
@@ -125,6 +129,43 @@ export interface ParRule {
   boss_path: FloatRange;
 }
 
+// The pack that appears when the locked gate opens, at the anchor bound to the GatePack slot.
+export interface LockedGate {
+  wake: Spawn[]; // min 1
+}
+
+// Gates of a generated crypt: shortcuts closes every loop with a far-side gate and a lever; locked
+// puts one gate before the boss.
+export interface GateRules {
+  shortcuts: boolean;
+  locked?: LockedGate;
+}
+
+// Who a ground effect lands on: Walkers (characters that do not swim), Swimmers or Everyone.
+export enum GroundEffectWho {
+  Walkers = "Walkers",
+  Swimmers = "Swimmers",
+  Everyone = "Everyone",
+}
+
+export const ALL_GROUND_EFFECT_WHOS: GroundEffectWho[] =
+  Object.values(GroundEffectWho);
+
+// A status a ground zone gives to the characters inside it: on entering, then every `period` seconds.
+export interface GroundEffect {
+  status: EntityReference; // Status
+  who: GroundEffectWho;
+  period: number; // min 0.1
+  durations: StatusDuration[];
+  magnitude: number;
+  path_cost?: number; // added to the path cost of a unit of walking in the zone; absent = nothing
+}
+
+// What the water of a generated layout does to the characters in it.
+export interface WaterRules {
+  effects: GroundEffect[]; // min 1
+}
+
 export interface GeneratorSpec {
   generator: GeneratorKind;
   version: number;
@@ -138,6 +179,9 @@ export interface GeneratorSpec {
   max_attempts?: number;
   candidates?: number;
   par?: ParRule;
+  gates?: GateRules;
+  sewer?: WaterRules; // turns a Crypt into a sewer
+  water?: WaterRules; // the water of a Forest or a Swamp
   seed_policy: SeedPolicy;
   fixed_seed?: number;
 }
@@ -146,9 +190,11 @@ export interface AnchorBinding {
   slot: AnchorSlot;
   ordinal?: number; // default 0
   every?: boolean; // template: one anchor per slot in the layout (ordinal must be absent)
+  min_count?: number; // only with every: a layout with fewer anchors of the slot is rejected
 }
 
-export const GENERATOR_VERSION = 2;
+// The generator version the data is tuned for (fey_core::mapgen::GENERATOR_VERSION)
+export const GENERATOR_VERSION = 13;
 
 export const createDefaultRequirement = (
   role: RoomRole = RoomRole.Combat,
