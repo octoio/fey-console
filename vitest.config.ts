@@ -48,6 +48,7 @@ const config = defineConfig({
       "@store": path.resolve(__dirname, "./src/store"),
       "@models": path.resolve(__dirname, "./src/models"),
       "@utils": path.resolve(__dirname, "./src/utils"),
+      "@test-utils": path.resolve(__dirname, "./test/utils"),
       "@assets": path.resolve(__dirname, "./src/assets"),
       "@hooks": path.resolve(__dirname, "./src/hooks"),
       "@pages": path.resolve(__dirname, "./src/pages"),

@@ -1,4 +1,4 @@
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, it, expect, vi } from "vitest";
 import { serializeDefinition } from "@components/stage-editor/stage-file-utils";
@@ -6,13 +6,13 @@ import { EntityType } from "@models/common.types";
 import { RoomPrefabEntityDefinition } from "@models/roomprefab.types";
 import { usePrefabStore } from "@store/prefab.store";
 import { useSkillStore } from "@store/skill.store";
+import { SHIPPED_JSON_DIR, hasShippedData, shippedTitle } from "@test-utils/shipped-data";
 import { scanFolderForEntities } from "@utils/entity-scanner";
 
 // Every entity file of the game data checkout goes through the code the editor loads and saves with.
 // A field the editor does not carry would vanish from the file at the next save: that is the damage
-// this test counts. Skipped when the sibling fey-rs checkout is absent.
-const JSON_DIR = join(__dirname, "../../fey-rs/data/json");
-const shipped = existsSync(JSON_DIR);
+// this test counts. Skipped (and says so) when no game data is found, see utils/shipped-data.ts.
+const JSON_DIR = SHIPPED_JSON_DIR ?? "";
 
 // -0 and 0 are the same number in the data; the editor writes 0
 const noNegativeZero = (_key: string, value: unknown) =>
@@ -71,7 +71,7 @@ const saveThroughEditor = (original: { type: string }): string => {
   return serializeDefinition(original);
 };
 
-describe.skipIf(!shipped)("shipped data through the editor", () => {
+describe.skipIf(!hasShippedData)(shippedTitle("shipped data through the editor"), () => {
   it("indexes every entity file in the folder scan", async () => {
     vi.spyOn(console, "log").mockImplementation(() => undefined);
     const warn = vi.spyOn(console, "warn").mockImplementation(() => undefined);

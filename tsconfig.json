@@ -22,6 +22,7 @@
       "@store/*": ["src/store/*"],
       "@models/*": ["src/models/*"],
       "@utils/*": ["src/utils/*"],
+      "@test-utils/*": ["test/utils/*"],
       "@assets/*": ["src/assets/*"],
       "@hooks/*": ["src/hooks/*"],
       "@pages/*": ["src/pages/*"]
