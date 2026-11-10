@@ -8,6 +8,10 @@ import { NumberField, SelectField, TextField, withField } from "./fields";
 
 const { Text } = Typography;
 
+// validate_guarantee_quality (fey-data validation.ml): quality None marks a bare item and is never a
+// rarity to demand, every other quality is accepted.
+const GUARANTEE_QUALITIES = ALL_QUALITIES.filter((q) => q !== QualityType.None);
+
 export const createDefaultTier = (): QuestTier => ({ order: 0 });
 
 export const createDefaultAffix = (): TierAffix => ({
@@ -105,7 +109,7 @@ export const TierCard: React.FC<TierCardProps> = ({ tier, onChange }) => {
           <SelectField
             label="guarantee min quality"
             value={tier.guarantee_min_quality}
-            options={ALL_QUALITIES}
+            options={GUARANTEE_QUALITIES}
             allowClear
             onChange={(guarantee_min_quality: QualityType | undefined) => set({ guarantee_min_quality })}
           />

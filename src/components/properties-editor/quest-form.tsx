@@ -50,7 +50,10 @@ export const QuestForm: React.FC<QuestFormProps> = ({ entity, onChange }) => {
           style={{ minWidth: 260 }}
           value={entity.required_achievements}
           aria-label="required achievements"
-          onChange={(required_achievements) => set({ required_achievements })}
+          // quest.atd: at least one required achievement, so the last tag stays
+          onChange={(required_achievements) =>
+            required_achievements.length > 0 && set({ required_achievements })
+          }
           options={ALL_ACHIEVEMENT_TYPES.map((a) => ({ value: a, label: a }))}
         />
       </Space>
