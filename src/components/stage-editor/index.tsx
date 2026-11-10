@@ -25,6 +25,7 @@ import {
   createDefaultGate,
   createDefaultStage,
   Gate,
+  GroundZone,
   Obstacle,
   StageEntityDefinition,
 } from "@models/stage.types";
@@ -36,6 +37,7 @@ import { AnchorCard } from "./anchor-card";
 import { ColorInput, MetadataInput } from "./field-inputs";
 import { GateCard } from "./gate-card";
 import { GeneratorCard } from "./generator-card";
+import { GroundCard } from "./ground-card";
 import { ObstacleCard } from "./obstacle-card";
 import {
   createAnchorDefinition,
@@ -207,6 +209,12 @@ export const StageEditor: React.FC<StageEditorProps> = ({
     if (!stage) return;
     // An empty list is saved as no field at all (the ATD field is optional)
     updateStage({ ...stage, gates: next.length > 0 ? next : undefined });
+  };
+
+  const setGround = (next: GroundZone[]) => {
+    if (!stage) return;
+    // An empty list is saved as no field at all (the ATD field is optional)
+    updateStage({ ...stage, ground: next.length > 0 ? next : undefined });
   };
 
   const updateAnchor = (index: number, definition: AnchorEntityDefinition) => {
@@ -420,6 +428,8 @@ export const StageEditor: React.FC<StageEditorProps> = ({
               ))}
             </Space>
           </Card>
+
+          <GroundCard ground={stage.ground ?? []} onChange={setGround} />
 
           <Card
             size="small"

@@ -29,6 +29,7 @@ import {
 } from "@models/generator.types";
 import { hintsFor, PrefabKindLookup, specProblems } from "@utils/mapgen-check";
 import { GeneratorSchematic } from "./generator-schematic";
+import { WaterRulesCard } from "./water-rules-card";
 
 const { Text } = Typography;
 
@@ -296,6 +297,9 @@ export const GeneratorCard: React.FC<GeneratorCardProps> = ({
             ))}
           </Space>
         </Card>
+
+        <WaterRulesCard label="sewer" rules={spec.sewer} onChange={(sewer) => set({ sewer })} />
+        <WaterRulesCard label="water" rules={spec.water} onChange={(water) => set({ water })} />
 
         <Card size="small" title="Requirements schematic (not the generator)">
           <GeneratorSchematic spec={spec} />
