@@ -8,7 +8,7 @@ import {
   AnchorType,
   createDefaultAnchor,
 } from "@models/anchor.types";
-import { ALL_ANCHOR_SLOTS, AnchorSlot } from "@models/generator.types";
+import { ALL_ANCHOR_SLOTS, AnchorSlot, dropUndefined } from "@models/generator.types";
 import { ColorInput, MetadataInput, Vector3Input } from "./field-inputs";
 
 const { Text } = Typography;
@@ -143,6 +143,25 @@ export const AnchorCard: React.FC<AnchorCardProps> = ({
                     ...anchor.binding!,
                     ordinal: ordinal ?? undefined,
                   },
+                })
+              }
+            />
+          )}
+          {anchor.binding?.every && (
+            <InputNumber
+              size="small"
+              min={1}
+              precision={0}
+              prefix={<Text type="secondary">min count</Text>}
+              value={anchor.binding.min_count}
+              aria-label={`${definition.key} binding min count`}
+              onChange={(min_count) =>
+                updateAnchor({
+                  ...anchor,
+                  binding: dropUndefined({
+                    ...anchor.binding!,
+                    min_count: min_count ?? undefined,
+                  }),
                 })
               }
             />

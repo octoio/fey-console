@@ -225,6 +225,8 @@ export const GeneratorCard: React.FC<GeneratorCardProps> = ({
           <InputNumber size="small" min={0} aria-label="Branch length min" value={c.branch_len.min} onChange={(v) => setConn({ branch_len: { ...c.branch_len, min: v ?? 0 } })} />
           <InputNumber size="small" min={0} aria-label="Branch length max" value={c.branch_len.max} onChange={(v) => setConn({ branch_len: { ...c.branch_len, max: v ?? 0 } })} />
           <Checkbox checked={c.dead_ends} onChange={(e) => setConn({ dead_ends: e.target.checked })}>dead ends</Checkbox>
+          {/* maze is optional and absent means false: unchecking drops the key */}
+          <Checkbox checked={c.maze ?? false} aria-label="Maze" onChange={(e) => set({ connections: dropUndefined({ ...c, maze: e.target.checked ? true : undefined }) })}>maze</Checkbox>
         </Space>
 
         <Card

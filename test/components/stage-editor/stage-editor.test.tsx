@@ -350,4 +350,48 @@ describe("StageEditor", () => {
     const saved = JSON.parse(mockWriteFile.mock.calls[0][2] as string);
     expect("obstacles" in saved.entity).toBe(false);
   });
+
+  it("adds a gate, saves it, then removes it and drops the field", async () => {
+    renderEditor([]);
+
+    fireEvent.change(
+      screen.getByPlaceholderText("New stage key (e.g. TheSwamp)"),
+      { target: { value: "TheSwamp" } },
+    );
+    fireEvent.click(screen.getByText("Create Stage"));
+    await waitFor(() => {
+      expect(screen.getByText("Stage: TheSwamp")).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByText("Add Gate"));
+    await waitFor(() => {
+      expect(screen.getByText("Gates (1)")).toBeInTheDocument();
+    });
+    fireEvent.change(screen.getByRole("textbox", { name: "gate 0 id" }), {
+      target: { value: "G" },
+    });
+    fireEvent.click(screen.getByText("Save Stage & Anchors"));
+    await waitFor(() => {
+      expect(mockWriteFile).toHaveBeenCalledTimes(1);
+    });
+    const first = JSON.parse(mockWriteFile.mock.calls[0][2] as string);
+    expect(first.entity.gates).toEqual([
+      {
+        id: "G",
+        opening: "Interact",
+        obstacle: { kind: "Wall", shape: "Box", x: 0, z: 0, half_x: 1, half_z: 1, yaw: 0 },
+      },
+    ]);
+
+    // the gate card has its own Remove; the gate's obstacle has none
+    fireEvent.click(screen.getByText("Remove"));
+    await waitFor(() => {
+      expect(screen.getByText("Gates (0)")).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByText("Save Stage & Anchors"));
+    await waitFor(() => {
+      expect(mockWriteFile).toHaveBeenCalledTimes(2);
+    });
+    const second = JSON.parse(mockWriteFile.mock.calls[1][2] as string);
+    expect("gates" in second.entity).toBe(false);
+  });
 });
