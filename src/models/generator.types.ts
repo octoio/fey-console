@@ -1,4 +1,4 @@
-import { EntityReference, FloatRange, IntRange } from "./common.types";
+import { EntityReference, EntityType, FloatRange, IntRange } from "./common.types";
 import { Spawn } from "./spawn.types";
 import { StatusDuration } from "./status.types";
 
@@ -165,6 +165,18 @@ export interface GroundEffect {
 export interface WaterRules {
   effects: GroundEffect[]; // min 1
 }
+
+export const createDefaultGroundEffect = (): GroundEffect => ({
+  status: { id: "", key: "", owner: "Octoio", type: EntityType.Status, version: 1 },
+  who: GroundEffectWho.Everyone,
+  period: 1,
+  durations: [],
+  magnitude: 0,
+});
+
+export const createDefaultWaterRules = (): WaterRules => ({
+  effects: [createDefaultGroundEffect()],
+});
 
 export interface GeneratorSpec {
   generator: GeneratorKind;
