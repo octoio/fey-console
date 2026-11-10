@@ -7,6 +7,13 @@ export type AchievementType =
   | "BoarDefender"
   | "ActTwoCleared";
 
+export const ALL_ACHIEVEMENT_TYPES: AchievementType[] = [
+  "None",
+  "SlimeExterminator",
+  "BoarDefender",
+  "ActTwoCleared",
+];
+
 export enum AchievementOp {
   Ge = "Ge",
   Le = "Le",
