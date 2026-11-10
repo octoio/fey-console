@@ -26,7 +26,6 @@ export const ObstacleCard: React.FC<ObstacleCardProps> = ({
   onRemove,
   label = `obstacle ${index}`,
 }) => {
-
   const number = (
     field: "x" | "z" | "radius" | "half_x" | "half_z" | "yaw",
     min?: number,
