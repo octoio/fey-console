@@ -15,7 +15,8 @@ interface ObstacleCardProps {
   index: number;
   obstacle: Obstacle;
   onChange: (obstacle: Obstacle) => void;
-  onRemove: () => void;
+  onRemove?: () => void; // absent: the obstacle belongs to something else (a gate) and is not removed alone
+  label?: string; // default "obstacle <index>"; what the controls are named
 }
 
 export const ObstacleCard: React.FC<ObstacleCardProps> = ({
@@ -23,8 +24,8 @@ export const ObstacleCard: React.FC<ObstacleCardProps> = ({
   obstacle,
   onChange,
   onRemove,
+  label = `obstacle ${index}`,
 }) => {
-  const label = `obstacle ${index}`;
 
   const number = (
     field: "x" | "z" | "radius" | "half_x" | "half_z" | "yaw",
@@ -63,9 +64,11 @@ export const ObstacleCard: React.FC<ObstacleCardProps> = ({
         </Space>
       }
       extra={
-        <Button danger size="small" onClick={onRemove}>
-          Remove
-        </Button>
+        onRemove && (
+          <Button danger size="small" onClick={onRemove}>
+            Remove
+          </Button>
+        )
       }
     >
       <Space wrap>
