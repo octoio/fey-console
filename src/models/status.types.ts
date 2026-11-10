@@ -1,5 +1,7 @@
 import { HitType } from "./common.types";
+import { StatType } from "./stat.types";
 import { Trigger } from "./trigger.types";
+import { StatusVfx } from "./vfx.types";
 
 export enum StatusDurationType {
   Chrono = "Chrono",
@@ -22,6 +24,7 @@ export enum StatusEffectMechanicType {
   Control = "Control",
   CrowdControl = "CrowdControl",
   Shield = "Shield",
+  Submerge = "Submerge",
 }
 
 export const ALL_STATUS_EFFECT_MECHANIC_TYPES: StatusEffectMechanicType[] =
@@ -33,7 +36,7 @@ export type StatusEffectMechanic = {
 
 export type StatusEffectMechanicStatChange = StatusEffectMechanic & {
   type: "StatChange";
-  stat: string;
+  stat: StatType;
 };
 
 export type StatusEffectMechanicHitOverTime = StatusEffectMechanic & {
@@ -85,6 +88,11 @@ export type StatusEffectMechanicShield = StatusEffectMechanic & {
   type: "Shield";
 };
 
+/** Nothing can target or hit the afflicted while it lasts, and it is unseen. */
+export type StatusEffectMechanicSubmerge = StatusEffectMechanic & {
+  type: "Submerge";
+};
+
 export enum StatusStackScalingStrategy {
   Additive = "Additive",
   Multiplicative = "Multiplicative",
@@ -111,6 +119,12 @@ export type StatusStack = {
   scaling_strategy: StatusStackScalingStrategy;
   /** Absent means RefreshAll. */
   full_stack?: StatusFullStackRule;
+  /** true: every application adds a stack with no cap (give size 1) and resets the duration of the whole stack. */
+  accumulate?: boolean;
+  /** Magnitude of each stack by position (the last entry for any further one) instead of the one it was applied with. */
+  magnitudes?: number[];
+  /** true: the stack fades by itself, one stack per duration of the latest application. */
+  decay?: boolean;
 };
 
 export type Status = {
@@ -120,6 +134,10 @@ export type Status = {
   };
   mechanic: StatusEffectMechanic;
   stack: StatusStack;
+  /** Every application ends early once its source has taken this fraction of its maximum health in damage since. */
+  break_burst?: number;
   /** Fire while the character has the status. */
   triggers?: Trigger[];
+  /** The effect on the afflicted character while the status lasts; presentation only. */
+  vfx?: StatusVfx;
 };

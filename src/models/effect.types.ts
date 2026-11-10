@@ -14,6 +14,7 @@ export enum EffectTargetMechanicType {
   Selected = "Selected",
   Circle = "Circle",
   Rectangle = "Rectangle",
+  Cone = "Cone",
 }
 
 export type EffectTargetMechanic = {
@@ -46,12 +47,22 @@ export type EffectTargetMechanicRectangle = EffectTargetMechanic & {
   height: number;
 };
 
+/** A wedge with its tip on the caster: `angle` is the full opening in degrees (1..360). `behind` turns the axis round. */
+export type EffectTargetMechanicCone = EffectTargetMechanic & {
+  type: EffectTargetMechanicType.Cone;
+  hit_count: number;
+  radius: number;
+  angle: number;
+  behind?: boolean;
+};
+
 export type EffectTargetMechanicInternal =
   | EffectTargetMechanicSelf
   | EffectTargetMechanicTeam
   | EffectTargetMechanicSelected
   | EffectTargetMechanicCircle
-  | EffectTargetMechanicRectangle;
+  | EffectTargetMechanicRectangle
+  | EffectTargetMechanicCone;
 
 export enum EffectTarget {
   Ally = "Ally",
@@ -69,6 +80,12 @@ export type EffectScaling = {
 export type DamageSchool = "Physical" | "Magical";
 export const ALL_DAMAGE_SCHOOLS: DamageSchool[] = ["Physical", "Magical"];
 
+/** A damage bonus on a weak target: below `below` of its maximum health (in (0, 1]) the hit deals `factor` times the damage. */
+export type ExecuteBonus = {
+  below: number;
+  factor: number;
+};
+
 export type HitEffect = {
   hit_type: HitType;
   scalers: EffectScaling[];
@@ -79,6 +96,14 @@ export type HitEffect = {
   can_miss: boolean;
   // Damage and Heal only; absent: each scaler goes to the school of its stat
   school?: DamageSchool;
+  /** Damage only: the hit multiplies on a target below a health fraction. */
+  execute?: ExecuteBonus;
+  /** Damage only: units a surviving target is pushed away from the caster (positive). */
+  knockback?: number;
+  /** Damage only, not with a knockback: units a surviving target is dragged towards water (positive). */
+  pull?: number;
+  /** Damage only: mana the caster gets for each target the hit lands on (positive). */
+  mana_on_hit?: number;
 };
 
 export type StatusEffect = {

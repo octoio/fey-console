@@ -1,9 +1,15 @@
 import { EntityReference, Metadata, Vector3 } from "./common.types";
-import { HitEffect, StatusEffect } from "./effect.types";
+import {
+  EffectTarget,
+  EffectTargetMechanicInternal,
+  HitEffect,
+  StatusEffect,
+} from "./effect.types";
 import { SkillExperience } from "./progression.types";
 import { QualityType } from "./quality.types";
 import { RequirementEvaluation } from "./requirement.types";
 import { Trigger } from "./trigger.types";
+import { SkillVfx } from "./vfx.types";
 
 export enum SkillCategory {
   None = "None",
@@ -47,6 +53,7 @@ export enum SkillActionNodeType {
   Projectile = "Projectile",
   Move = "Move",
   Requirement = "Requirement",
+  Interrupt = "Interrupt",
 }
 
 export type SkillActionNode = {
@@ -148,6 +155,18 @@ export type SkillActionRequirementNode = SkillActionNode & {
   child: SkillActionNode;
 };
 
+/**
+ * Cancels the running cast of each character the mechanic and team pick (the mechanic must be
+ * Selected, which stands for the interrupted character). `on_interrupt` is a status applied to
+ * each character whose cast was really cancelled.
+ */
+export type SkillActionInterruptNode = SkillActionNode & {
+  type: SkillActionNodeType.Interrupt;
+  target_mechanic: EffectTargetMechanicInternal;
+  target: EffectTarget;
+  on_interrupt?: StatusEffect;
+};
+
 export enum SkillIndicatorPosition {
   Character = "Character",
   Mouse = "Mouse",
@@ -173,18 +192,22 @@ export type Skill = {
   indicators: SkillIndicator[];
   /** Skill XP earned on use and how the level scales the skill; absent = no XP. */
   experience?: SkillExperience;
-  /** true: the caster cannot walk from the start of the cast until it completes or is cancelled. */
-  root_while_casting?: boolean;
+  /** true: the caster may walk while casting and the cast runs on (movement skills); absent = a move input before the cast window ends cancels the cast. */
+  walk_while_casting?: boolean;
   /** true: casting this skill cancels the cast in progress (a dash). */
   cancels_cast?: boolean;
   /** false: no interrupt cancels a cast of this skill and the HUD offers no "interrupt!" (a boss that is immune). Absent = true. */
   interruptible?: boolean;
+  /** The caster must carry this status to cast the skill. */
+  needs_status?: EntityReference;
   /** How many casts can be stocked; one charge comes back every cooldown. Absent = 1. */
   charges?: number;
   /** Seconds from the start of the cast to the hit moment (clip rate = impact time / hit_delay). */
   hit_delay?: number;
   /** Fire while the character knows the skill. */
   triggers?: Trigger[];
+  /** Visual effects by phase; presentation only. */
+  vfx?: SkillVfx;
 };
 
 export type SkillEntityDefinition = {
