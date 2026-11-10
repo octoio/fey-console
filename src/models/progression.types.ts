@@ -30,9 +30,9 @@ export const DEFAULT_COOLDOWN_PER_LEVEL = 0.01;
 /** XP needed to go from `level` to `level + 1` (mirrors the Rust XpChart::required). */
 export const xpRequired = (chart: XpChart, level: number): number => {
   let required = Math.max(1, chart.base);
-  for (let k = 0; k < Math.max(0, level - 1); k++) 
+  for (let k = 0; k < Math.max(0, level - 1); k++) {
     required += Math.max(0, Math.floor(chart.increment * chart.growth ** k));
-  
+  }
   return required;
 };
 

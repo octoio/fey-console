@@ -11,8 +11,8 @@ describe.skipIf(!hasGeneratorAtd)("anchor slots", () => {
     const withoutComments = block![1].replace(/\(\*[\s\S]*?\*\)/g, "");
     const variants = [...withoutComments.matchAll(/\b([A-Z]\w*)\b/g)].map((m) => m[1]);
     expect(variants.length).toBeGreaterThan(0);
-    for (const v of variants) 
+    for (const v of variants) {
       expect(ALL_ANCHOR_SLOTS).toContain(v);
-    
+    }
   });
 });

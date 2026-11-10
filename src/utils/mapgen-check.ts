@@ -204,9 +204,9 @@ export const parHints = (spec: GeneratorSpec): string[] => {
 export const hintsFor = (spec: GeneratorSpec): string[] => {
   const hints = parHints(spec);
   if (spec.version !== GENERATOR_VERSION)
-    {hints.push(
+    hints.push(
       `generator version ${spec.version}: the current version is ${GENERATOR_VERSION}`,
-    );}
+    );
   if (spec.seed_policy === SeedPolicy.Fixed)
     hints.push("Fixed seed: every run gets the same layout");
   return hints;
