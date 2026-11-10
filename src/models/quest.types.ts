@@ -10,6 +10,13 @@ import { StatType } from "./stat.types";
 // tier record is where the knobs start.
 export type QuestDifficultyType = "Normal" | "Hard" | "Nightmare" | "Custom";
 
+export const ALL_QUEST_DIFFICULTY_TYPES: QuestDifficultyType[] = [
+  "Normal",
+  "Hard",
+  "Nightmare",
+  "Custom",
+];
+
 // A monster modifier of a tier: the final stat value is multiplied (1.3 = +30%).
 export interface TierAffix {
   name: string;
@@ -39,6 +46,15 @@ export interface QuestDifficulty {
   tier?: QuestTier;
 }
 
+export type QuestDifficultyEntityDefinition = {
+  id: string;
+  owner: string;
+  type: string;
+  key: string;
+  version: number;
+  entity: QuestDifficulty;
+};
+
 export type QuestOrigin =
   | "QuestBoard"
   | "Item"
@@ -49,7 +65,25 @@ export type QuestOrigin =
   | "Event"
   | "Player";
 
+export const ALL_QUEST_ORIGINS: QuestOrigin[] = [
+  "QuestBoard",
+  "Item",
+  "NPC",
+  "World",
+  "Stage",
+  "Quest",
+  "Event",
+  "Player",
+];
+
 export type QuestAssignee = "Player" | "Team" | "PlayerHidden" | "TeamHidden";
+
+export const ALL_QUEST_ASSIGNEES: QuestAssignee[] = [
+  "Player",
+  "Team",
+  "PlayerHidden",
+  "TeamHidden",
+];
 
 // Conditions: single event-driven checks tracked by the server.
 // Combining conditions is the tree's job (Parallel/Any/Sequence).
