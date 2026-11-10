@@ -2,7 +2,7 @@ import { StatAffix } from "./affix.types";
 import { EntityReference, IntRange, Metadata } from "./common.types";
 import { QualityType } from "./quality.types";
 import { Trigger } from "./trigger.types";
-import { VisualLayer } from "./weapon-class.types";
+import { VisualLayer } from "./visual.types";
 
 export enum EquipmentCategory {
   Head = "Head",

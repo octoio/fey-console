@@ -2,7 +2,7 @@ import { Color, EntityReference, Metadata, Vector3 } from "./common.types";
 import { StatusEffect } from "./effect.types";
 import { LevelGrowth, XpChart } from "./progression.types";
 import { StatSheet } from "./stat.types";
-import { VisualLayer } from "./weapon-class.types";
+import { VisualLayer } from "./visual.types";
 
 export enum CharacterType {
   Adventurer = "Adventurer",
