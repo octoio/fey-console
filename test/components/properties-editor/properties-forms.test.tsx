@@ -132,3 +132,21 @@ describe("CharacterForm level", { timeout: 30000 }, () => {
     expect(saved(onChange)).toEqual({ ...character(), swims: true });
   });
 });
+
+describe("QuestForm required achievements", { timeout: 30000 }, () => {
+  it("cannot save an empty list: removing the last tag is ignored", () => {
+    const onChange = vi.fn();
+    render(<QuestForm entity={quest({ required_achievements: ["BoarDefender"] })} onChange={onChange} />);
+    fireEvent.click(document.querySelector(".ant-select-selection-item-remove")!);
+    expect(onChange).not.toHaveBeenCalled();
+  });
+});
+
+describe("DifficultyForm guarantee quality", { timeout: 30000 }, () => {
+  it("does not offer None, which validate_guarantee_quality rejects", () => {
+    render(<DifficultyForm entity={difficulty({ order: 1 })} onChange={vi.fn()} />);
+    fireEvent.mouseDown(screen.getAllByRole("combobox").find((c) => c.getAttribute("aria-label") === "guarantee min quality")!);
+    expect(screen.getAllByText("Epic").length).toBeGreaterThan(0);
+    expect(screen.queryByText("None")).toBeNull();
+  });
+});
