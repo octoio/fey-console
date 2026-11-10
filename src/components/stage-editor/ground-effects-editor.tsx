@@ -23,43 +23,6 @@ interface GroundEffectsEditorProps {
   minCount?: number; // removing is refused at this many effects (default 0)
 }
 
-// The statuses a ground zone gives to the characters in it. Shared by the stage's ground zones and
-// the generator's sewer / water rules.
-export const GroundEffectsEditor: React.FC<GroundEffectsEditorProps> = ({
-  label,
-  effects,
-  onChange,
-  minCount = 0,
-}) => {
-  const update = (index: number, effect: GroundEffect) =>
-    onChange(effects.map((e, i) => (i === index ? effect : e)));
-
-  return (
-    <Space direction="vertical" style={{ width: "100%" }}>
-      {effects.map((effect, index) => (
-        <EffectRow
-          key={index}
-          label={`${label} effect ${index}`}
-          effect={effect}
-          onChange={(next) => update(index, next)}
-          onRemove={
-            effects.length > minCount
-              ? () => onChange(effects.filter((_, i) => i !== index))
-              : undefined
-          }
-        />
-      ))}
-      <Button
-        size="small"
-        aria-label={`${label} add effect`}
-        onClick={() => onChange([...effects, createDefaultGroundEffect()])}
-      >
-        Add Effect
-      </Button>
-    </Space>
-  );
-};
-
 const EffectRow: React.FC<{
   label: string;
   effect: GroundEffect;
@@ -154,6 +117,43 @@ const EffectRow: React.FC<{
           Add Duration
         </Button>
       </Space>
+    </Space>
+  );
+};
+
+// The statuses a ground zone gives to the characters in it. Shared by the stage's ground zones and
+// the generator's sewer / water rules.
+export const GroundEffectsEditor: React.FC<GroundEffectsEditorProps> = ({
+  label,
+  effects,
+  onChange,
+  minCount = 0,
+}) => {
+  const update = (index: number, effect: GroundEffect) =>
+    onChange(effects.map((e, i) => (i === index ? effect : e)));
+
+  return (
+    <Space direction="vertical" style={{ width: "100%" }}>
+      {effects.map((effect, index) => (
+        <EffectRow
+          key={index}
+          label={`${label} effect ${index}`}
+          effect={effect}
+          onChange={(next) => update(index, next)}
+          onRemove={
+            effects.length > minCount
+              ? () => onChange(effects.filter((_, i) => i !== index))
+              : undefined
+          }
+        />
+      ))}
+      <Button
+        size="small"
+        aria-label={`${label} add effect`}
+        onClick={() => onChange([...effects, createDefaultGroundEffect()])}
+      >
+        Add Effect
+      </Button>
     </Space>
   );
 };

@@ -394,4 +394,40 @@ describe("StageEditor", () => {
     const second = JSON.parse(mockWriteFile.mock.calls[1][2] as string);
     expect("gates" in second.entity).toBe(false);
   });
+
+  it("adds a ground zone, saves it, then removes it and drops the field", async () => {
+    renderEditor([]);
+
+    fireEvent.change(
+      screen.getByPlaceholderText("New stage key (e.g. TheSwamp)"),
+      { target: { value: "TheSwamp" } },
+    );
+    fireEvent.click(screen.getByText("Create Stage"));
+    await waitFor(() => {
+      expect(screen.getByText("Stage: TheSwamp")).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByText("Add Ground"));
+    await waitFor(() => {
+      expect(screen.getByText("Ground (1)")).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByText("Save Stage & Anchors"));
+    await waitFor(() => {
+      expect(mockWriteFile).toHaveBeenCalledTimes(1);
+    });
+    const first = JSON.parse(mockWriteFile.mock.calls[0][2] as string);
+    expect(first.entity.ground).toEqual([
+      { kind: "Water", shape: "Circle", x: 0, z: 0, radius: 1 },
+    ]);
+
+    fireEvent.click(screen.getByText("Remove"));
+    await waitFor(() => {
+      expect(screen.getByText("Ground (0)")).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByText("Save Stage & Anchors"));
+    await waitFor(() => {
+      expect(mockWriteFile).toHaveBeenCalledTimes(2);
+    });
+    const second = JSON.parse(mockWriteFile.mock.calls[1][2] as string);
+    expect("ground" in second.entity).toBe(false);
+  });
 });

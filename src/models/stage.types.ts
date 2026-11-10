@@ -98,6 +98,14 @@ export const createDefaultObstacle = (
     ? { kind: ObstacleKind.Rock, shape, x: 0, z: 0, radius: 1 }
     : { kind: ObstacleKind.Wall, shape, x: 0, z: 0, half_x: 1, half_z: 1, yaw: 0 };
 
+export const createDefaultGroundZone = (): GroundZone => ({
+  kind: GroundKind.Water,
+  shape: ObstacleShape.Circle,
+  x: 0,
+  z: 0,
+  radius: 1,
+});
+
 export const createDefaultGate = (): Gate => ({
   id: "",
   obstacle: createDefaultObstacle(ObstacleShape.Box),
