@@ -21,6 +21,7 @@ interface ShapeInputsProps<T extends Footprint> {
   label: string; // names the controls: "<label> shape", "<label> x"
   value: T;
   onChange: (value: T) => void;
+  minSize?: number; // smallest radius or half extent the schema accepts (default 0.01)
 }
 
 // The shape select and the place and size inputs of a footprint
@@ -28,6 +29,7 @@ export const ShapeInputs = <T extends Footprint>({
   label,
   value,
   onChange,
+  minSize = 0.01,
 }: ShapeInputsProps<T>) => {
   const number = (field: ShapeField, min?: number) => (
     <InputNumber
@@ -63,11 +65,11 @@ export const ShapeInputs = <T extends Footprint>({
       {number("x")}
       {number("z")}
       {value.shape === ObstacleShape.Circle ? (
-        number("radius", 0.01)
+        number("radius", minSize)
       ) : (
         <>
-          {number("half_x", 0.01)}
-          {number("half_z", 0.01)}
+          {number("half_x", minSize)}
+          {number("half_z", minSize)}
           {number("yaw")}
         </>
       )}

@@ -61,7 +61,8 @@ const GroundZoneCard: React.FC<GroundZoneCardProps> = ({
             onChange={(kind) => set({ kind })}
             options={ALL_GROUND_KINDS.map((kind) => ({ value: kind, label: kind }))}
           />
-          <ShapeInputs label={label} value={zone} onChange={onChange} />
+          {/* stage.atd: a ground zone's radius and half extents are at least 0.1 */}
+          <ShapeInputs label={label} value={zone} onChange={onChange} minSize={0.1} />
         </Space>
         <GroundEffectsEditor
           label={label}
