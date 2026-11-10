@@ -6,6 +6,7 @@ import { AnchorEntityDefinition } from "@models/anchor.types";
 import { RoomPrefabEntityDefinition } from "@models/roomprefab.types";
 import { StageEntityDefinition } from "@models/stage.types";
 import { usePrefabStore } from "@store/prefab.store";
+import { SHIPPED_JSON_DIR, hasShippedData, shippedTitle } from "@test-utils/shipped-data";
 import { prefabProblems, specProblems } from "@utils/mapgen-check";
 
 const inline = {
@@ -44,9 +45,9 @@ describe("RoomPrefab JSON", () => {
   });
 });
 
-// Round trip against the shipped game data when the sibling repo is checked out
-const JSON_DIR = join(__dirname, "../../../fey-rs/data/json");
-const shipped = existsSync(JSON_DIR);
+// Round trip against the shipped game data (skipped, and says so, when it is not found)
+const JSON_DIR = SHIPPED_JSON_DIR ?? "";
+const shipped = hasShippedData;
 
 // -0 and 0 are the same number in the data; the editor writes 0
 const noNegativeZero = (_key: string, value: unknown) => (Object.is(value, -0) ? 0 : value);
@@ -56,7 +57,7 @@ const files = (dir: string, suffix: string) =>
     ? readdirSync(join(JSON_DIR, dir)).filter((f) => f.endsWith(suffix))
     : [];
 
-describe.skipIf(!shipped)("shipped mapgen data", () => {
+describe.skipIf(!shipped)(shippedTitle("shipped mapgen data"), () => {
   it("round-trips every roomprefab file semantically", () => {
     const names = files("roomprefab", ".roomprefab.json");
     expect(names.length).toBeGreaterThan(0);

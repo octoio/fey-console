@@ -1,4 +1,4 @@
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
@@ -6,6 +6,7 @@ import {
   Faction,
   type CharacterEntityDefinition,
 } from "@models/character.types";
+import { SHIPPED_JSON_DIR, hasShippedData, shippedTitle } from "@test-utils/shipped-data";
 
 describe("character.types faction", () => {
   it("lists the factions of the ATD schema", () => {
@@ -27,11 +28,8 @@ describe("character.types faction", () => {
     expect(without.faction).toBeUndefined();
   });
 
-  it("is filled in every character of the game data checkout, when there is one", () => {
-    const dir = join(__dirname, "../../../fey-rs/data/json/character");
-    if (!existsSync(dir)) {
-      return;
-    }
+  it.skipIf(!hasShippedData)(shippedTitle("is filled in every character of the game data checkout"), () => {
+    const dir = join(SHIPPED_JSON_DIR!, "character");
     const files = readdirSync(dir).filter((f) => f.endsWith(".character.json"));
     expect(files.length).toBeGreaterThan(0);
     for (const file of files) {

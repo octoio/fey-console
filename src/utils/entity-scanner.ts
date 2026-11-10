@@ -60,12 +60,6 @@ export async function scanFolderForEntities(
       console.log(`Found ${allFiles.length} files`);
     } else throw new Error("Directory handle is required for scanning");
 
-    // If no entities were found, provide mock data for testing
-    if (Object.values(entityReferences).every((arr) => arr.length === 0)) {
-      console.log("No entities found, providing mock data");
-      await mockScanDelay();
-    }
-
     return {
       entities: mapEntityReferencesFromFileEntityReferences(entityReferences),
       files: allFiles,
@@ -183,9 +177,4 @@ async function processJsonFile(
   } catch (error) {
     console.warn(`Error processing file ${filePath}:`, error);
   }
-}
-
-// Mock delay to simulate async operation
-function mockScanDelay(): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, 1000));
 }

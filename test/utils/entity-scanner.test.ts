@@ -290,31 +290,6 @@ describe("entity-scanner", () => {
       expect(result.entities.Weapon).toHaveLength(0);
     });
 
-    it("should provide mock data when no entities are found", async () => {
-      const mockHandle = createMockFileSystemHandle({
-        "empty.txt": "not an entity",
-      });
-
-      // Mock the mockScanDelay function to resolve immediately
-      vi.doMock("@utils/entity-scanner", async () => {
-        const actual = await vi.importActual("@utils/entity-scanner");
-        return {
-          ...actual,
-          mockScanDelay: () => Promise.resolve(),
-        };
-      });
-
-      const result = await scanFolderForEntities("test", mockHandle as any);
-
-      expect(consoleSpy.log).toHaveBeenCalledWith(
-        "No entities found, providing mock data",
-      );
-      expect(result.files).toHaveLength(1);
-      expect(
-        Object.values(result.entities).every((arr) => arr.length === 0),
-      ).toBe(true);
-    });
-
     it("should handle different entity types", async () => {
       const entities = {
         "weapon.json": JSON.stringify({

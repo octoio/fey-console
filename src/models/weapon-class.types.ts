@@ -1,6 +1,5 @@
 import { AnimationCue } from "./animation.types";
-import { EntityReference, Metadata } from "./common.types";
-import { ModelAnchorPosition } from "./model.types";
+import { Metadata } from "./common.types";
 import { WeaponCategory } from "./weapon.types";
 
 // Weapon class entity (weapon_class.atd): maps a family of weapon categories to the animation
@@ -23,12 +22,4 @@ export interface WeaponClass {
   metadata: Metadata;
   categories: WeaponCategory[];
   animation_set: AnimationSetEntry[];
-}
-
-// Presentation layer of a weapon, equipment item or monster (visual.atd).
-export interface VisualLayer {
-  layer: string;
-  socket?: ModelAnchorPosition;
-  sort: number;
-  only_for_classes?: EntityReference[];
 }

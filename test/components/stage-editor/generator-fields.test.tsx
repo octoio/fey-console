@@ -3,12 +3,10 @@ import { join } from "node:path";
 import { describe, it, expect, vi } from "vitest";
 import { GeneratorCard } from "@components/stage-editor/generator-card";
 import { GeneratorSpec } from "@models/generator.types";
+import { SHIPPED_JSON_DIR, shippedTitle } from "@test-utils/shipped-data";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-const stagePath = join(
-  __dirname,
-  "../../../../fey-rs/data/json/stage/thecrypt.stage.json",
-);
+const stagePath = join(SHIPPED_JSON_DIR ?? "", "stage/thecrypt.stage.json");
 
 const inline: GeneratorSpec = {
   generator: "Crypt",
@@ -70,7 +68,7 @@ describe("GeneratorCard field levels", { timeout: 30000 }, () => {
     expect(r.placement.max_enemies).toBeUndefined();
   });
 
-  it.skipIf(!shipped)("shows the shipped crypt Ambush min_spacing 2", () => {
+  it.skipIf(!shipped)(shippedTitle("shows the shipped crypt Ambush min_spacing 2"), () => {
     render(<GeneratorCard spec={shipped!} prefabKind={() => undefined} onChange={vi.fn()} onRemove={vi.fn()} />);
     const i = shipped!.requirements.findIndex((r) => r.role === "Ambush");
     expect(value(`requirement ${i} min spacing`)).toBe("2");
