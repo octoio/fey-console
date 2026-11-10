@@ -1,7 +1,9 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { ALL_ACHIEVEMENT_TYPES } from "@models/achievement.types";
 import { ALL_GENERATOR_KINDS } from "@models/generator.types";
+import { ALL_QUEST_ASSIGNEES, ALL_QUEST_DIFFICULTY_TYPES, ALL_QUEST_ORIGINS } from "@models/quest.types";
 import { ALL_GATE_OPENINGS } from "@models/stage.types";
 import { GENERATOR_ATD, generatorAtdTitle, hasGeneratorAtd } from "@test-utils/shipped-data";
 
@@ -21,5 +23,25 @@ describe.skipIf(!hasGeneratorAtd)("enums offer exactly the ATD variants", () => 
   it(generatorAtdTitle("gate_opening"), () => {
     const stageAtd = join(dirname(GENERATOR_ATD!), "stage.atd");
     expect([...ALL_GATE_OPENINGS].sort()).toEqual(variants(stageAtd, "gate_opening").sort());
+  });
+
+  const atd = (file: string) => join(dirname(GENERATOR_ATD!), file);
+
+  it(generatorAtdTitle("achievement_type"), () => {
+    expect([...ALL_ACHIEVEMENT_TYPES].sort()).toEqual(variants(atd("achievement.atd"), "achievement_type").sort());
+  });
+
+  it(generatorAtdTitle("quest_origin"), () => {
+    expect([...ALL_QUEST_ORIGINS].sort()).toEqual(variants(atd("quest.atd"), "quest_origin").sort());
+  });
+
+  it(generatorAtdTitle("quest_assignee"), () => {
+    expect([...ALL_QUEST_ASSIGNEES].sort()).toEqual(variants(atd("quest.atd"), "quest_assignee").sort());
+  });
+
+  it(generatorAtdTitle("quest_difficulty_type"), () => {
+    expect([...ALL_QUEST_DIFFICULTY_TYPES].sort()).toEqual(
+      variants(atd("quest.atd"), "quest_difficulty_type").sort(),
+    );
   });
 });
