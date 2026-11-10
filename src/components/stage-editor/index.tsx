@@ -22,7 +22,9 @@ import { GeneratorKind, createDefaultGeneratorSpec } from "@models/generator.typ
 import { RoomPrefabEntityDefinition } from "@models/roomprefab.types";
 import {
   createDefaultObstacle,
+  createDefaultGate,
   createDefaultStage,
+  Gate,
   Obstacle,
   StageEntityDefinition,
 } from "@models/stage.types";
@@ -32,6 +34,7 @@ import { fileUtils } from "@utils/file-utils";
 import { bindingProblems } from "@utils/mapgen-check";
 import { AnchorCard } from "./anchor-card";
 import { ColorInput, MetadataInput } from "./field-inputs";
+import { GateCard } from "./gate-card";
 import { GeneratorCard } from "./generator-card";
 import { ObstacleCard } from "./obstacle-card";
 import {
@@ -195,6 +198,15 @@ export const StageEditor: React.FC<StageEditorProps> = ({
     if (!stage) return;
     // An empty list is saved as no field at all (the ATD field is optional)
     updateStage({ ...stage, obstacles: next.length > 0 ? next : undefined });
+  };
+
+  const gates: Gate[] = stage?.gates ?? [];
+  const groundIds = (stage?.ground ?? []).flatMap((zone) => zone.id ?? []);
+
+  const setGates = (next: Gate[]) => {
+    if (!stage) return;
+    // An empty list is saved as no field at all (the ATD field is optional)
+    updateStage({ ...stage, gates: next.length > 0 ? next : undefined });
   };
 
   const updateAnchor = (index: number, definition: AnchorEntityDefinition) => {
@@ -404,6 +416,37 @@ export const StageEditor: React.FC<StageEditorProps> = ({
                   onRemove={() =>
                     setObstacles(obstacles.filter((_, i) => i !== index))
                   }
+                />
+              ))}
+            </Space>
+          </Card>
+
+          <Card
+            size="small"
+            title={`Gates (${gates.length})`}
+            extra={
+              <Button
+                size="small"
+                onClick={() => setGates([...gates, createDefaultGate()])}
+              >
+                Add Gate
+              </Button>
+            }
+          >
+            <Space direction="vertical" style={{ width: "100%" }}>
+              {gates.length === 0 && (
+                <Empty description="No gates: nothing opens during the stage" />
+              )}
+              {gates.map((gate, index) => (
+                <GateCard
+                  key={index}
+                  index={index}
+                  gate={gate}
+                  groundIds={groundIds}
+                  onChange={(updated) =>
+                    setGates(gates.map((g, i) => (i === index ? updated : g)))
+                  }
+                  onRemove={() => setGates(gates.filter((_, i) => i !== index))}
                 />
               ))}
             </Space>
