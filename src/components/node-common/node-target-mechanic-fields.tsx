@@ -1,4 +1,4 @@
-import { Select } from "antd";
+import { Checkbox, Select } from "antd";
 import React from "react";
 import {
   FullWidthSelect,
@@ -141,6 +141,13 @@ export const NodeTargetMechanicFields: React.FC<
       const cone = mechanic as EffectTargetMechanicCone;
       const update = (patch: Partial<EffectTargetMechanicCone>) =>
         onUpdate({ ...cone, ...patch });
+      // `behind` is optional and absent means false: unchecking drops the key.
+      const setBehind = (behind: boolean) => {
+        const next = { ...cone };
+        if (behind) next.behind = true;
+        else delete next.behind;
+        onUpdate(next);
+      };
       return (
         <>
           <NodeField label="Hit Count">
@@ -175,6 +182,14 @@ export const NodeTargetMechanicFields: React.FC<
               />
             </NodeInteractive>
           </NodeField>
+          <NodeInteractive>
+            <Checkbox
+              checked={cone.behind === true}
+              onChange={(e) => setBehind(e.target.checked)}
+            >
+              Behind (turn the cone round)
+            </Checkbox>
+          </NodeInteractive>
         </>
       );
     }
