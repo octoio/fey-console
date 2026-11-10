@@ -47,6 +47,17 @@ vi.mock("@components/common/styled-components", () => ({
 
 // Mock antd Select and Option
 vi.mock("antd", () => ({
+  Checkbox: ({ checked, onChange, children }: any) => (
+    <label>
+      <input
+        type="checkbox"
+        data-testid="behind-checkbox"
+        checked={checked}
+        onChange={(e) => onChange?.({ target: { checked: e.target.checked } })}
+      />
+      {children}
+    </label>
+  ),
   Select: {
     Option: ({ children, value, ...props }: any) => (
       <option value={value} {...props}>
@@ -531,6 +542,42 @@ describe("NodeTargetMechanicFields", () => {
       fireEvent.change(inputs[2], { target: { value: "120" } });
 
       expect(mockOnUpdate).toHaveBeenCalledWith({ ...cone, angle: 120 });
+    });
+  });
+
+  describe("Cone behind", () => {
+    const base: EffectTargetMechanicCone = {
+      type: EffectTargetMechanicType.Cone,
+      hit_count: 3,
+      radius: 6,
+      angle: 90,
+    };
+
+    const behindCone: EffectTargetMechanicCone = { ...base, behind: true };
+
+    it("shows unchecked when the key is absent and checking writes behind: true", () => {
+      render(
+        <NodeTargetMechanicFields mechanic={base} onUpdate={mockOnUpdate} />,
+      );
+      const box = screen.getByTestId("behind-checkbox");
+      expect(box).not.toBeChecked();
+      fireEvent.click(box);
+      expect(mockOnUpdate).toHaveBeenCalledWith({ ...base, behind: true });
+    });
+
+    it("unchecking removes the key instead of writing behind: false", () => {
+      render(
+        <NodeTargetMechanicFields
+          mechanic={behindCone}
+          onUpdate={mockOnUpdate}
+        />,
+      );
+      const box = screen.getByTestId("behind-checkbox");
+      expect(box).toBeChecked();
+      fireEvent.click(box);
+      const written = mockOnUpdate.mock.calls[0][0];
+      expect(written).toEqual(base);
+      expect("behind" in written).toBe(false);
     });
   });
 

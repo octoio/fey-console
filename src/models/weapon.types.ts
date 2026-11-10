@@ -2,7 +2,7 @@ import { StatAffix } from "./affix.types";
 import { EntityReference, IntRange, Metadata } from "./common.types";
 import { ModelAnchorSet } from "./model.types";
 import { QualityType } from "./quality.types";
-import { VisualLayer } from "./weapon-class.types";
+import { VisualLayer } from "./visual.types";
 
 export enum WeaponCategory {
   None = "None",
