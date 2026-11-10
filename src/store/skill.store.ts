@@ -519,6 +519,12 @@ export const useSkillStore = create<SkillEditorState>()(
             };
             newNode.data.direction = { x: 0, y: 0, z: 1 };
             break;
+          case SkillActionNodeType.Interrupt:
+            newNode.data.target_mechanic = {
+              type: EffectTargetMechanicType.Selected,
+            };
+            newNode.data.target = EffectTarget.Enemy;
+            break;
           case SkillActionNodeType.Requirement:
             newNode.data.requirements = {
               operator: RequirementOperator.All,

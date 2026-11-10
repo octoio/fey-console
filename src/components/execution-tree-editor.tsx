@@ -18,6 +18,7 @@ import { autoLayoutNodes } from "@utils/auto-layout";
 import { AnimationNode } from "./nodetypes/animation-node";
 import { DelayNode } from "./nodetypes/delay-node";
 import { HitEffectNode } from "./nodetypes/hit-effect-node";
+import { InterruptNode } from "./nodetypes/interrupt-node";
 import { MoveNode } from "./nodetypes/move-node";
 import { ParallelNode } from "./nodetypes/parallel-node";
 import { ProjectileNode } from "./nodetypes/projectile-node";
@@ -63,6 +64,7 @@ export const ExecutionTreeEditor: React.FC = () => {
         [SkillActionNodeType.Move]: MoveNode,
         [SkillActionNodeType.Projectile]: ProjectileNode,
         [SkillActionNodeType.Requirement]: RequirementNode,
+        [SkillActionNodeType.Interrupt]: InterruptNode,
       }) as Record<SkillActionNodeType, React.FC<NodeProps>>,
     [],
   );

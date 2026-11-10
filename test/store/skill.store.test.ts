@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { EntityType } from "@models/common.types";
+import { EffectTarget, EffectTargetMechanicType } from "@models/effect.types";
 import { QualityType } from "@models/quality.types";
 import { RequirementOperator } from "@models/requirement.types";
 import {
@@ -315,6 +316,24 @@ describe("useSkillStore", () => {
         operator: RequirementOperator.All,
         requirements: [],
       });
+    });
+
+    it("should add an interrupt node targeting the selected character", () => {
+      const { result } = renderHook(() => useSkillStore());
+
+      act(() => {
+        result.current.addNode(SkillActionNodeType.Interrupt, null);
+      });
+
+      const newNode = result.current.nodes.find(
+        (n) => n.type === SkillActionNodeType.Interrupt,
+      );
+      expect(newNode).toBeDefined();
+      expect(newNode?.data.target_mechanic).toEqual({
+        type: EffectTargetMechanicType.Selected,
+      });
+      expect(newNode?.data.target).toBe(EffectTarget.Enemy);
+      expect(newNode?.data).not.toHaveProperty("on_interrupt");
     });
 
     it("should add node with parent and create edge", () => {

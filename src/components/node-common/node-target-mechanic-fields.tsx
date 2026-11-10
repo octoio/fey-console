@@ -8,6 +8,7 @@ import {
   ALL_CHARACTER_TEAMS,
   EffectTargetMechanic,
   EffectTargetMechanicCircle,
+  EffectTargetMechanicCone,
   EffectTargetMechanicRectangle,
   EffectTargetMechanicTeam,
   EffectTargetMechanicType,
@@ -135,6 +136,48 @@ export const NodeTargetMechanicFields: React.FC<
           </NodeField>
         </>
       );
+
+    case EffectTargetMechanicType.Cone: {
+      const cone = mechanic as EffectTargetMechanicCone;
+      const update = (patch: Partial<EffectTargetMechanicCone>) =>
+        onUpdate({ ...cone, ...patch });
+      return (
+        <>
+          <NodeField label="Hit Count">
+            <NodeInteractive>
+              <FullWidthInputNumber
+                min={1}
+                value={cone.hit_count}
+                onChange={(value) => update({ hit_count: Number(value) || 1 })}
+                size="small"
+              />
+            </NodeInteractive>
+          </NodeField>
+          <NodeField label="Radius">
+            <NodeInteractive>
+              <FullWidthInputNumber
+                min={0}
+                step={0.5}
+                value={cone.radius}
+                onChange={(value) => update({ radius: Number(value) || 0 })}
+                size="small"
+              />
+            </NodeInteractive>
+          </NodeField>
+          <NodeField label="Angle (degrees)">
+            <NodeInteractive>
+              <FullWidthInputNumber
+                min={1}
+                max={360}
+                value={cone.angle}
+                onChange={(value) => update({ angle: Number(value) || 1 })}
+                size="small"
+              />
+            </NodeInteractive>
+          </NodeField>
+        </>
+      );
+    }
 
     default:
       return null;
