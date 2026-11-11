@@ -60,3 +60,14 @@ describe("weapon level requirement", () => {
     expect(w.min_level).toBe(4);
   });
 });
+
+describe("weapon off-hand rule", () => {
+  it("off_hands lists categories and survives a JSON round trip", () => {
+    const w: Pick<Weapon, "category" | "off_hands"> = {
+      category: WeaponCategory.OneHandMace,
+      off_hands: [WeaponCategory.Shield, WeaponCategory.Focus],
+    };
+    expect(JSON.parse(JSON.stringify(w))).toEqual(w);
+    expect(Object.values(WeaponCategory)).toContain("Focus");
+  });
+});
