@@ -46,7 +46,7 @@ export type Weapon = {
   metadata: Metadata;
   /** Overrides the weapon class that lists the category. */
   weapon_class?: EntityReference;
-  /** Sprite layer drawn when the weapon is held. */
+  /** Look layer shown for the weapon (a model hung on a socket); socket absent: the socket of `hand`. */
   visual?: VisualLayer;
   category: WeaponCategory;
   /** Equip slot the weapon occupies; explicit data, not derived from the category. */
