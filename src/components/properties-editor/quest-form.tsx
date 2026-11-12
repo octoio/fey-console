@@ -4,7 +4,7 @@ import { EntityReferenceSelect } from "@components/common/entity-reference-selec
 import { ALL_ACHIEVEMENT_TYPES, AchievementType } from "@models/achievement.types";
 import { EntityType } from "@models/common.types";
 import { ALL_QUEST_ASSIGNEES, ALL_QUEST_ORIGINS, Quest } from "@models/quest.types";
-import { FlagField, SelectField, withField } from "./fields";
+import { FlagField, NumberField, SelectField, withField } from "./fields";
 
 const { Text } = Typography;
 
@@ -41,6 +41,7 @@ export const QuestForm: React.FC<QuestFormProps> = ({ entity, onChange }) => {
       <Space wrap>
         <FlagField label="is repeatable" value={entity.is_repeatable} onChange={(on) => set({ is_repeatable: on ?? false })} />
         <FlagField label="ends run" value={entity.ends_run} onChange={(ends_run) => set({ ends_run })} />
+        <NumberField label="reward gold" value={entity.reward_gold} min={1} onChange={(reward_gold) => set({ reward_gold })} />
       </Space>
       <Space>
         <Text strong>required achievements</Text>
