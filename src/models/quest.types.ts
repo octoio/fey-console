@@ -321,6 +321,8 @@ export interface Quest {
   required_achievements: AchievementType[]; // min 1
   /** true: clearing this quest ends the run as a win (absent = false). */
   ends_run?: boolean;
+  /** Gold every player of the party gets when the quest is won, times the tier's gold multiplier (min 1; absent = none). */
+  reward_gold?: number;
 }
 
 export type QuestEntityDefinition = {

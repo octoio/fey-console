@@ -57,7 +57,7 @@ export interface AnchorLampPost extends AnchorBase {
 export interface AnchorHealingShrine extends AnchorBase {
   type: AnchorType.HealingShrine;
   model: string; // key of the pack prop that stands there (min length 1)
-  price: number; // gold at level 1 for one use (min 1); the sim scales it like the gold drops
+  price: number; // gold each living player of the party pays for one use (min 1); fixed, never grows with level or tier
 }
 
 export interface AnchorLever extends AnchorBase {

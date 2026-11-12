@@ -4,7 +4,6 @@ import { QualityType } from "./quality.types";
 import { RequirementEvaluation } from "./requirement.types";
 
 export enum DropType {
-  Gold = "Gold",
   Equipment = "Equipment",
   Weapon = "Weapon",
   Skill = "Skill",
@@ -24,12 +23,6 @@ export type DropGate = {
   min_tier?: number;
   min_rank?: MonsterRank;
   lower_rank_weight?: number;
-};
-
-export type GoldDrop = {
-  type: DropType.Gold;
-  weight: number; // min 1
-  amount: IntRange; // 1..1000
 };
 
 export type EquipmentDrop = {
@@ -60,7 +53,6 @@ export type SkillBookDrop = {
 };
 
 export type Drop =
-  | GoldDrop
   | EquipmentDrop
   | WeaponDrop
   | SkillDrop
@@ -90,11 +82,21 @@ export type DropGuarantee = {
   min_quality: QualityType;
 };
 
-/** Gold grows with the killed monster's level and rank; absent fields add nothing. */
-export type GoldScaling = {
+/** With `chance`, a kill of a rank drops a whole amount in `amount` (1..1000), the same for every eligible player. */
+export type GoldRule = {
+  chance: number; // 0..1
+  amount: IntRange;
+};
+
+/**
+ * The gold of a table per monster rank. The amount grows by `per_level` for each level above 1 (absent:
+ * not at all) and by the quest tier's gold multiplier.
+ */
+export type GoldDrops = {
   per_level?: number;
-  elite?: number;
-  boss?: number;
+  normal: GoldRule;
+  elite: GoldRule;
+  boss: GoldRule;
 };
 
 /** Poll (default): need / greed / pass. Everyone: a copy each. Individual: one player per item. */
@@ -114,15 +116,14 @@ export type DropEvaluation = {
 
 export type DropTable = {
   metadata: Metadata;
-  gold_drops: Drop[];
+  /** Absent: the table drops no gold. */
+  gold?: GoldDrops;
   equipment_drops: Drop[];
   weapon_drops: Drop[];
   skill_book_drops: Drop[];
   /** Absent: items are picked by entry weight alone. */
   rarity_curve?: RarityCurve;
   guarantees?: DropGuarantee[];
-  /** Absent: gold amounts are not scaled. */
-  gold_scaling?: GoldScaling;
   /** Absent: Poll. */
   distribution?: LootDistribution;
   /** Each eligible player beyond the first multiplies the chance of every item category by 1 + this. */

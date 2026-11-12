@@ -101,6 +101,17 @@ describe("QuestForm ends_run", { timeout: 30000 }, () => {
     expect("ends_run" in saved(onChange)).toBe(false);
   });
 
+  it("the reward gold writes a number and clearing removes the key (#357)", () => {
+    const onChange = vi.fn();
+    render(<QuestForm entity={quest({ reward_gold: 15 })} onChange={onChange} />);
+    const field = screen.getByLabelText("reward gold");
+    expect(field).toHaveValue("15");
+    fireEvent.change(field, { target: { value: "20" } });
+    expect(saved(onChange).reward_gold).toBe(20);
+    fireEvent.change(field, { target: { value: "" } });
+    expect("reward_gold" in saved(onChange)).toBe(false);
+  });
+
   it("says the tree is not editable", () => {
     render(<QuestForm entity={quest()} onChange={vi.fn()} />);
     expect(screen.getByText(/not editable here/)).toBeInTheDocument();
