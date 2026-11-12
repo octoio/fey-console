@@ -118,6 +118,8 @@ export type Character = {
   starting_equipment?: EntityReference[];
   /** Weapons (entity references) a new player character wields. */
   starting_weapons?: EntityReference[];
+  /** PersonalQuest a new player character opens with (the first of its personal line). */
+  first_personal_quest?: EntityReference;
 };
 
 export type CharacterEntityDefinition = {
