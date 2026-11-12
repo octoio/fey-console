@@ -106,3 +106,53 @@ describe("AnchorCard healing shrine", { timeout: 30000 }, () => {
     expect(entity.binding).toEqual({ slot: AnchorSlot.Healing, every: true });
   });
 });
+
+describe("AnchorCard merchant", { timeout: 30000 }, () => {
+  const saved = createAnchorDefinition(
+    "Merchant",
+    JSON.parse(
+      JSON.stringify({
+        type: "Merchant",
+        metadata: { title: "Merchant", description: "" },
+        transform: {
+          position: { x: 0, y: 0, z: 0 },
+          rotation: { x: 0, y: 0, z: 0 },
+          scale: { x: 1, y: 1, z: 1 },
+        },
+        model: "VCart",
+        prices: { common: 15, uncommon: 30, rare: 70, epic: 150, legendary: 300 },
+        sell_fraction: 0.2,
+        commission_price: 25,
+        stock: {
+          size: 5,
+          rarity: { common: 60, uncommon: 30, rare: 10, epic: 0, legendary: 0 },
+          kinds: { equipment: 1, weapon: 1 },
+        },
+        showcase: {
+          rarity: { common: 0, uncommon: 0, rare: 80, epic: 20, legendary: 0 },
+        },
+      }),
+    ),
+  );
+
+  it("round-trips through the editor model without dropping a field", () => {
+    expect(JSON.parse(JSON.stringify(saved)).entity).toEqual(saved.entity);
+    expect(saved.entity.type).toBe(AnchorType.Merchant);
+  });
+
+  it("edits one price and leaves the rest of the chart alone", () => {
+    const onChange = vi.fn();
+    render(<AnchorCard definition={saved} isNew={false} onChange={onChange} onRemove={vi.fn()} />);
+    fireEvent.change(screen.getByRole("spinbutton", { name: "price rare" }), {
+      target: { value: "80" },
+    });
+    const entity = onChange.mock.calls.at(-1)?.[0].entity;
+    expect(entity.prices).toEqual({ common: 15, uncommon: 30, rare: 80, epic: 150, legendary: 300 });
+    expect(entity.stock.size).toBe(5);
+  });
+
+  it("creates a merchant from the type switch with a full default chart", () => {
+    const anchor = createDefaultAnchor(AnchorType.Merchant);
+    expect(anchor).toMatchObject({ type: "Merchant", sell_fraction: 0.2 });
+  });
+});
