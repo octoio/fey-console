@@ -70,6 +70,7 @@ export enum EntityType {
   RoomPrefab = "RoomPrefab",
   Achievement = "Achievement",
   Balance = "Balance",
+  PersonalQuest = "PersonalQuest",
 }
 
 // Update EntityReference to use the enum
