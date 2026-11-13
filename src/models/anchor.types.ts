@@ -1,4 +1,4 @@
-import { Color, Metadata, Transform } from "./common.types";
+import { Color, EntityReference, Metadata, Transform } from "./common.types";
 import { RarityWeights } from "./drop.types";
 import { CharacterTeam } from "./effect.types";
 import { AnchorBinding } from "./generator.types";
@@ -96,6 +96,7 @@ export type MerchantShowcase = {
 export interface AnchorMerchant extends AnchorBase {
   type: AnchorType.Merchant;
   model: string; // key of the pack prop that stands there (min length 1)
+  outfit: EntityReference[]; // the equipment her figure wears while a run is in progress (each is an Equipment)
   prices: RarityPrices;
   sell_fraction: number; // 0..1: the share of the price she pays for a piece
   commission_price: number; // gold for one random piece of a slot (min 1)
@@ -164,6 +165,7 @@ export const createDefaultAnchor = (type: AnchorType): Anchor => {
         ...base,
         type: AnchorType.Merchant,
         model: "",
+        outfit: [],
         prices: { common: 1, uncommon: 1, rare: 1, epic: 1, legendary: 1 },
         sell_fraction: 0.2,
         commission_price: 1,

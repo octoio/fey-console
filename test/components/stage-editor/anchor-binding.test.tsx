@@ -5,6 +5,34 @@ import { AnchorType, createDefaultAnchor } from "@models/anchor.types";
 import { AnchorSlot } from "@models/generator.types";
 import { fireEvent, render, screen } from "@testing-library/react";
 
+// The reference picker needs the entity store: a stub that shows the key and can set it
+vi.mock("@components/common/entity-reference-select", () => ({
+  EntityReferenceSelect: ({
+    value,
+    onChange,
+  }: {
+    value?: string;
+    onChange: (r: { key: string; type: string; owner: string; version: number; id: string }) => void;
+  }) => (
+    <>
+      <input aria-label="reference key" readOnly value={value ?? ""} />
+      <button
+        onClick={() =>
+          onChange({
+            id: "Octoio:Equipment:RagCape:1",
+            key: "RagCape",
+            owner: "Octoio",
+            type: "Equipment",
+            version: 1,
+          })
+        }
+      >
+        set reference
+      </button>
+    </>
+  ),
+}));
+
 describe("AnchorCard binding", { timeout: 30000 }, () => {
   const bound = createAnchorDefinition("Pack", {
     ...createDefaultAnchor(AnchorType.SpawnPoint),
@@ -120,6 +148,15 @@ describe("AnchorCard merchant", { timeout: 30000 }, () => {
           scale: { x: 1, y: 1, z: 1 },
         },
         model: "VCart",
+        outfit: [
+          {
+            id: "Octoio:Equipment:ReapersCowl:1",
+            key: "ReapersCowl",
+            owner: "Octoio",
+            type: "Equipment",
+            version: 1,
+          },
+        ],
         prices: { common: 15, uncommon: 30, rare: 70, epic: 150, legendary: 300 },
         sell_fraction: 0.2,
         commission_price: 25,
@@ -151,8 +188,29 @@ describe("AnchorCard merchant", { timeout: 30000 }, () => {
     expect(entity.stock.size).toBe(5);
   });
 
+  it("lists the outfit and adds a piece to it", () => {
+    const onChange = vi.fn();
+    render(<AnchorCard definition={saved} isNew={false} onChange={onChange} onRemove={vi.fn()} />);
+    expect(screen.getByRole("textbox", { name: "reference key" })).toHaveValue("ReapersCowl");
+    fireEvent.click(screen.getByRole("button", { name: /add outfit piece/i }));
+    const entity = onChange.mock.calls.at(-1)?.[0].entity;
+    expect(entity.outfit.map((p: { key: string }) => p.key)).toEqual(["ReapersCowl", ""]);
+    expect(entity.outfit[1].type).toBe("Equipment");
+  });
+
+  it("picks a piece of the outfit and removes another", () => {
+    const onChange = vi.fn();
+    render(<AnchorCard definition={saved} isNew={false} onChange={onChange} onRemove={vi.fn()} />);
+    fireEvent.click(screen.getByRole("button", { name: "set reference" }));
+    expect(onChange.mock.calls.at(-1)?.[0].entity.outfit.map((p: { key: string }) => p.key)).toEqual([
+      "RagCape",
+    ]);
+    fireEvent.click(screen.getByRole("button", { name: /remove outfit piece/i }));
+    expect(onChange.mock.calls.at(-1)?.[0].entity.outfit).toEqual([]);
+  });
+
   it("creates a merchant from the type switch with a full default chart", () => {
     const anchor = createDefaultAnchor(AnchorType.Merchant);
-    expect(anchor).toMatchObject({ type: "Merchant", sell_fraction: 0.2 });
+    expect(anchor).toMatchObject({ type: "Merchant", sell_fraction: 0.2, outfit: [] });
   });
 });
