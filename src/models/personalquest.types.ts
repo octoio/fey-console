@@ -1,4 +1,5 @@
 import { EntityReference, Metadata } from "./common.types";
+import { QualityType } from "./quality.types";
 
 // Personal quest entity (personal_quest.atd): a goal one character pursues alone, on top of the
 // party quest, and what it gives (#356). The first one is a character's first weapon; the others
@@ -18,6 +19,9 @@ export interface PersonalGoal {
   growth?: number;
 }
 
+/** What breaks a sworn quest: the holder dies, or the holder drinks the flask. */
+export type PersonalOath = "NoDeath" | "NoFlask";
+
 export type PersonalRewardKind = "WeaponCache" | "Piece" | "SkillBook" | "Gold";
 
 export interface PersonalReward {
@@ -30,6 +34,8 @@ export interface PersonalReward {
   gold?: number;
   /** What the card and the line say of the reward ("your first weapon"); absent = worded from the kind. */
   text?: string;
+  /** Piece only: the piece is of this quality or better (a sworn quest's sure piece). */
+  min_quality?: QualityType;
 }
 
 export interface PersonalQuest {
@@ -39,4 +45,6 @@ export interface PersonalQuest {
   rewards: PersonalReward[];
   /** The line shown while pursuing it; {count} is filled with the size: "Defeat {count} monsters". */
   goal_text: string;
+  /** Sworn quest: breaking it loses the quest and gives Oathbreaker. Its rewards are pieces with a min_quality. */
+  oath?: PersonalOath;
 }
