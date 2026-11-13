@@ -1,4 +1,5 @@
-import { Color, Metadata, Transform } from "./common.types";
+import { Color, EntityReference, Metadata, Transform } from "./common.types";
+import { RarityWeights } from "./drop.types";
 import { CharacterTeam } from "./effect.types";
 import { AnchorBinding } from "./generator.types";
 
@@ -12,6 +13,7 @@ export enum AnchorType {
   LampPost = "LampPost",
   HealingShrine = "HealingShrine",
   Lever = "Lever",
+  Merchant = "Merchant",
 }
 
 export enum ZoneDetectionType {
@@ -65,6 +67,43 @@ export interface AnchorLever extends AnchorBase {
   model: string; // key of the pack prop that stands there (min length 1)
 }
 
+/** The gold the merchant asks for a piece of each rarity (a bare item counts as Common). */
+export type RarityPrices = {
+  common: number; // min 1
+  uncommon: number;
+  rare: number;
+  epic: number;
+  legendary: number;
+};
+
+/** Relative weights of equipment and weapons on her shelf (only the sum must be positive). */
+export type MerchantKindWeights = {
+  equipment: number; // min 0
+  weapon: number; // min 0
+};
+
+export type MerchantStock = {
+  size: number; // pieces rolled at the run start and at each return to the village (min 1)
+  rarity: RarityWeights;
+  kinds: MerchantKindWeights;
+};
+
+export type MerchantShowcase = {
+  rarity: RarityWeights; // the one piece kept until it is bought
+};
+
+/** The village merchant: sells and buys equipment and weapons, takes commissions (fey-rs docs/systems/loot.md). */
+export interface AnchorMerchant extends AnchorBase {
+  type: AnchorType.Merchant;
+  model: string; // key of the pack prop that stands there (min length 1)
+  outfit: EntityReference[]; // the equipment her figure wears while a run is in progress (each is an Equipment)
+  prices: RarityPrices;
+  sell_fraction: number; // 0..1: the share of the price she pays for a piece
+  commission_price: number; // gold for one random piece of a slot (min 1)
+  stock: MerchantStock;
+  showcase: MerchantShowcase;
+}
+
 export type Anchor =
   | AnchorZone
   | AnchorSpawnPoint
@@ -72,7 +111,8 @@ export type Anchor =
   | AnchorQuestBoard
   | AnchorLampPost
   | AnchorHealingShrine
-  | AnchorLever;
+  | AnchorLever
+  | AnchorMerchant;
 
 export type AnchorEntityDefinition = {
   id: string;
@@ -120,5 +160,23 @@ export const createDefaultAnchor = (type: AnchorType): Anchor => {
       return { ...base, type: AnchorType.HealingShrine, model: "", price: 1 };
     case AnchorType.Lever:
       return { ...base, type: AnchorType.Lever, model: "" };
+    case AnchorType.Merchant:
+      return {
+        ...base,
+        type: AnchorType.Merchant,
+        model: "",
+        outfit: [],
+        prices: { common: 1, uncommon: 1, rare: 1, epic: 1, legendary: 1 },
+        sell_fraction: 0.2,
+        commission_price: 1,
+        stock: {
+          size: 1,
+          rarity: { common: 1, uncommon: 0, rare: 0, epic: 0, legendary: 0 },
+          kinds: { equipment: 1, weapon: 1 },
+        },
+        showcase: {
+          rarity: { common: 1, uncommon: 0, rare: 0, epic: 0, legendary: 0 },
+        },
+      };
   }
 };

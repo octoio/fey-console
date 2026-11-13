@@ -10,6 +10,7 @@ import {
 } from "@models/anchor.types";
 import { ALL_ANCHOR_SLOTS, AnchorSlot, dropUndefined } from "@models/generator.types";
 import { ColorInput, MetadataInput, Vector3Input } from "./field-inputs";
+import { MerchantFields } from "./merchant-fields";
 
 const { Text } = Typography;
 
@@ -216,6 +217,10 @@ export const AnchorCard: React.FC<AnchorCardProps> = ({
               </>
             )}
           </Space>
+        )}
+
+        {anchor.type === AnchorType.Merchant && (
+          <MerchantFields anchor={anchor} onChange={updateAnchor} />
         )}
 
         {anchor.type === AnchorType.Zone && (
