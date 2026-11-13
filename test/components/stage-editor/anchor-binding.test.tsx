@@ -214,3 +214,47 @@ describe("AnchorCard merchant", { timeout: 30000 }, () => {
     expect(anchor).toMatchObject({ type: "Merchant", sell_fraction: 0.2, outfit: [] });
   });
 });
+
+describe("AnchorCard chest", { timeout: 30000 }, () => {
+  const chest = createAnchorDefinition("Chest", {
+    ...createDefaultAnchor(AnchorType.Chest),
+    binding: { slot: AnchorSlot.Chest, ordinal: 0 },
+  });
+
+  it("creates a chest with an Uncommon floor and an empty guard", () => {
+    expect(createDefaultAnchor(AnchorType.Chest)).toMatchObject({
+      type: "Chest",
+      model: "",
+      min_quality: "Uncommon",
+      guard: { type: "Anchor", key: "" },
+    });
+  });
+
+  it("edits the model and keeps the binding", () => {
+    const onChange = vi.fn();
+    render(<AnchorCard definition={chest} isNew={false} onChange={onChange} onRemove={vi.fn()} />);
+    fireEvent.change(screen.getByRole("textbox", { name: "chest model" }), {
+      target: { value: "VChest" },
+    });
+    const entity = onChange.mock.calls.at(-1)?.[0].entity;
+    expect(entity.model).toBe("VChest");
+    expect(entity.binding).toEqual({ slot: AnchorSlot.Chest, ordinal: 0 });
+  });
+
+  it("sets the guard from the reference picker", () => {
+    const onChange = vi.fn();
+    render(<AnchorCard definition={chest} isNew={false} onChange={onChange} onRemove={vi.fn()} />);
+    fireEvent.click(screen.getByRole("button", { name: "set reference" }));
+    expect(onChange.mock.calls.at(-1)?.[0].entity.guard.key).toBe("RagCape");
+  });
+
+  it("offers only Uncommon, Rare and Epic as the floor", () => {
+    render(<AnchorCard definition={chest} isNew={false} onChange={vi.fn()} onRemove={vi.fn()} />);
+    fireEvent.mouseDown(screen.getByRole("combobox", { name: "chest min quality" }));
+    for (const quality of ["Rare", "Epic"]) {
+      expect(screen.getAllByText(quality).length).toBeGreaterThan(0);
+    }
+    expect(screen.queryByText("Legendary")).toBeNull();
+    expect(screen.queryByText("Common")).toBeNull();
+  });
+});
