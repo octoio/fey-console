@@ -1,29 +1,42 @@
 import { EntityReference, Metadata } from "./common.types";
 
 // Personal quest entity (personal_quest.atd): a goal one character pursues alone, on top of the
-// party quest, and the reward it gives. The first one is a character's first weapon (#356).
-export type PersonalGoalKind = "DefeatMonsters";
+// party quest, and what it gives (#356). The first one is a character's first weapon; the others
+// are the cards of the offer of three, drawn from the pool the character names (`personal_quests`).
+export type PersonalGoalKind =
+  | "DefeatMonsters"
+  | "DefeatElites"
+  | "DealDamage"
+  | "HealAllies"
+  | "GainLevels";
 
 export interface PersonalGoal {
   kind: PersonalGoalKind;
-  /** How many monsters to defeat (credited kills count; min 1). */
+  /** The starting size of the goal (min 1). */
   count: number;
+  /** The size is count * (1 + growth * n), n = chosen quests finished this run; absent = 0 (not negative). */
+  growth?: number;
 }
 
-export type PersonalRewardKind = "WeaponCache";
+export type PersonalRewardKind = "WeaponCache" | "Piece" | "SkillBook" | "Gold";
 
 export interface PersonalReward {
   kind: PersonalRewardKind;
-  /** Weapons (entity references) the cache draws from: at least three weapon classes. */
-  weapons: EntityReference[];
+  /** How often the draw of a card picks it among the quest's rewards; absent = 1 (min 1). */
+  weight?: number;
+  /** WeaponCache only, not empty: the weapons the cache draws from (three weapon classes at least). */
+  weapons?: EntityReference[];
+  /** Gold only, above 0: the gold given to the character's own purse. */
+  gold?: number;
+  /** What the card and the line say of the reward ("your first weapon"); absent = worded from the kind. */
+  text?: string;
 }
 
 export interface PersonalQuest {
   metadata: Metadata;
   goal: PersonalGoal;
-  reward: PersonalReward;
-  /** The line shown while pursuing it: "Defeat 4 monsters with your fists". */
+  /** The rewards a card can carry, by weight; at least one. */
+  rewards: PersonalReward[];
+  /** The line shown while pursuing it; {count} is filled with the size: "Defeat {count} monsters". */
   goal_text: string;
-  /** What it gives, in the line: "your first weapon". */
-  reward_text: string;
 }

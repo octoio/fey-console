@@ -120,6 +120,8 @@ export type Character = {
   starting_weapons?: EntityReference[];
   /** PersonalQuest a new player character opens with (the first of its personal line). */
   first_personal_quest?: EntityReference;
+  /** PersonalQuest pool the offer of three draws from after the first one; absent or empty = no offer. */
+  personal_quests?: EntityReference[];
 };
 
 export type CharacterEntityDefinition = {
