@@ -1,7 +1,8 @@
-import { Color, EntityReference, Metadata, Transform } from "./common.types";
+import { Color, EntityReference, EntityType, Metadata, Transform } from "./common.types";
 import { RarityWeights } from "./drop.types";
 import { CharacterTeam } from "./effect.types";
 import { AnchorBinding } from "./generator.types";
+import { QualityType } from "./quality.types";
 
 // Anchor entity (anchor.atd): gameplay markers owned by a stage.
 // Transforms are relative to the stage's StageOrigin.
@@ -14,6 +15,7 @@ export enum AnchorType {
   HealingShrine = "HealingShrine",
   Lever = "Lever",
   Merchant = "Merchant",
+  Chest = "Chest",
 }
 
 export enum ZoneDetectionType {
@@ -67,6 +69,14 @@ export interface AnchorLever extends AnchorBase {
   model: string; // key of the pack prop that stands there (min length 1)
 }
 
+/** A guarded chest in the generated Treasure room: each member of the party gets one piece when it is opened. */
+export interface AnchorChest extends AnchorBase {
+  type: AnchorType.Chest;
+  model: string; // key of the pack prop that stands there (min length 1)
+  min_quality: QualityType; // the floor of each piece (Uncommon..Epic)
+  guard: EntityReference; // the SpawnPoint anchor of the same stage whose monsters guard it
+}
+
 /** The gold the merchant asks for a piece of each rarity (a bare item counts as Common). */
 export type RarityPrices = {
   common: number; // min 1
@@ -112,7 +122,8 @@ export type Anchor =
   | AnchorLampPost
   | AnchorHealingShrine
   | AnchorLever
-  | AnchorMerchant;
+  | AnchorMerchant
+  | AnchorChest;
 
 export type AnchorEntityDefinition = {
   id: string;
@@ -160,6 +171,14 @@ export const createDefaultAnchor = (type: AnchorType): Anchor => {
       return { ...base, type: AnchorType.HealingShrine, model: "", price: 1 };
     case AnchorType.Lever:
       return { ...base, type: AnchorType.Lever, model: "" };
+    case AnchorType.Chest:
+      return {
+        ...base,
+        type: AnchorType.Chest,
+        model: "",
+        min_quality: QualityType.Uncommon,
+        guard: { id: "", key: "", owner: "Octoio", type: EntityType.Anchor, version: 1 },
+      };
     case AnchorType.Merchant:
       return {
         ...base,

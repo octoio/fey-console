@@ -32,6 +32,7 @@ export enum AnchorSlot {
   Healing = "Healing",
   Lever = "Lever",
   GatePack = "GatePack",
+  ChestGuard = "ChestGuard",
 }
 
 export enum RoomSize {

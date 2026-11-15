@@ -75,11 +75,29 @@ export type RarityCurve = {
   boss_tilt?: number;
 };
 
-/** A monster of at least `min_rank` always drops one item of `kind` of at least `min_quality`. */
+/**
+ * A monster of at least `min_rank` always drops one item of `kind` of at least `min_quality`. With
+ * `per_player` (absent: false; only for Equipment or Weapon) the item is rolled once for each
+ * character credited with the kill and is that character's own: no Need / Greed roll.
+ */
 export type DropGuarantee = {
   min_rank: MonsterRank;
   kind: DropType; // Equipment, Weapon or SkillBook
   min_quality: QualityType;
+  per_player?: boolean;
+};
+
+/** The chances that one kill drops a piece of equipment and a weapon (before `party_scaling`). */
+export type ItemRule = {
+  equipment: number; // 0..1
+  weapon: number; // 0..1
+};
+
+/** The item chances of a table per monster rank. */
+export type ItemChances = {
+  normal: ItemRule;
+  elite: ItemRule;
+  boss: ItemRule;
 };
 
 /** With `chance`, a kill of a rank drops a whole amount in `amount` (1..1000), the same for every eligible player. */
@@ -124,6 +142,8 @@ export type DropTable = {
   /** Absent: items are picked by entry weight alone. */
   rarity_curve?: RarityCurve;
   guarantees?: DropGuarantee[];
+  /** Required when the table has equipment or weapon entries; absent: those chances are 0. */
+  item_chances?: ItemChances;
   /** Absent: Poll. */
   distribution?: LootDistribution;
   /** Each eligible player beyond the first multiplies the chance of every item category by 1 + this. */
