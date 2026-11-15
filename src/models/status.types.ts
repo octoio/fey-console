@@ -140,4 +140,6 @@ export type Status = {
   triggers?: Trigger[];
   /** The effect on the afflicted character while the status lasts; presentation only. */
   vfx?: StatusVfx;
+  /** true: the status stays on a character that dies and is revived. Only a StatChange status. */
+  keeps_through_death?: boolean;
 };

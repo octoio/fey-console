@@ -29,6 +29,7 @@ export enum StatType {
   GoldModifier = "GoldModifier",
   LifeSteal = "LifeSteal",
   HealthGlobeChance = "HealthGlobeChance",
+  HealthModifier = "HealthModifier",
 }
 
 /**
@@ -88,6 +89,8 @@ export interface StatSheet {
   experience_modifier: number;
   gold_modifier: number;
   life_steal: number;
+  /** Scales the final maximum health (1.0 = unchanged); a status lowers it by its share (-0.1 = 10% less). */
+  health_modifier: number;
   /** The chance a kill drops a health globe (absent = 0). */
   health_globe_chance?: number;
 }
