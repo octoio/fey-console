@@ -70,6 +70,8 @@ export interface StatDisplay {
   lower_is_better: boolean;
   /** A short name for lines where the title is too long; absent = the title. */
   label?: string;
+  /** The value is multiplied by this before it is formatted (movement speed counts in 3 metres per second); absent = 1. */
+  scale?: number;
 }
 
 export type StatEntityDefinition = {

@@ -195,6 +195,14 @@ describe("StatForm display rule (fey-rs#396)", { timeout: 30000 }, () => {
     expect(saved(onChange).display.unit).toBe(" /s");
   });
 
+  it("sets the scale and clearing it removes its key", () => {
+    const onChange = renderForm(stat(base));
+    fireEvent.change(screen.getByLabelText("scale"), { target: { value: "3" } });
+    expect(saved(onChange).display.scale).toBe(3);
+    fireEvent.change(screen.getByLabelText("scale"), { target: { value: "" } });
+    expect("scale" in saved(onChange).display).toBe(false);
+  });
+
   it("clearing the label removes its key, unchecking the flag writes false", () => {
     const onChange = renderForm(stat(base));
     fireEvent.change(screen.getByLabelText("label"), { target: { value: "" } });

@@ -28,6 +28,7 @@ export const StatForm: React.FC<StatFormProps> = ({ entity, onChange }) => {
         onChange={(decimals) => set({ decimals: decimals ?? 0 })}
       />
       <TextField label="unit" value={display.unit} onChange={(unit) => set({ unit: unit ?? "" })} />
+      <NumberField label="scale" value={display.scale} min={0} step={0.1} onChange={(scale) => set({ scale: scale || undefined })} />
       <TextField label="label" value={display.label} onChange={(label) => set({ label })} />
       <FlagField
         label="lower is better"
