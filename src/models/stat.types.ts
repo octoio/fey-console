@@ -48,7 +48,38 @@ export interface Stat {
   clamp?: StatClamp;
   /** What the attributes (Vit, Str, Int, Dex) add to this stat. */
   conversions?: StatConversion[];
+  /** How the stat's number reads, on every screen that writes it. */
+  display: StatDisplay;
 }
+
+/** Flat is the number, Percent a share stored as 0.125 and shown 12.5%, Change a factor round 1.0 shown as the change from normal (1.08 is +8%). */
+export type StatFormat = "Flat" | "Percent" | "Change";
+
+export const ALL_STAT_FORMATS: StatFormat[] = ["Flat", "Percent", "Change"];
+
+/** The most decimals a stat shows. */
+export const MAX_STAT_DECIMALS = 4;
+
+export interface StatDisplay {
+  format: StatFormat;
+  /** The most decimals shown; trailing zeros are dropped. */
+  decimals: number;
+  /** Text after the number (" /s"), empty for most. */
+  unit: string;
+  /** True where less is good (damage taken): comparisons and colours point the other way. */
+  lower_is_better: boolean;
+  /** A short name for lines where the title is too long; absent = the title. */
+  label?: string;
+}
+
+export type StatEntityDefinition = {
+  id: string;
+  owner: string;
+  type: string;
+  key: string;
+  version: number;
+  entity: Stat;
+};
 
 export interface StatClamp {
   min?: number;

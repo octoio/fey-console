@@ -4,6 +4,7 @@ import { entityFilePath, serializeDefinition } from "@components/stage-editor/st
 import { Character } from "@models/character.types";
 import { EntityReferences, EntityType } from "@models/common.types";
 import { Quest, QuestDifficulty } from "@models/quest.types";
+import { Stat } from "@models/stat.types";
 import { useSkillStore } from "@store/skill.store";
 import { FileInfo } from "@utils/entity-scanner";
 import { fileUtils } from "@utils/file-utils";
@@ -11,6 +12,7 @@ import { CharacterForm } from "./character-form";
 import { DifficultyForm } from "./difficulty-form";
 import { PROPERTIES_TYPES, PropertiesDefinition, parsePropertiesFile } from "./properties-file";
 import { QuestForm } from "./quest-form";
+import { StatForm } from "./stat-form";
 
 const { Text } = Typography;
 
@@ -71,6 +73,8 @@ export const PropertiesEditor: React.FC<PropertiesEditorProps> = ({
         return <DifficultyForm entity={definition.entity as QuestDifficulty} onChange={setEntity} />;
       case EntityType.Quest:
         return <QuestForm entity={definition.entity as Quest} onChange={setEntity} />;
+      case EntityType.Stat:
+        return <StatForm entity={definition.entity as Stat} onChange={setEntity} />;
       default:
         return <CharacterForm entity={definition.entity as Character} onChange={setEntity} />;
     }
@@ -82,7 +86,7 @@ export const PropertiesEditor: React.FC<PropertiesEditorProps> = ({
         <Select
           showSearch
           style={{ width: 320 }}
-          placeholder="Open a quest difficulty, quest or character"
+          placeholder="Open a quest difficulty, quest, character or stat"
           aria-label="Properties file"
           disabled={!directoryHandle}
           onChange={load}
