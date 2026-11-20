@@ -169,8 +169,9 @@ export type SkillActionInterruptNode = SkillActionNode & {
 };
 
 /**
- * The nearest drain of the stage with batches left pours one at once (a quest's StartDrains made
- * them); the drains the quest keeps for a call (its call_anchor) come first. Nothing when none is left.
+ * The nearest drain within 24 units of the caster that is not spent pours one batch at once (a
+ * quest's StartDrains made them); the drains the quest keeps for a call (its call_anchor) come
+ * first and are never spent. Nothing when none is in reach or the swarm is at its cap.
  */
 export type SkillActionCallDrainNode = SkillActionNode & {
   type: SkillActionNodeType.CallDrain;

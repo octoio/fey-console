@@ -15,7 +15,7 @@ export const CallDrainNode = createNodeComponent({
   renderContent: () => (
     <NodeField label="Calls">
       <Text type="secondary">
-        The nearest drain with batches left pours a batch now.
+        The nearest drain within 24 units that is not spent pours a batch now (none at the swarm cap).
       </Text>
     </NodeField>
   ),
