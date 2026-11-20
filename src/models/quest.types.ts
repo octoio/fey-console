@@ -1,6 +1,6 @@
 import { AchievementType } from "./achievement.types";
 import { CharacterType, MonsterRank } from "./character.types";
-import { Color, EntityReference, Metadata } from "./common.types";
+import { Color, EntityReference, IntRange, Metadata } from "./common.types";
 import { QualityType } from "./quality.types";
 import { Spawn, SpawnSequence } from "./spawn.types";
 import { StatType } from "./stat.types";
@@ -158,6 +158,7 @@ export type QuestActionType =
   | "Message"
   | "EnableQuestBoardQuest"
   | "StartEscalation"
+  | "StartDrains"
   | "SpawnAtRemains";
 
 export interface QuestActionSpawn {
@@ -220,6 +221,23 @@ export interface QuestActionStartEscalation {
   rewards: boolean;
 }
 
+// The drains pour: every anchor `anchor` expands to (a template) is a drain of the stage. A living
+// player near a drain with batches left wakes it; a second later it pours a batch of `batch` `spawn`
+// monsters at the party and rests `gap` seconds. A drain has `batches` batches, then it is spent.
+// `cap` counts every living monster of the `spawn` kind on the stage: a resting drain does not wake
+// while that many live; a call ignores it. The drains of `call_anchor` (another template) wake for
+// no passing player, only for a CallDrain skill node, which opens them first.
+export interface QuestActionStartDrains {
+  type: "StartDrains";
+  anchor: EntityReference; // Anchor
+  call_anchor?: EntityReference; // Anchor
+  spawn: EntityReference; // Character
+  batch: IntRange; // 1..100
+  batches: IntRange; // 1..100
+  gap: number; // min 1
+  cap: number; // min 1
+}
+
 // `character` rises where the latest dead `remains_of` character fell
 export interface QuestActionSpawnAtRemains {
   type: "SpawnAtRemains";
@@ -239,6 +257,7 @@ export type QuestAction =
   | QuestActionMessage
   | QuestActionEnableQuestBoardQuest
   | QuestActionStartEscalation
+  | QuestActionStartDrains
   | QuestActionSpawnAtRemains;
 
 // Execution tree — mirrors the skill action node pattern.

@@ -21,6 +21,7 @@ import type { Quest, QuestAction } from "@models/quest.types";
 import {
   SkillActionNodeType,
   type Skill,
+  type SkillActionCallDrainNode,
   type SkillActionInterruptNode,
 } from "@models/skill.types";
 import {
@@ -101,6 +102,27 @@ describe("quest additions", () => {
       "OpenGate",
     ]);
     expect(endsRun.ends_run).toBe(true);
+  });
+});
+
+describe("drains (fey-rs #412)", () => {
+  it("has the StartDrains action with its call-only anchor and the CallDrain node", () => {
+    const action: QuestAction = {
+      type: "StartDrains",
+      anchor: ref(EntityType.Anchor, "TheWarrensDrainSpawn"),
+      call_anchor: ref(EntityType.Anchor, "TheWarrensCallDrain"),
+      spawn: ref(EntityType.Character, "PlagueRat"),
+      batch: { min: 8, max: 12 },
+      batches: { min: 2, max: 3 },
+      gap: 45,
+      cap: 24,
+    };
+    const node: SkillActionCallDrainNode = {
+      type: SkillActionNodeType.CallDrain,
+      name: "CallA",
+    };
+    expect(action.type).toBe("StartDrains");
+    expect(node.type).toBe("CallDrain");
   });
 });
 

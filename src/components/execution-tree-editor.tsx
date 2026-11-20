@@ -16,6 +16,7 @@ import { SkillActionNodeType } from "@models/skill.types";
 import { useSkillStore } from "@store/skill.store";
 import { autoLayoutNodes } from "@utils/auto-layout";
 import { AnimationNode } from "./nodetypes/animation-node";
+import { CallDrainNode } from "./nodetypes/call-drain-node";
 import { DelayNode } from "./nodetypes/delay-node";
 import { HitEffectNode } from "./nodetypes/hit-effect-node";
 import { InterruptNode } from "./nodetypes/interrupt-node";
@@ -65,6 +66,7 @@ export const ExecutionTreeEditor: React.FC = () => {
         [SkillActionNodeType.Projectile]: ProjectileNode,
         [SkillActionNodeType.Requirement]: RequirementNode,
         [SkillActionNodeType.Interrupt]: InterruptNode,
+        [SkillActionNodeType.CallDrain]: CallDrainNode,
       }) as Record<SkillActionNodeType, React.FC<NodeProps>>,
     [],
   );

@@ -54,6 +54,7 @@ export enum SkillActionNodeType {
   Move = "Move",
   Requirement = "Requirement",
   Interrupt = "Interrupt",
+  CallDrain = "CallDrain",
 }
 
 export type SkillActionNode = {
@@ -165,6 +166,14 @@ export type SkillActionInterruptNode = SkillActionNode & {
   target_mechanic: EffectTargetMechanicInternal;
   target: EffectTarget;
   on_interrupt?: StatusEffect;
+};
+
+/**
+ * The nearest drain of the stage with batches left pours one at once (a quest's StartDrains made
+ * them); the drains the quest keeps for a call (its call_anchor) come first. Nothing when none is left.
+ */
+export type SkillActionCallDrainNode = SkillActionNode & {
+  type: SkillActionNodeType.CallDrain;
 };
 
 export enum SkillIndicatorPosition {
