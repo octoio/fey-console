@@ -11,6 +11,7 @@ import {
   parsePropertiesFile,
 } from "@components/properties-editor/properties-file";
 import { QuestForm } from "@components/properties-editor/quest-form";
+import { StatForm } from "@components/properties-editor/stat-form";
 import { serializeDefinition } from "@components/stage-editor/stage-file-utils";
 import { EntityType } from "@models/common.types";
 import { SHIPPED_JSON_DIR, hasShippedData, shippedTitle } from "@test-utils/shipped-data";
@@ -42,6 +43,8 @@ const mount = (definition: PropertiesDefinition) => {
         return <DifficultyForm entity={entity as never} onChange={onChange} />;
       case EntityType.Quest:
         return <QuestForm entity={entity as never} onChange={onChange} />;
+      case EntityType.Stat:
+        return <StatForm entity={entity as never} onChange={onChange} />;
       default:
         return <CharacterForm entity={entity as never} onChange={onChange} />;
     }
@@ -64,6 +67,11 @@ const editAndUndo = (definition: PropertiesDefinition) => {
       flag("ends run");
       flag("ends run");
     }
+  } else if (definition.type === EntityType.Stat) {
+    number("decimals", "3");
+    number("decimals", String((entity.display as { decimals: number }).decimals));
+    flag("lower is better");
+    flag("lower is better");
   } else if (definition.type === EntityType.Character) {
     if ("level" in entity) {
       number("level", "99");
@@ -82,7 +90,7 @@ const editAndUndo = (definition: PropertiesDefinition) => {
   }
 };
 
-// Every shipped Quest, QuestDifficulty and Character file: (a) the patch every form edit goes through,
+// Every shipped Quest, QuestDifficulty, Character and Stat file: (a) the patch every form edit goes through,
 // with nothing to patch, and (b) the form rendered, one real edit made through a control and undone,
 // each must save equal to what was read. Fields no form shows are covered by being spread untouched.
 describe.skipIf(!hasShippedData)(shippedTitle("Properties editor on shipped data"), () => {
