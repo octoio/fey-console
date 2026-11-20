@@ -159,6 +159,7 @@ export type QuestActionType =
   | "EnableQuestBoardQuest"
   | "StartEscalation"
   | "StartDrains"
+  | "StopDrains"
   | "SpawnAtRemains";
 
 export interface QuestActionSpawn {
@@ -238,6 +239,12 @@ export interface QuestActionStartDrains {
   cap: number; // min 1
 }
 
+// Spends the drains a player wakes: one already rumbling pours its one batch, the call-only drains
+// (`call_anchor`) keep theirs. No field.
+export interface QuestActionStopDrains {
+  type: "StopDrains";
+}
+
 // `character` rises where the latest dead `remains_of` character fell
 export interface QuestActionSpawnAtRemains {
   type: "SpawnAtRemains";
@@ -258,6 +265,7 @@ export type QuestAction =
   | QuestActionEnableQuestBoardQuest
   | QuestActionStartEscalation
   | QuestActionStartDrains
+  | QuestActionStopDrains
   | QuestActionSpawnAtRemains;
 
 // Execution tree — mirrors the skill action node pattern.

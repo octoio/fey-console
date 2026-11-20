@@ -37,7 +37,7 @@ vi.mock("@components/node-common", () => ({
 
 describe("CallDrainNode", () => {
   it("is the CallDrain node type and says what it does", () => {
-    render(<CallDrainNode {...({} as never)} />);
+    render(<CallDrainNode {...({} as React.ComponentProps<typeof CallDrainNode>)} />);
     expect(screen.getByTestId("call-drain-node")).toHaveAttribute(
       "data-node-type",
       SkillActionNodeType.CallDrain,

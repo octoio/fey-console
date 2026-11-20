@@ -124,6 +124,11 @@ describe("drains (fey-rs #412)", () => {
     expect(action.type).toBe("StartDrains");
     expect(node.type).toBe("CallDrain");
   });
+
+  it("has the StopDrains action, which takes no field", () => {
+    const action: QuestAction = { type: "StopDrains" };
+    expect(action.type).toBe("StopDrains");
+  });
 });
 
 describe("skill and effect additions", () => {

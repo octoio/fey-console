@@ -24,6 +24,16 @@ describe.skipIf(!hasShippedData)(shippedTitle("the Rat Warrens"), () => {
     expect(drains?.batch).toEqual({ min: 8, max: 12 });
   });
 
+  it("stops its drains after the kill objective and before the message", () => {
+    const quest = JSON.parse(read("quest/ratwarrensquest.quest.json"));
+    const steps: string[] = quest.entity.root.children.map(
+      (n: { type: string; action?: QuestAction }) => n.action?.type ?? n.type,
+    );
+    const kill = steps.indexOf("Objective");
+    expect(steps.indexOf("StopDrains")).toBeGreaterThan(kill);
+    expect(steps.indexOf("StopDrains")).toBeLessThan(steps.indexOf("Message"));
+  });
+
   it.each(["screech", "swarm-call"])(
     "opens and saves the %s skill with its CallDrain nodes",
     (file) => {
