@@ -2,8 +2,10 @@ import { describe, it, expect, vi } from "vitest";
 import { CharacterForm } from "@components/properties-editor/character-form";
 import { DifficultyForm } from "@components/properties-editor/difficulty-form";
 import { QuestForm } from "@components/properties-editor/quest-form";
+import { StatForm } from "@components/properties-editor/stat-form";
 import { Character, CharacterType } from "@models/character.types";
 import { Quest, QuestDifficulty } from "@models/quest.types";
+import { Stat, StatType } from "@models/stat.types";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 // The reference picker needs the entity store
@@ -159,5 +161,53 @@ describe("DifficultyForm guarantee quality", { timeout: 30000 }, () => {
     fireEvent.mouseDown(screen.getAllByRole("combobox").find((c) => c.getAttribute("aria-label") === "guarantee min quality")!);
     expect(screen.getAllByText("Epic").length).toBeGreaterThan(0);
     expect(screen.queryByText("None")).toBeNull();
+  });
+});
+
+describe("StatForm display rule (fey-rs#396)", { timeout: 30000 }, () => {
+  const stat = (display: Stat["display"]): Stat => ({
+    metadata: { title: "Damage Taken Modifier", description: "" },
+    type: StatType.DamageTakenModifier,
+    color,
+    clamp: { min: 0 },
+    display,
+  });
+  const renderForm = (entity: Stat) => {
+    const onChange = vi.fn();
+    render(<StatForm entity={entity} onChange={onChange} />);
+    return onChange;
+  };
+  const base = { format: "Change", decimals: 0, unit: "", lower_is_better: true, label: "Damage taken" } as const;
+
+  it("shows the display rule", () => {
+    renderForm(stat(base));
+    expect(screen.getByLabelText("decimals")).toHaveValue("0");
+    expect(screen.getByLabelText("label")).toHaveValue("Damage taken");
+    expect(screen.getByRole("checkbox", { name: "lower is better" })).toBeChecked();
+  });
+
+  it("edits the decimals and the unit and keeps the rest of the stat", () => {
+    const onChange = renderForm(stat(base));
+    fireEvent.change(screen.getByLabelText("decimals"), { target: { value: "2" } });
+    expect(saved(onChange).display).toEqual({ ...base, decimals: 2 });
+    expect(saved(onChange).clamp).toEqual({ min: 0 });
+    fireEvent.change(screen.getByLabelText("unit"), { target: { value: " /s" } });
+    expect(saved(onChange).display.unit).toBe(" /s");
+  });
+
+  it("sets the scale and clearing it removes its key", () => {
+    const onChange = renderForm(stat(base));
+    fireEvent.change(screen.getByLabelText("scale"), { target: { value: "3" } });
+    expect(saved(onChange).display.scale).toBe(3);
+    fireEvent.change(screen.getByLabelText("scale"), { target: { value: "" } });
+    expect("scale" in saved(onChange).display).toBe(false);
+  });
+
+  it("clearing the label removes its key, unchecking the flag writes false", () => {
+    const onChange = renderForm(stat(base));
+    fireEvent.change(screen.getByLabelText("label"), { target: { value: "" } });
+    expect("label" in saved(onChange).display).toBe(false);
+    fireEvent.click(screen.getByRole("checkbox", { name: "lower is better" }));
+    expect(saved(onChange).display.lower_is_better).toBe(false);
   });
 });

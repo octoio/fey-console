@@ -12,14 +12,16 @@ interface NumberFieldProps {
   label: string;
   value: number | undefined;
   min?: number;
+  max?: number;
   step?: number;
   onChange: (value: number | undefined) => void;
 }
 
-export const NumberField: React.FC<NumberFieldProps> = ({ label, value, min, step, onChange }) => (
+export const NumberField: React.FC<NumberFieldProps> = ({ label, value, min, max, step, onChange }) => (
   <InputNumber
     size="small"
     min={min}
+    max={max}
     step={step}
     prefix={<Text type="secondary">{label}</Text>}
     value={value}

@@ -1,17 +1,20 @@
 import { CharacterEntityDefinition } from "@models/character.types";
 import { EntityType } from "@models/common.types";
 import { QuestDifficultyEntityDefinition, QuestEntityDefinition } from "@models/quest.types";
+import { StatEntityDefinition } from "@models/stat.types";
 
 export type PropertiesDefinition =
   | QuestDifficultyEntityDefinition
   | QuestEntityDefinition
-  | CharacterEntityDefinition;
+  | CharacterEntityDefinition
+  | StatEntityDefinition;
 
 /** The entity types the Properties editor opens: their fields are plain values. */
 export const PROPERTIES_TYPES: string[] = [
   EntityType.QuestDifficulty,
   EntityType.Quest,
   EntityType.Character,
+  EntityType.Stat,
 ];
 
 /** Parses a file of one of the Properties types; fields the forms do not show stay as read. */
