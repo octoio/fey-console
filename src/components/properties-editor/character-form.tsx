@@ -52,6 +52,12 @@ export const CharacterForm: React.FC<CharacterFormProps> = ({ entity, onChange }
           onChange={(vision_range) => set({ vision_range: vision_range ?? 0 })}
         />
         <NumberField
+          label="body radius"
+          value={entity.body_radius}
+          min={0.1}
+          onChange={(body_radius) => set({ body_radius })}
+        />
+        <NumberField
           label="director cost"
           value={entity.director_cost}
           min={1}
