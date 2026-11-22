@@ -54,6 +54,7 @@ export enum SkillActionNodeType {
   Move = "Move",
   Requirement = "Requirement",
   Interrupt = "Interrupt",
+  CallDrain = "CallDrain",
 }
 
 export type SkillActionNode = {
@@ -165,6 +166,15 @@ export type SkillActionInterruptNode = SkillActionNode & {
   target_mechanic: EffectTargetMechanicInternal;
   target: EffectTarget;
   on_interrupt?: StatusEffect;
+};
+
+/**
+ * The nearest drain within 24 units of the caster that is not spent pours one batch at once (a
+ * quest's StartDrains made them); the drains the quest keeps for a call (its call_anchor) come
+ * first and are never spent. Nothing when none is in reach or the swarm is at its cap.
+ */
+export type SkillActionCallDrainNode = SkillActionNode & {
+  type: SkillActionNodeType.CallDrain;
 };
 
 export enum SkillIndicatorPosition {

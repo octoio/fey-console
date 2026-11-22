@@ -33,6 +33,7 @@ export enum AnchorSlot {
   Lever = "Lever",
   GatePack = "GatePack",
   ChestGuard = "ChestGuard",
+  CallSpawn = "CallSpawn",
 }
 
 export enum RoomSize {

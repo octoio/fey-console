@@ -79,6 +79,8 @@ export type Character = {
   metadata: Metadata;
   type: CharacterType;
   variant?: CharacterVariant;
+  /** Collision radius in units when the body is not the type's base radius times `variant.scale.x` (at least 0.1). */
+  body_radius?: number;
   /** Model family the character is drawn with: the pack key is `<family>[-<variant>]`. */
   model_family?: string;
   /** Look layers the monster owns. */

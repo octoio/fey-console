@@ -124,7 +124,7 @@ describe("ExecutionTreeEditor Component", () => {
       render(<ExecutionTreeEditor />);
 
       expect(screen.getByTestId("react-flow-node-types")).toHaveTextContent(
-        "NodeTypes: 12",
+        "NodeTypes: 13",
       );
     });
   });
