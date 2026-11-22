@@ -104,6 +104,8 @@ export type HitEffect = {
   pull?: number;
   /** Damage only: mana the caster gets for each target the hit lands on (positive). */
   mana_on_hit?: number;
+  /** Damage only: against a structure the hit takes this share of its full health in place of its scalers (above 0, at most 1). */
+  structure_share?: number;
 };
 
 export type StatusEffect = {
