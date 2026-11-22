@@ -68,6 +68,7 @@ export const CharacterForm: React.FC<CharacterFormProps> = ({ entity, onChange }
         <FlagField label="hunts healers" value={entity.hunts_healers} onChange={(hunts_healers) => set({ hunts_healers })} />
         <FlagField label="swims" value={entity.swims} onChange={(swims) => set({ swims })} />
         <FlagField label="lurks" value={entity.lurks} onChange={(lurks) => set({ lurks })} />
+        <FlagField label="structure" value={entity.structure} onChange={(structure) => set({ structure })} />
       </Space>
     </Space>
   );

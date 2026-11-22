@@ -18,7 +18,8 @@ export const ALL_CHARACTER_TYPES: CharacterType[] =
  * Whom a character sides with. Separate from the controller: who steers a body (an AI
  * brain or any client) changes at runtime, its faction does not. Whether two factions
  * fight is decided by the game rules (hostile, neutral or friendly), not per character.
- * Players are Adventurers.
+ * Players are Adventurers. Folk are the party's wards (the barn doors): friendly to the
+ * party but never one of its members.
  */
 export enum Faction {
   Adventurers = "Adventurers",
@@ -26,6 +27,7 @@ export enum Faction {
   Slimes = "Slimes",
   Crypt = "Crypt",
   Neutral = "Neutral",
+  Folk = "Folk",
 }
 
 export const ALL_FACTIONS: Faction[] = Object.values(Faction);
@@ -112,6 +114,8 @@ export type Character = {
   swims?: boolean;
   /** true: cannot be targeted or seen until it acts (starts a cast, or an area effect hits it). */
   lurks?: boolean;
+  /** true: a structure (the barn doors): it stands, has no brain, level or status and is never pushed. */
+  structure?: boolean;
   /** Present: the character is a breeding nest. */
   nest?: Nest;
   /** What the director pays in credits to spawn this monster in a wave (>= 1; absent = the default cost). Bosses are never bought. */

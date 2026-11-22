@@ -6,6 +6,8 @@ export interface Spawn {
   character: EntityReference; // Character
   anchor: EntityReference; // Anchor
   target_adventurer_on_spawn: boolean;
+  /** The spawned monsters go for the nearest living character of this definition (not with target_adventurer_on_spawn). */
+  assault?: EntityReference; // Character
 }
 
 export interface SpawnSequenceStep {

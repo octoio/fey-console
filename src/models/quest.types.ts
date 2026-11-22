@@ -160,7 +160,8 @@ export type QuestActionType =
   | "StartEscalation"
   | "StartDrains"
   | "StopDrains"
-  | "SpawnAtRemains";
+  | "SpawnAtRemains"
+  | "Call";
 
 export interface QuestActionSpawn {
   type: "Spawn";
@@ -253,6 +254,13 @@ export interface QuestActionSpawnAtRemains {
   target_adventurer_on_spawn: boolean;
 }
 
+// Text on screen and a pulsing marker on each anchor (where something comes from), for a few seconds
+export interface QuestActionCall {
+  type: "Call";
+  anchors: EntityReference[]; // Anchor, min 1
+  message: string;
+}
+
 export type QuestAction =
   | QuestActionSpawn
   | QuestActionStartSpawnSequence
@@ -266,7 +274,8 @@ export type QuestAction =
   | QuestActionStartEscalation
   | QuestActionStartDrains
   | QuestActionStopDrains
-  | QuestActionSpawnAtRemains;
+  | QuestActionSpawnAtRemains
+  | QuestActionCall;
 
 // Execution tree — mirrors the skill action node pattern.
 // Node ids are explicit, unique within a quest, and name nodes in network
@@ -277,7 +286,9 @@ export type QuestNodeType =
   | "Any"
   | "Timer"
   | "Objective"
-  | "Action";
+  | "Action"
+  | "Protect"
+  | "Wait";
 
 // Restart: the child subtree and the timer start over
 export type QuestTimerTimeoutType = "Fail" | "Complete" | "Restart";
@@ -316,6 +327,22 @@ export interface QuestTimerNode extends QuestNodeBase {
   on_timeout: QuestTimerTimeoutType;
 }
 
+// The party protects `character`: while `child` runs, if no character of that definition lives the
+// quest is lost (the doors fell). Completes with the child. A line of the tracker named `title`,
+// its bar the protected one's health.
+export interface QuestProtectNode extends QuestNodeBase {
+  type: "Protect";
+  title: string; // min 1
+  character: EntityReference; // Character
+  child: QuestNode;
+}
+
+// A leaf that completes after `duration` seconds. Not tracked.
+export interface QuestWaitNode extends QuestNodeBase {
+  type: "Wait";
+  duration: number; // min 0
+}
+
 export interface QuestObjectiveNode extends QuestNodeBase {
   type: "Objective";
   metadata: Metadata;
@@ -333,6 +360,8 @@ export type QuestNode =
   | QuestParallelNode
   | QuestAnyNode
   | QuestTimerNode
+  | QuestProtectNode
+  | QuestWaitNode
   | QuestObjectiveNode
   | QuestActionNode;
 
@@ -369,6 +398,7 @@ export const questNodeChildren = (node: QuestNode): QuestNode[] => {
     case "Any":
       return node.children;
     case "Timer":
+    case "Protect":
       return [node.child];
     default:
       return [];
