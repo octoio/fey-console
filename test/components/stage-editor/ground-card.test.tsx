@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { GroundCard } from "@components/stage-editor/ground-card";
 import { createDefaultGroundEffect } from "@models/generator.types";
-import { createDefaultGroundZone, GroundKind, GroundZone, ObstacleShape } from "@models/stage.types";
+import { ALL_GROUND_KINDS, createDefaultGroundZone, GroundKind, GroundZone, ObstacleShape } from "@models/stage.types";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 // The reference picker needs the entity store
@@ -50,6 +50,14 @@ describe("GroundCard", { timeout: 30000 }, () => {
     expect(circle).toMatchObject({ shape: "Circle", x: 3, z: -2, radius: 1, id: "pond" });
     expect(circle).not.toHaveProperty("half_x");
     expect(circle).not.toHaveProperty("yaw");
+  });
+
+  it("offers every ground kind of stage.atd, the farm's Road, Tilled and Mud included, and saves a pick", () => {
+    expect(ALL_GROUND_KINDS).toEqual(["Water", "Dry", "Boardwalk", "Road", "Tilled", "Mud"]);
+    const onChange = renderCard([createDefaultGroundZone()]);
+    fireEvent.mouseDown(screen.getByRole("combobox", { name: "ground 0 kind" }));
+    fireEvent.click(screen.getByText("Mud"));
+    expect(saved(onChange)[0]).toMatchObject({ kind: "Mud" });
   });
 
   it("removes the id key when the id is cleared", () => {
