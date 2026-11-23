@@ -8,7 +8,9 @@ describe("createDefaultProjectile", () => {
   it.each(ALL_PROJECTILE_TYPES)("creates a %s projectile", (type) => {
     const projectile = createDefaultProjectile(type);
     expect(projectile.type).toBe(type);
-    expect(projectile.lifetime).toBeGreaterThan(0);
+    if (projectile.type !== "Beam") {
+      expect(projectile.lifetime).toBeGreaterThan(0);
+    }
     expect(projectile.max_hit_count).toBeGreaterThanOrEqual(1);
   });
 
@@ -24,10 +26,10 @@ describe("createDefaultProjectile", () => {
     expect(lob.flight_time).toBeLessThanOrEqual(lob.lifetime);
   });
 
-  it("gives the beam a pulse within its lifetime", () => {
+  it("gives the beam no lifetime: the skill channel ends it", () => {
     const beam = createDefaultProjectile("Beam");
-    if (beam.type !== "Beam") throw new Error("kind");
-    expect(beam.tick_interval).toBeLessThanOrEqual(beam.lifetime);
+    expect(beam).not.toHaveProperty("lifetime");
+    expect(beam).not.toHaveProperty("tick_interval");
   });
 
   it("creates independent instances", () => {
