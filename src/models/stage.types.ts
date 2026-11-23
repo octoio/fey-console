@@ -93,6 +93,7 @@ export interface Gate {
   side_x?: number;
   side_z?: number;
   drains?: string[]; // ids of the ground zones that are gone once the gate opens
+  open_prop?: string; // a pack prop that stands where the obstacle stood once the gate is open
 }
 
 export const createDefaultObstacle = (

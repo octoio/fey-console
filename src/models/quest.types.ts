@@ -161,7 +161,8 @@ export type QuestActionType =
   | "StartDrains"
   | "StopDrains"
   | "SpawnAtRemains"
-  | "Call";
+  | "Call"
+  | "SetLight";
 
 export interface QuestActionSpawn {
   type: "Spawn";
@@ -261,6 +262,17 @@ export interface QuestActionCall {
   message: string;
 }
 
+// The looks of the light the client knows; its look table says what each one is
+export type LightLook = "Sunset" | "Dusk" | "Lamplit";
+
+// The light of the stage goes to `look` over `seconds` (0 = at once), from the look it is at now. A
+// player who joins later sees the light the stage is at.
+export interface QuestActionSetLight {
+  type: "SetLight";
+  look: LightLook;
+  seconds: number; // 0..600
+}
+
 export type QuestAction =
   | QuestActionSpawn
   | QuestActionStartSpawnSequence
@@ -275,7 +287,8 @@ export type QuestAction =
   | QuestActionStartDrains
   | QuestActionStopDrains
   | QuestActionSpawnAtRemains
-  | QuestActionCall;
+  | QuestActionCall
+  | QuestActionSetLight;
 
 // Execution tree — mirrors the skill action node pattern.
 // Node ids are explicit, unique within a quest, and name nodes in network
