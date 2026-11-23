@@ -202,6 +202,21 @@ export const AnchorCard: React.FC<AnchorCardProps> = ({
                 updateAnchor({ ...anchor, model: event.target.value })
               }
             />
+            {anchor.type === AnchorType.LampPost && (
+              <>
+                <Text strong>body</Text>
+                <InputNumber
+                  size="small"
+                  min={0.1}
+                  step={0.1}
+                  value={anchor.body}
+                  aria-label={`${definition.key} lamp post body`}
+                  onChange={(body) =>
+                    updateAnchor({ ...anchor, body: body ?? undefined })
+                  }
+                />
+              </>
+            )}
             {anchor.type === AnchorType.HealingShrine && (
               <>
                 <Text strong>price</Text>
