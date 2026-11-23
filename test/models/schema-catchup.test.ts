@@ -170,6 +170,21 @@ describe("the farm (fey-rs #408)", () => {
     expect(call.type === "Call" && call.anchors).toHaveLength(1);
   });
 
+  it("has the ambient flag, the skittish record and the Rehome action (fey-rs #438)", () => {
+    const sheep: Pick<Character, "faction" | "ambient" | "skittish"> = {
+      faction: Faction.Folk,
+      ambient: true,
+      skittish: { alarm_radius: 8, stroll_pace: 0.4 },
+    };
+    const bell: QuestAction = {
+      type: "Rehome",
+      character: ref(EntityType.Character, "Sheep"),
+      anchor: ref(EntityType.Anchor, "TheFarmPen"),
+    };
+    expect(sheep.skittish?.stroll_pace).toBe(0.4);
+    expect(bell.type === "Rehome" && bell.anchor.key).toBe("TheFarmPen");
+  });
+
   it("has the Protect and Wait nodes, and walks into the child of a Protect", () => {
     const wait: QuestNode = { type: "Wait", id: 2, name: "calm", duration: 25 };
     const protect: QuestNode = {

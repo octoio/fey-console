@@ -77,6 +77,11 @@ export type Nest = {
   burst_count: number; // min 1
 };
 
+export type Skittish = {
+  alarm_radius: number; // >= 1
+  stroll_pace: number; // 0.1..1
+};
+
 export type Character = {
   metadata: Metadata;
   type: CharacterType;
@@ -116,6 +121,10 @@ export type Character = {
   lurks?: boolean;
   /** true: a structure (the barn doors): it stands, has no brain, level or status and is never pushed. */
   structure?: boolean;
+  /** true: background life (a sheep): others walk through it, no name, a health bar only once hurt, no minimap mark. Only Folk or Neutral, never a structure or a nest. */
+  ambient?: boolean;
+  /** Present: an animal. It wanders in its home area, runs from hostiles within alarm_radius and strolls at stroll_pace of its speed. Folk only. */
+  skittish?: Skittish;
   /** Present: the character is a breeding nest. */
   nest?: Nest;
   /** What the director pays in credits to spawn this monster in a wave (>= 1; absent = the default cost). Bosses are never bought. */

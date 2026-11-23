@@ -162,6 +162,7 @@ export type QuestActionType =
   | "StopDrains"
   | "SpawnAtRemains"
   | "Call"
+  | "Rehome"
   | "SetLight";
 
 export interface QuestActionSpawn {
@@ -262,6 +263,14 @@ export interface QuestActionCall {
   message: string;
 }
 
+// Every living character of `character` (an animal) now belongs to the area of `anchor` (a spawn
+// point with a radius): it goes there, hurrying while outside, and keeps to it
+export interface QuestActionRehome {
+  type: "Rehome";
+  character: EntityReference; // Character with skittish
+  anchor: EntityReference; // Anchor, a SpawnPoint with a radius
+}
+
 // The looks of the light the client knows; its look table says what each one is
 export type LightLook = "Sunset" | "Dusk" | "Lamplit";
 
@@ -288,6 +297,7 @@ export type QuestAction =
   | QuestActionStopDrains
   | QuestActionSpawnAtRemains
   | QuestActionCall
+  | QuestActionRehome
   | QuestActionSetLight;
 
 // Execution tree — mirrors the skill action node pattern.
