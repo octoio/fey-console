@@ -7,8 +7,12 @@ import {
   Character,
   Faction,
   MonsterRank,
+  Skittish,
 } from "@models/character.types";
 import { FlagField, NumberField, SelectField, TextField, withField } from "./fields";
+
+/** What ticking "skittish" starts from; the numbers are then edited beside it. */
+const DEFAULT_SKITTISH: Skittish = { alarm_radius: 6, stroll_pace: 0.4 };
 
 interface CharacterFormProps {
   entity: Character;
@@ -70,7 +74,30 @@ export const CharacterForm: React.FC<CharacterFormProps> = ({ entity, onChange }
         <FlagField label="lurks" value={entity.lurks} onChange={(lurks) => set({ lurks })} />
         <FlagField label="structure" value={entity.structure} onChange={(structure) => set({ structure })} />
         <FlagField label="ambient" value={entity.ambient} onChange={(ambient) => set({ ambient })} />
+        <FlagField
+          label="skittish"
+          value={entity.skittish ? true : undefined}
+          onChange={(on) => set({ skittish: on && DEFAULT_SKITTISH })}
+        />
       </Space>
+      {entity.skittish && (
+        <Space wrap>
+          <NumberField
+            label="alarm radius"
+            value={entity.skittish.alarm_radius}
+            min={1}
+            onChange={(alarm_radius) => set({ skittish: { ...entity.skittish!, alarm_radius: alarm_radius ?? 1 } })}
+          />
+          <NumberField
+            label="stroll pace"
+            value={entity.skittish.stroll_pace}
+            min={0.1}
+            max={1}
+            step={0.1}
+            onChange={(stroll_pace) => set({ skittish: { ...entity.skittish!, stroll_pace: stroll_pace ?? 0.1 } })}
+          />
+        </Space>
+      )}
     </Space>
   );
 };
