@@ -5,6 +5,7 @@ import {
   ALL_SKILL_MOVE_MODES,
   SkillActionNodeType,
   SkillCategory,
+  type Skill,
   SkillMoveMode,
 } from "@models/skill.types";
 
@@ -26,5 +27,20 @@ describe("skill.types movement skills", () => {
       ].sort(),
     );
     expect(SkillMoveMode.ShadowStep).toBe("ShadowStep");
+  });
+});
+
+describe("skill.types channelled skills", () => {
+  it("holds the three numbers of a channel as the ATD names them", () => {
+    const channel: NonNullable<Skill["channel"]> = {
+      pulse_interval: 0.5,
+      pulse_cost: 1,
+      turn_rate: 120,
+    };
+    const skill: Pick<Skill, "channel" | "target_type"> = {
+      target_type: "None" as Skill["target_type"],
+      channel,
+    };
+    expect(JSON.parse(JSON.stringify(skill)).channel).toEqual(channel);
   });
 });
