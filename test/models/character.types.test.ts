@@ -48,7 +48,7 @@ describe("character.types body_radius", () => {
     expect(absent.body_radius).toBeUndefined();
   });
 
-  it.skipIf(!hasShippedData)(shippedTitle("is at least 0.1 where the game data states it, the Plague Rat states 0.6 and the barn doors 2 (#408)"), () => {
+  it.skipIf(!hasShippedData)(shippedTitle("is at least 0.1 where the game data states it, the Plague Rat states 0.6, the barn doors 2 (#408), the sheep 0.5 and the hen 0.3 (#438)"), () => {
     const dir = join(SHIPPED_JSON_DIR!, "character");
     const stated: Record<string, number> = {};
     for (const file of readdirSync(dir).filter((f) => f.endsWith(".character.json"))) {
@@ -58,6 +58,6 @@ describe("character.types body_radius", () => {
         stated[json.key] = json.entity.body_radius;
       }
     }
-    expect(stated).toEqual({ BarnDoors: 2, PlagueRat: 0.6 });
+    expect(stated).toEqual({ BarnDoors: 2, Hen: 0.3, PlagueRat: 0.6, Sheep: 0.5 });
   });
 });
