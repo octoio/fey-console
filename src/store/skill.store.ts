@@ -25,6 +25,7 @@ import {
   SkillActionNode,
   SkillActionNodeType,
   SkillCategory,
+  SkillChannel,
   SkillEntityDefinition,
   SkillIndicator,
   SkillMoveMode,
@@ -53,6 +54,7 @@ interface SkillEditorState {
   ) => void;
   updateCost: (mana: number) => void;
   updateCastDistance: (max: number) => void;
+  updateChannel: (channel: SkillChannel | undefined) => void;
 
   // Node management
   addNode: (nodeType: SkillActionNodeType, parentId: string | null) => void;
@@ -373,6 +375,14 @@ export const useSkillStore = create<SkillEditorState>()(
           ...entity,
           cast_distance: { max },
         }));
+      },
+
+      updateChannel: (channel) => {
+        get().updateSkillEntity((entity) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { channel: _old, ...rest } = entity;
+          return channel ? { ...rest, channel } : rest;
+        });
       },
 
       addNode: (nodeType, parentId) => {

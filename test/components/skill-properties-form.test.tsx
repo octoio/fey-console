@@ -29,6 +29,12 @@ vi.mock("@components/skill-form/cast-distance-section", () => ({
   )),
 }));
 
+vi.mock("@components/skill-form/channel-section", () => ({
+  ChannelSection: vi.fn(() => (
+    <div data-testid="channel-section">Channel Section</div>
+  )),
+}));
+
 vi.mock("@components/skill-form/entity-definition-section", () => ({
   EntityDefinitionSection: vi.fn(() => (
     <div data-testid="entity-definition-section">Entity Definition Section</div>
@@ -205,13 +211,14 @@ describe("SkillPropertiesForm Component", () => {
         screen.getByTestId("skill-properties-section"),
       ).toBeInTheDocument();
       expect(screen.getByTestId("cast-distance-section")).toBeInTheDocument();
+      expect(screen.getByTestId("channel-section")).toBeInTheDocument();
       expect(screen.getByTestId("icon-reference-section")).toBeInTheDocument();
       expect(screen.getByTestId("indicators-section")).toBeInTheDocument();
 
       // Verify order by checking the form content
       const form = screen.getByTestId("ant-form");
       const sections = form.children;
-      expect(sections).toHaveLength(6);
+      expect(sections).toHaveLength(7);
     });
 
     it("should render EntityDefinitionSection first", () => {
