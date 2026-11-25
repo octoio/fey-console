@@ -56,6 +56,7 @@ export interface AnchorQuestBoard extends AnchorBase {
 export interface AnchorLampPost extends AnchorBase {
   type: AnchorType.LampPost;
   model: string; // key of the pack prop that stands there (min length 1)
+  body?: number; // radius of the post's solid foot (min 0.1); absent = not solid
 }
 
 export interface AnchorHealingShrine extends AnchorBase {

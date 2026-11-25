@@ -117,16 +117,6 @@ export type GoldDrops = {
   boss: GoldRule;
 };
 
-/** Poll (default): need / greed / pass. Everyone: a copy each. Individual: one player per item. */
-export enum LootDistribution {
-  Poll = "Poll",
-  Everyone = "Everyone",
-  Individual = "Individual",
-}
-
-export const ALL_LOOT_DISTRIBUTIONS: LootDistribution[] =
-  Object.values(LootDistribution);
-
 export type DropEvaluation = {
   operator: RequirementEvaluation;
   drops: Drop[];
@@ -144,8 +134,6 @@ export type DropTable = {
   guarantees?: DropGuarantee[];
   /** Required when the table has equipment or weapon entries; absent: those chances are 0. */
   item_chances?: ItemChances;
-  /** Absent: Poll. */
-  distribution?: LootDistribution;
   /** Each eligible player beyond the first multiplies the chance of every item category by 1 + this. */
   party_scaling?: number;
 };

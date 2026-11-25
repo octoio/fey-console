@@ -147,6 +147,16 @@ describe("GateCard", { timeout: 30000 }, () => {
     expect(saved(onChange).drains).toEqual(["Pond"]);
   });
 
+  it("writes the open prop and clearing it removes the key", () => {
+    const onChange = renderGate({ ...full, open_prop: "VFence1Broken" });
+    const input = screen.getByRole("textbox", { name: "gate 0 open prop" }) as HTMLInputElement;
+    expect(input.value).toBe("VFence1Broken");
+    fireEvent.change(input, { target: { value: "VFence2Broken" } });
+    expect(saved(onChange).open_prop).toBe("VFence2Broken");
+    fireEvent.change(input, { target: { value: "" } });
+    expect("open_prop" in saved(onChange)).toBe(false);
+  });
+
   it("shows the lever read and clearing it removes the key", () => {
     const lever = { id: "", key: "ShortcutLever", owner: "Octoio", type: "Anchor", version: 1 };
     const onChange = renderGate({ ...full, lever } as Gate);

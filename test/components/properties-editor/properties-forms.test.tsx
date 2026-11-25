@@ -146,6 +146,25 @@ describe("CharacterForm level", { timeout: 30000 }, () => {
   });
 });
 
+describe("CharacterForm skittish", { timeout: 30000 }, () => {
+  it("ticking it adds the block and unticking removes it", () => {
+    const onChange = vi.fn();
+    render(<CharacterForm entity={character()} onChange={onChange} />);
+    fireEvent.click(screen.getByRole("checkbox", { name: "skittish" }));
+    expect(saved(onChange).skittish).toEqual({ alarm_radius: 6, stroll_pace: 0.4 });
+  });
+
+  it("edits the alarm radius and unticking drops the key", () => {
+    const onChange = vi.fn();
+    const skittish = { alarm_radius: 5, stroll_pace: 0.5 };
+    render(<CharacterForm entity={character({ skittish })} onChange={onChange} />);
+    fireEvent.change(screen.getByLabelText("alarm radius"), { target: { value: "7" } });
+    expect(saved(onChange).skittish).toEqual({ alarm_radius: 7, stroll_pace: 0.5 });
+    fireEvent.click(screen.getByRole("checkbox", { name: "skittish" }));
+    expect("skittish" in saved(onChange)).toBe(false);
+  });
+});
+
 describe("QuestForm required achievements", { timeout: 30000 }, () => {
   it("cannot save an empty list: removing the last tag is ignored", () => {
     const onChange = vi.fn();
