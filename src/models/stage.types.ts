@@ -45,11 +45,15 @@ export interface StageProp {
 }
 
 // Which ground a ground zone is. Water slows everyone inside it (unless the character swims);
-// Boardwalk is walked like Dry with its own look and footstep sound.
+// Boardwalk is walked like Dry with its own look and footstep sound; Road (a packed dirt road or yard),
+// Tilled (a ploughed field) and Mud (trampled mud) are walked like Dry too and only change the painting and the sound.
 export enum GroundKind {
   Water = "Water",
   Dry = "Dry",
   Boardwalk = "Boardwalk",
+  Road = "Road",
+  Tilled = "Tilled",
+  Mud = "Mud",
 }
 
 export const ALL_GROUND_KINDS: GroundKind[] = Object.values(GroundKind);
@@ -89,6 +93,7 @@ export interface Gate {
   side_x?: number;
   side_z?: number;
   drains?: string[]; // ids of the ground zones that are gone once the gate opens
+  open_prop?: string; // a pack prop that stands where the obstacle stood once the gate is open
 }
 
 export const createDefaultObstacle = (

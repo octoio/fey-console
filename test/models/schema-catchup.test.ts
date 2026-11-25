@@ -8,7 +8,11 @@ import {
 } from "@models/achievement.types";
 import { AnchorType, createDefaultAnchor } from "@models/anchor.types";
 import { AnimationCue } from "@models/animation.types";
-import { CharacterType, type Character } from "@models/character.types";
+import {
+  CharacterType,
+  Faction,
+  type Character,
+} from "@models/character.types";
 import { EntityType, type EntityReference } from "@models/common.types";
 import {
   EffectTarget,
@@ -17,17 +21,20 @@ import {
   type HitEffect,
 } from "@models/effect.types";
 import { GENERATOR_VERSION } from "@models/generator.types";
-import type { Quest, QuestAction } from "@models/quest.types";
+import {
+  questNodeChildren,
+  questNodesDepthFirst,
+  type Quest,
+  type QuestAction,
+  type QuestNode,
+} from "@models/quest.types";
 import {
   SkillActionNodeType,
   type Skill,
   type SkillActionCallDrainNode,
   type SkillActionInterruptNode,
 } from "@models/skill.types";
-import {
-  GateOpening,
-  type Stage,
-} from "@models/stage.types";
+import { GateOpening, type Stage } from "@models/stage.types";
 import {
   StatusEffectMechanicType,
   StatusStackScalingStrategy,
@@ -128,6 +135,71 @@ describe("drains (fey-rs #412)", () => {
   it("has the StopDrains action, which takes no field", () => {
     const action: QuestAction = { type: "StopDrains" };
     expect(action.type).toBe("StopDrains");
+  });
+});
+
+describe("the farm (fey-rs #408)", () => {
+  it("has the Folk faction and the structure flag of a character", () => {
+    const doors: Pick<Character, "faction" | "structure"> = {
+      faction: Faction.Folk,
+      structure: true,
+    };
+    expect(doors.faction).toBe("Folk");
+    expect(doors.structure).toBe(true);
+  });
+
+  it("has the assault order of a spawn and the Call action", () => {
+    const spawn: QuestAction = {
+      type: "Spawn",
+      spawn: {
+        spawn_count: 4,
+        character: ref(EntityType.Character, "WildBoar"),
+        anchor: ref(EntityType.Anchor, "TheFarmWayRoad"),
+        target_adventurer_on_spawn: false,
+        assault: ref(EntityType.Character, "BarnDoors"),
+      },
+    };
+    const call: QuestAction = {
+      type: "Call",
+      anchors: [ref(EntityType.Anchor, "TheFarmWayRoad")],
+      message: "Boars from the road",
+    };
+    expect(spawn.type === "Spawn" && spawn.spawn.assault?.key).toBe(
+      "BarnDoors",
+    );
+    expect(call.type === "Call" && call.anchors).toHaveLength(1);
+  });
+
+  it("has the ambient flag, the skittish record and the Rehome action (fey-rs #438)", () => {
+    const sheep: Pick<Character, "faction" | "ambient" | "skittish"> = {
+      faction: Faction.Folk,
+      ambient: true,
+      skittish: { alarm_radius: 8, stroll_pace: 0.4 },
+    };
+    const bell: QuestAction = {
+      type: "Rehome",
+      character: ref(EntityType.Character, "Sheep"),
+      anchor: ref(EntityType.Anchor, "TheFarmPen"),
+    };
+    expect(sheep.skittish?.stroll_pace).toBe(0.4);
+    expect(bell.type === "Rehome" && bell.anchor.key).toBe("TheFarmPen");
+  });
+
+  it("has the Protect and Wait nodes, and walks into the child of a Protect", () => {
+    const wait: QuestNode = { type: "Wait", id: 2, name: "calm", duration: 25 };
+    const protect: QuestNode = {
+      type: "Protect",
+      id: 1,
+      name: "hold",
+      title: "Hold the barn doors",
+      character: ref(EntityType.Character, "BarnDoors"),
+      child: wait,
+    };
+    expect(questNodeChildren(protect)).toEqual([wait]);
+    expect(questNodesDepthFirst(protect).map((n) => n.type)).toEqual([
+      "Protect",
+      "Wait",
+    ]);
   });
 });
 

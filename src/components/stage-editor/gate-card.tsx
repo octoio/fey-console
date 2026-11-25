@@ -101,6 +101,15 @@ export const GateCard: React.FC<GateCardProps> = ({
             options={groundIds.map((id) => ({ value: id, label: id }))}
           />
         </Space>
+        <Input
+          size="small"
+          style={{ width: 280 }}
+          prefix={<Text type="secondary">open prop</Text>}
+          placeholder="what stands there once open"
+          value={gate.open_prop ?? ""}
+          aria-label={`${label} open prop`}
+          onChange={(event) => set({ open_prop: event.target.value || undefined })}
+        />
         <ObstacleCard
           index={0}
           label={`${label} obstacle`}
