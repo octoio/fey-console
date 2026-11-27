@@ -34,17 +34,21 @@ export interface ProjectileImpactStatus extends ProjectileImpact {
   status_effect: StatusEffect;
 }
 
-export interface Projectile {
+/** What every kind has; the kinds that fly (all but the beam) add a `lifetime`. */
+export interface ProjectileBase {
   metadata: Metadata;
   type: ProjectileType;
   model: ProjectileModel;
-  lifetime: number;
   spawn_offset: Vector3;
   max_hit_count: number;
   on_impact: (ProjectileImpactHit | ProjectileImpactStatus)[];
   on_end: (ProjectileImpactHit | ProjectileImpactStatus)[];
   /** body rides the projectile, trail streams behind it, impact plays where it lands; presentation only. */
   vfx?: ProjectileVfx;
+}
+
+export interface Projectile extends ProjectileBase {
+  lifetime: number;
 }
 
 export interface ProjectileHoming extends Projectile {
@@ -70,13 +74,11 @@ export interface ProjectileArc extends Projectile {
   arc_height: number;
 }
 
-/** A channelled line: pulses every `tick_interval` while the caster holds still. */
-export interface ProjectileBeam extends Projectile {
+/** The line of a channelled skill: the skill's `channel` pulses, steers, pays for and ends it, so it has no lifetime. */
+export interface ProjectileBeam extends ProjectileBase {
   type: "Beam";
   range: number;
   width: number;
-  tick_interval: number;
-  rotation_speed: number;
 }
 
 export type ProjectileEntity =
@@ -85,10 +87,9 @@ export type ProjectileEntity =
   | ProjectileArc
   | ProjectileBeam;
 
-const baseProjectile = (): Omit<Projectile, "type"> => ({
+const baseProjectile = (): Omit<ProjectileBase, "type"> => ({
   metadata: { title: "", description: "" },
   model: { type: "Fireball" },
-  lifetime: 5,
   spawn_offset: { x: 0, y: 0, z: 0 },
   max_hit_count: 1,
   on_impact: [],
@@ -96,17 +97,27 @@ const baseProjectile = (): Omit<Projectile, "type"> => ({
 });
 
 /** A valid starting point for each projectile kind (the validators of fey-data hold). */
-export function createDefaultProjectile(type: ProjectileType): ProjectileEntity {
+export function createDefaultProjectile(
+  type: ProjectileType,
+): ProjectileEntity {
   const base = baseProjectile();
   switch (type) {
     case "Homing":
-      return { ...base, type, speed: 10, rotation_speed: 180 };
+      return { ...base, type, lifetime: 5, speed: 10, rotation_speed: 180 };
     case "Straight":
-      return { ...base, type, speed: 20, max_range: 15, radius: 0.3 };
+      return {
+        ...base,
+        type,
+        lifetime: 5,
+        speed: 20,
+        max_range: 15,
+        radius: 0.3,
+      };
     case "Arc":
       return {
         ...base,
         type,
+        lifetime: 5,
         flight_time: 1,
         max_range: 12,
         radius: 2,
@@ -118,8 +129,6 @@ export function createDefaultProjectile(type: ProjectileType): ProjectileEntity 
         type,
         range: 10,
         width: 0.8,
-        tick_interval: 0.5,
-        rotation_speed: 90,
       };
   }
 }

@@ -7,6 +7,7 @@ import {
 import { useSkillStore } from "@store/skill.store";
 import { BasicInfoForm } from "./skill-form/basic-info-form";
 import { CastDistanceSection } from "./skill-form/cast-distance-section";
+import { ChannelSection } from "./skill-form/channel-section";
 import { EntityDefinitionSection } from "./skill-form/entity-definition-section";
 import { IconReferenceSection } from "./skill-form/icon-reference-section";
 import { IndicatorsSection } from "./skill-form/indicators-section";
@@ -30,6 +31,7 @@ export const SkillPropertiesForm: React.FC = () => {
         <BasicInfoForm />
         <SkillPropertiesSection />
         <CastDistanceSection />
+        <ChannelSection />
         <IconReferenceSection />
         <IndicatorsSection />
       </Form>

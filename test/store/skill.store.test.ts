@@ -124,6 +124,21 @@ describe("useSkillStore", () => {
       expect(result.current.skillData?.entity.cost.mana).toBe(50);
     });
 
+    it("should set and clear the channel of a skill", () => {
+      const { result } = renderHook(() => useSkillStore());
+      const channel = { pulse_interval: 0.5, pulse_cost: 1, turn_rate: 120 };
+
+      act(() => {
+        result.current.updateChannel(channel);
+      });
+      expect(result.current.skillData?.entity.channel).toEqual(channel);
+
+      act(() => {
+        result.current.updateChannel(undefined);
+      });
+      expect(result.current.skillData?.entity).not.toHaveProperty("channel");
+    });
+
     it("should update cast distance correctly", () => {
       const { result } = renderHook(() => useSkillStore());
 

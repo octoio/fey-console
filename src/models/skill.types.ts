@@ -189,6 +189,20 @@ export type SkillIndicator = {
   scale: Vector3;
 };
 
+/**
+ * A channelled skill: the caster stands still and the skill works until the mana cannot pay the next
+ * pulse, the caster moves, casts, is stunned or cancels. `cost.mana` is the start cost. Its tree is the
+ * opening (one Beam projectile node); the target type is None.
+ */
+export type SkillChannel = {
+  /** Seconds between pulses (at least 0.1). */
+  pulse_interval: number;
+  /** Mana paid at each pulse (at least 1): the channel ends when it cannot. */
+  pulse_cost: number;
+  /** Degrees per second the beam follows the aim; 0 keeps the starting direction. */
+  turn_rate: number;
+};
+
 export type Skill = {
   metadata: Metadata;
   quality: QualityType;
@@ -206,6 +220,8 @@ export type Skill = {
   walk_while_casting?: boolean;
   /** true: casting this skill cancels the cast in progress (a dash). */
   cancels_cast?: boolean;
+  /** A channelled skill (see SkillChannel). */
+  channel?: SkillChannel;
   /** false: no interrupt cancels a cast of this skill and the HUD offers no "interrupt!" (a boss that is immune). Absent = true. */
   interruptible?: boolean;
   /** The caster must carry this status to cast the skill. */
